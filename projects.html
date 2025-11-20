@@ -12,10 +12,14 @@
       <nav class="nav">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
+        <a href="resume.html">Resume</a>
         <a href="publications.html">Publications</a>
         <a href="projects.html">Projects</a>
-        <a href="resume.html">Resume / CV</a>
-        <a href="contact.html">Contact</a>
+        <a href="services.html">Services</a>
+        <a href="updates.html">Recent Updates</a>
+        <a href="teaching.html">Teaching</a>
+        <a href="others.html">Others</a>
+        <a href="meeting.html">Schedule Meeting</a>
       </nav>
     </aside>
 
@@ -24,14 +28,25 @@
         <h1>Projects</h1>
 
         <h3>MDocAgent</h3>
-        <p>Agent-based architecture to solve complex document tasks involving retrieval, extraction and reasoning.</p>
+        <p>Agent-based architecture that composes specialized modules to solve complex document workflows (retrieval, extraction, reasoning).</p>
 
         <h3>HM-RAG</h3>
-        <p>Hybrid retriever + generator approach for multimodal documents and large collections.</p>
+        <p>Hybrid retriever-augmented generation model for multimodal documents enabling structured retrieval and generation.</p>
 
         <h3>SCAN</h3>
-        <p>Spatially-aware contrastive attention network for layout-aware document representation.</p>
+        <p>Spatial contrastive attention networks for layout-aware document representation learning.</p>
       </section>
+
+      <div class="footer-line">
+        <div>© <span id="year4"></span> Subrata Pramanik</div>
+        <div id="live-info4">Time: <span id="live-time4"></span> &nbsp; | &nbsp; Visitors: <span id="visitor-count4">0</span></div>
+      </div>
+
+      <script>document.getElementById('year4').textContent = new Date().getFullYear();
+        function updateTime4(){ document.getElementById('live-time4').textContent = new Date().toLocaleString(); }
+        updateTime4(); setInterval(updateTime4,1000);
+        document.getElementById('visitor-count4').textContent = localStorage.getItem('site_visits_total_v1') || '0';
+      </script>
     </main>
   </div>
 </body>
