@@ -3,44 +3,55 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Your Name — Home</title>
-  <style>
-    body { font-family: Arial, sans-serif; max-width: 900px; margin: 36px auto; padding: 0 20px; line-height:1.5; }
-    header { border-bottom: 1px solid #ddd; padding-bottom: 12px; margin-bottom: 18px; }
-    h1 { margin: 0; }
-    nav a { margin-right: 12px; text-decoration:none; color:#0366d6; }
-    footer { border-top:1px solid #eee; margin-top:28px; padding-top:12px; color:#666; font-size:0.9em; }
-    img.profile { width:120px; border-radius:8px; float:right; margin-left:16px; }
-  </style>
+  <title>Subrata Pramanik — Home</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>Subrata Pramanik</h1>
-    <p>Junior Research Fellow</p>
-    <nav><a href="index.html">Home</a> <a href="about.html">About</a> <a href="projects.html">Projects</a></nav>
-  </header>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="photo">
+        <!-- profile image path (your uploaded file) -->
+        <img src="/mnt/data/5cff262e-f700-4872-9c29-ec8bdc648d97.png" alt="Subrata Pramanik" />
+      </div>
+      <h2>Subrata Pramanik</h2>
+      <div class="sub">Research Scholar</div>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="publications.html">Publications</a>
+        <a href="projects.html">Projects</a>
+        <a href="resume.html">Resume / CV</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="footer-small">Document AI · NLP · Multi-modal ML</div>
+    </aside>
 
-  <main>
-    <section>
-      <img src="profile.jpg" alt="Profile" class="profile" />
-      <h2>Welcome</h2>
-      <p>Hello! I am Subrata Pramanik, a research scholar working in Document AI, NLP, and Computer Vision</p>
-    </section>
+    <main class="main">
+      <section class="section">
+        <h1>Welcome</h1>
+        <p>Hello — I am <strong>Subrata Pramanik</strong>, a Research Scholar working on Document AI, Natural Language Processing and Multi-modal Machine Learning. This site highlights my research, publications, and projects. Click the links on the left to navigate.</p>
+      </section>
 
-    <section>
-      <h3>Projects</h3>
-      <ul>
-        <li><strong>MDocAgent</strong> — Intelligent multi-agent model for document understanding</li>
-<li><strong>HM-RAG</strong> — Hybrid retriever for multi-modal information extraction</li>
-<li><strong>SCAN</strong> — Spatially-aware contrastive attention network</li>
+      <section class="section">
+        <h2>Selected Projects</h2>
+        <ul>
+          <li><strong>MDocAgent</strong> — multi-agent approach for complex document tasks (information extraction, QA).</li>
+          <li><strong>HM-RAG</strong> — hybrid retriever-augmented generator for multimodal retrieval in documents.</li>
+          <li><strong>SCAN</strong> — spatial contrastive attention networks for document layout-aware representations.</li>
+        </ul>
+      </section>
 
-      </ul>
-    </section>
-  </main>
+      <section class="section">
+        <h2>Quick Contact</h2>
+        <div class="contact-line">Email: <a href="mailto:your.email@example.com">your.email@example.com</a></div>
+        <div class="contact-line">Location: Mumbai, India</div>
+      </section>
 
-  <footer>
-    © <span id="year"></span> Pramanik(SP) — Email: subrata.official111@gmail.com
-    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-  </footer>
+      <footer style="margin-top:24px;color:#888;font-size:0.9em">
+        © <span id="year"></span> Subrata Pramanik
+        <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+      </footer>
+    </main>
+  </div>
 </body>
 </html>
