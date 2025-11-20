@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Publications — Subrata Pramanik</title>
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Publications — Subrata</title>
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -12,23 +12,38 @@
       <nav class="nav">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
+        <a href="resume.html">Resume</a>
         <a href="publications.html">Publications</a>
         <a href="projects.html">Projects</a>
-        <a href="resume.html">Resume / CV</a>
-        <a href="contact.html">Contact</a>
+        <a href="services.html">Services</a>
+        <a href="updates.html">Recent Updates</a>
+        <a href="teaching.html">Teaching</a>
+        <a href="others.html">Others</a>
+        <a href="meeting.html">Schedule Meeting</a>
       </nav>
     </aside>
 
     <main class="main">
       <section class="section">
         <h1>Publications</h1>
-        <p>Selected recent publications — add citation links or PDF links below:</p>
+        <p>Selected recent publications — add links to PDF or webpages where available:</p>
         <ul class="pub-list">
-          <li><strong>SCAN</strong> — paper on spatial contrastive attention network. <a href="#" target="_blank">[PDF]</a> <a href="#">[Web]</a></li>
-          <li><strong>MDocAgent</strong> — multi-agent document understanding framework. <a href="#">[PDF]</a></li>
-          <li><strong>HM-RAG</strong> — hybrid retriever-augmented approach for multimodal documents. <a href="#">[PDF]</a></li>
+          <li><strong>SCAN</strong> — Spatially-aware contrastive attention networks for documents. <a href="#">[PDF]</a> <a href="#">[Web]</a></li>
+          <li><strong>MDocAgent</strong> — Agent-based framework for document understanding. <a href="#">[PDF]</a></li>
+          <li><strong>HM-RAG</strong> — Hybrid retriever-augmented generator for multimodal documents. <a href="#">[PDF]</a></li>
         </ul>
       </section>
+
+      <div class="footer-line">
+        <div>© <span id="year3"></span> Subrata Pramanik</div>
+        <div id="live-info3">Time: <span id="live-time3"></span> &nbsp; | &nbsp; Visitors: <span id="visitor-count3">0</span></div>
+      </div>
+
+      <script>document.getElementById('year3').textContent = new Date().getFullYear();
+        function updateTime3(){ document.getElementById('live-time3').textContent = new Date().toLocaleString(); }
+        updateTime3(); setInterval(updateTime3,1000);
+        document.getElementById('visitor-count3').textContent = localStorage.getItem('site_visits_total_v1') || '0';
+      </script>
     </main>
   </div>
 </body>
