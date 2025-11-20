@@ -4,12 +4,12 @@
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
+  <div class="wrapper">
     <aside class="sidebar">
-      <div class="photo"><img src="/mnt/data/5cff262e-f700-4872-9c29-ec8bdc648d97.png" alt="Subrata" /></div>
+      <div class="profile-wrap"><img src="/mnt/data/profile.jpg" alt="Subrata" /></div>
       <h2>Subrata Pramanik</h2>
-      <div class="sub">Research Scholar</div>
-      <nav class="nav">
+      <p class="subtitle">Research Scholar</p>
+      <nav class="side-nav">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="resume.html">Resume</a>
@@ -23,10 +23,10 @@
       </nav>
     </aside>
 
-    <main class="main">
-      <section class="section">
+    <main class="content">
+      <section class="card">
         <h1>Teaching</h1>
-        <p>I have served as teaching assistant for multiple courses (list here):</p>
+        <p>I have served as teaching assistant for these courses (examples):</p>
         <ul>
           <li>Machine Learning (COL341)</li>
           <li>Computer Vision (COL780)</li>
@@ -34,17 +34,17 @@
         </ul>
       </section>
 
-      <div class="footer-line">
-        <div>© <span id="year8"></span> Subrata Pramanik</div>
-        <div id="live-info8">Time: <span id="live-time8"></span> &nbsp; | &nbsp; Visitors: <span id="visitor-count8">0</span></div>
+      <div class="footer">
+        <div>© <span id="year-t"></span> Subrata Pramanik</div>
+        <div>Time: <span id="t-t"></span> | Visitors: <span id="v-t">0</span></div>
       </div>
-
-      <script>document.getElementById('year8').textContent = new Date().getFullYear();
-        function updateTime8(){ document.getElementById('live-time8').textContent = new Date().toLocaleString(); }
-        updateTime8(); setInterval(updateTime8,1000);
-        document.getElementById('visitor-count8').textContent = localStorage.getItem('site_visits_total_v1') || '0';
-      </script>
     </main>
   </div>
+
+  <script>document.getElementById('year-t').textContent=new Date().getFullYear();
+  function ut(){document.getElementById('t-t').textContent=new Date().toLocaleString()}ut();setInterval(ut,1000);
+  fetch('https://api.countapi.xyz/hit/subrata4532.github.io/pageviews').then(r=>r.json()).then(j=>{if(j.value)document.getElementById('v-t').textContent=j.value})
+  .catch(()=>document.getElementById('v-t').textContent = localStorage.getItem('vis_local_v1') || '1');
+  </script>
 </body>
 </html>
