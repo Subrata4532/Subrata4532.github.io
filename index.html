@@ -7,15 +7,17 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <aside class="sidebar">
-      <div class="photo">
-        <img src="/mnt/data/5cff262e-f700-4872-9c29-ec8bdc648d97.png" alt="Subrata Pramanik" />
+  <div class="wrapper">
+    <!-- SIDEBAR -->
+    <aside class="sidebar" aria-label="Sidebar">
+      <div class="profile-wrap">
+        <!-- use uploaded path. Replace with profile.jpg if you uploaded to repo -->
+        <img src="/mnt/data/profile.jpg" alt="Subrata Pramanik" />
       </div>
       <h2>Subrata Pramanik</h2>
-      <div class="sub">Research Scholar</div>
+      <p class="subtitle">Research Scholar — Document AI · NLP · Multi-modal ML</p>
 
-      <nav class="nav">
+      <nav class="side-nav" aria-label="Main Navigation">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="resume.html">Resume</a>
@@ -25,60 +27,86 @@
         <a href="updates.html">Recent Updates</a>
         <a href="teaching.html">Teaching</a>
         <a href="others.html">Others</a>
-        <a href="meeting.html">Schedule Meeting</a>
+        <a href="meeting.html" style="color:var(--accent)">Schedule Meeting</a>
       </nav>
-      <div class="small">Document AI · NLP · Multi-modal ML</div>
+
+      <div style="margin-top:auto; text-align:center; width:100%;">
+        <div class="tag">IIT · Research Scholar</div>
+        <div style="height:10px"></div>
+        <div style="font-size:12px;color:var(--muted)">Contact: <a href="mailto:your.email@example.com" style="color:var(--accent)">your.email@example.com</a></div>
+      </div>
     </aside>
 
-    <main class="main">
-      <section class="section">
+    <!-- MAIN CONTENT -->
+    <main class="content" role="main">
+      <!-- Hero -->
+      <section class="card" aria-label="Hero">
         <h1>Welcome</h1>
-        <p>Hello — I am <strong>Subrata Pramanik</strong>, a Research Scholar working on Document AI, Natural Language Processing, and Multi-modal Machine Learning. This site showcases my research, publications and projects. Use the menu on the left to navigate.</p>
+        <p style="color:var(--muted);font-size:1rem;line-height:1.5rem">
+          Hello — I am <strong>Subrata Pramanik</strong>, a Research Scholar working on Document AI, Natural Language Processing, and Multi-modal Machine Learning. I build systems for extracting knowledge from complex documents, retrieval-augmented generation, and layout-aware models.
+        </p>
+
+        <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap">
+          <div class="tag">Document Understanding</div>
+          <div class="tag">NLP & Retrieval</div>
+          <div class="tag">Multi-modal ML</div>
+        </div>
       </section>
 
-      <section class="section">
+      <!-- Projects highlight -->
+      <section class="card projects" aria-label="Selected Projects">
         <h2>Selected Projects</h2>
         <ul>
-          <li><strong>MDocAgent</strong> — multi-agent approach for complex document tasks (IE, QA).</li>
-          <li><strong>HM-RAG</strong> — hybrid retriever-augmented model for multimodal documents.</li>
-          <li><strong>SCAN</strong> — spatial contrastive attention for layout-aware document features.</li>
+          <li><strong>MDocAgent</strong> — multi-agent pipeline for complex document tasks (retrieval, extraction, QA).</li>
+          <li><strong>HM-RAG</strong> — hybrid retriever-augmented generator for multimodal documents.</li>
+          <li><strong>SCAN</strong> — spatial contrastive attention for layout-aware document embeddings.</li>
         </ul>
       </section>
 
-      <section class="section">
+      <!-- Quick contact -->
+      <section class="card" aria-label="Contact">
         <h2>Quick contact</h2>
-        <div class="contact-line">Email: <a href="mailto:your.email@example.com">your.email@example.com</a></div>
-        <div class="contact-line">Location: Mumbai, India</div>
+        <div class="meta-line">Email: <a href="mailto:your.email@example.com">your.email@example.com</a></div>
+        <div class="meta-line">Location: Mumbai, India</div>
       </section>
 
-      <div class="footer-line">
+      <!-- Footer line with live time and visitor count -->
+      <div class="footer" role="contentinfo">
         <div>© <span id="year"></span> Subrata Pramanik</div>
-        <div id="live-info">Time: <span id="live-time"></span> &nbsp; | &nbsp; Visitors: <span id="visitor-count">0</span></div>
+        <div class="kv">
+          <div>Time: <span id="live-time"></span></div>
+          <div style="width:12px"></div>
+          <div>Visitors: <span id="visitor-count">0</span></div>
+        </div>
       </div>
-
-      <script>
-        // year
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-        // live date/time (updates every second)
-        function updateTime(){
-          const now = new Date();
-          const s = now.toLocaleString();
-          document.getElementById('live-time').textContent = s;
-        }
-        updateTime();
-        setInterval(updateTime,1000);
-
-        // simple visitor counter (per-browser using localStorage)
-        const key = 'site_visits_total_v1';
-        const prev = localStorage.getItem(key) ? parseInt(localStorage.getItem(key),10) : 0;
-        if(!localStorage.getItem('site_visited_v1')) {
-          localStorage.setItem(key, String(prev + 1));
-          localStorage.setItem('site_visited_v1','1');
-        }
-        document.getElementById('visitor-count').textContent = localStorage.getItem(key);
-      </script>
     </main>
   </div>
+
+  <!-- JS: year, live time & visitor counter (simple) -->
+  <script>
+    // year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // live local time - updates every second
+    function updateTime(){
+      document.getElementById('live-time').textContent = new Date().toLocaleString();
+    }
+    updateTime(); setInterval(updateTime,1000);
+
+    // simple site-wide visitor counter using countapi.xyz
+    // first call to ensure a key exists, then display value
+    const apiKey = 'subrata4532.github.io'; // namespace for countapi
+    fetch('https://api.countapi.xyz/hit/'+apiKey+'/pageviews')
+      .then(r=>r.json())
+      .then(j=>{
+        if(j && j.value) document.getElementById('visitor-count').textContent = j.value;
+      }).catch(()=> {
+        // fallback: per-browser localStorage
+        const k='vis_local_v1';
+        if(!localStorage.getItem(k)) localStorage.setItem(k, '1');
+        else localStorage.setItem(k, String(Number(localStorage.getItem(k))+1));
+        document.getElementById('visitor-count').textContent = localStorage.getItem(k);
+      });
+  </script>
 </body>
 </html>
