@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Schedule Meeting — Subrata</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="photo"><img src="/mnt/data/5cff262e-f700-4872-9c29-ec8bdc648d97.png" alt="Subrata" /></div>
+      <h2>Subrata Pramanik</h2>
+      <div class="sub">Research Scholar</div>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="resume.html">Resume</a>
+        <a href="publications.html">Publications</a>
+        <a href="projects.html">Projects</a>
+        <a href="services.html">Services</a>
+        <a href="updates.html">Recent Updates</a>
+        <a href="teaching.html">Teaching</a>
+        <a href="others.html">Others</a>
+        <a href="meeting.html">Schedule Meeting</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <section class="section">
+        <h1>Schedule a Meeting</h1>
+        <p>Please choose a suitable slot below to schedule a meeting.</p>
+      </section>
+
+      <div class="calendly-inline-widget" data-url="https://calendly.com/yourname/meeting" style="min-width:320px;height:700px;"></div>
+
+      <div class="footer-line">
+        <div>© <span id="year10"></span> Subrata Pramanik</div>
+        <div id="live-info10">Time: <span id="live-time10"></span> &nbsp; | &nbsp; Visitors: <span id="visitor-count10">0</span></div>
+      </div>
+
+      <script>
+        document.getElementById('year10').textContent = new Date().getFullYear();
+        function updateTime10(){ document.getElementById('live-time10').textContent = new Date().toLocaleString(); }
+        updateTime10(); setInterval(updateTime10,1000);
+        document.getElementById('visitor-count10').textContent = localStorage.getItem('site_visits_total_v1') || '0';
+      </script>
+    </main>
+  </div>
+</body>
+</html>
