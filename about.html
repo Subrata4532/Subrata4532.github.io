@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>About — Subrata Pramanik</title>
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>About — Subrata</title>
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -12,21 +12,25 @@
       <nav class="nav">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
+        <a href="resume.html">Resume</a>
         <a href="publications.html">Publications</a>
         <a href="projects.html">Projects</a>
-        <a href="resume.html">Resume / CV</a>
-        <a href="contact.html">Contact</a>
+        <a href="services.html">Services</a>
+        <a href="updates.html">Recent Updates</a>
+        <a href="teaching.html">Teaching</a>
+        <a href="others.html">Others</a>
+        <a href="meeting.html">Schedule Meeting</a>
       </nav>
     </aside>
 
     <main class="main">
       <section class="section">
         <h1>About</h1>
-        <p>I am a Research Scholar working at the intersection of Document AI, Natural Language Processing, and Multi-modal Machine Learning. My research focuses on building robust models for understanding complex documents — extracting structured data, answering questions from multi-page documents, and combining visual+text signals.</p>
+        <p>I am a Research Scholar working at the intersection of Document AI, Natural Language Processing and Multi-modal Machine Learning. My research focuses on building robust models for understanding complex documents — extracting structured data, answering questions from multi-page documents, and combining visual and textual signals.</p>
 
         <h3>Education</h3>
         <ul>
-          <li>M.Tech / PhD (Research Scholar) — details you can add here</li>
+          <li>M.Tech / PhD (Research Scholar) — details to update</li>
         </ul>
 
         <h3>Research Interests</h3>
@@ -36,6 +40,17 @@
           <li>Multi-modal Deep Learning</li>
         </ul>
       </section>
+
+      <div class="footer-line">
+        <div>© <span id="year2"></span> Subrata Pramanik</div>
+        <div id="live-info2">Time: <span id="live-time2"></span> &nbsp; | &nbsp; Visitors: <span id="visitor-count2">0</span></div>
+      </div>
+
+      <script>document.getElementById('year2').textContent = new Date().getFullYear();
+        function updateTime2(){ document.getElementById('live-time2').textContent = new Date().toLocaleString(); }
+        updateTime2(); setInterval(updateTime2,1000);
+        const key='site_visits_total_v1'; document.getElementById('visitor-count2').textContent = localStorage.getItem(key) || '0';
+      </script>
     </main>
   </div>
 </body>
