@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Your Name — Home</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 900px; margin: 36px auto; padding: 0 20px; line-height:1.5; }
+    header { border-bottom: 1px solid #ddd; padding-bottom: 12px; margin-bottom: 18px; }
+    h1 { margin: 0; }
+    nav a { margin-right: 12px; text-decoration:none; color:#0366d6; }
+    footer { border-top:1px solid #eee; margin-top:28px; padding-top:12px; color:#666; font-size:0.9em; }
+    img.profile { width:120px; border-radius:8px; float:right; margin-left:16px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Your Name</h1>
+    <p>Short tagline — what you do.</p>
+    <nav><a href="index.html">Home</a> <a href="about.html">About</a> <a href="projects.html">Projects</a></nav>
+  </header>
+
+  <main>
+    <section>
+      <img src="profile.jpg" alt="Profile" class="profile" />
+      <h2>Welcome</h2>
+      <p>Hello — this is my website hosted with GitHub Pages. I will edit content by changing files in the repository.</p>
+    </section>
+
+    <section>
+      <h3>Projects</h3>
+      <ul>
+        <li><strong>Project A</strong> — short description</li>
+        <li><strong>Project B</strong> — short description</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Your Name — Email: your.email@example.com
+    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  </footer>
+</body>
+</html>
