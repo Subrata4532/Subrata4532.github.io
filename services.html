@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Services — Subrata</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="photo"><img src="/mnt/data/5cff262e-f700-4872-9c29-ec8bdc648d97.png" alt="Subrata" /></div>
+      <h2>Subrata Pramanik</h2>
+      <div class="sub">Research Scholar</div>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="resume.html">Resume</a>
+        <a href="publications.html">Publications</a>
+        <a href="projects.html">Projects</a>
+        <a href="services.html">Services</a>
+        <a href="updates.html">Recent Updates</a>
+        <a href="teaching.html">Teaching</a>
+        <a href="others.html">Others</a>
+        <a href="meeting.html">Schedule Meeting</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <section class="section">
+        <h1>Services</h1>
+        <ul>
+          <li>Research collaborations</li>
+          <li>Student supervision (project/Thesis)</li>
+          <li>Consulting in Document AI and NLP</li>
+        </ul>
+      </section>
+
+      <div class="footer-line">
+        <div>© <span id="year6"></span> Subrata Pramanik</div>
+        <div id="live-info6">Time: <span id="live-time6"></span> &nbsp; | &nbsp; Visitors: <span id="visitor-count6">0</span></div>
+      </div>
+
+      <script>document.getElementById('year6').textContent = new Date().getFullYear();
+        function updateTime6(){ document.getElementById('live-time6').textContent = new Date().toLocaleString(); }
+        updateTime6(); setInterval(updateTime6,1000);
+        document.getElementById('visitor-count6').textContent = localStorage.getItem('site_visits_total_v1') || '0';
+      </script>
+    </main>
+  </div>
+</body>
+</html>
