@@ -1,19 +1,18 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Schedule Meeting — Subrata</title>
   <link rel="stylesheet" href="style.css" />
   <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </head>
 <body>
-  <div class="container">
+  <div class="wrapper">
     <aside class="sidebar">
-      <div class="photo"><img src="/mnt/data/5cff262e-f700-4872-9c29-ec8bdc648d97.png" alt="Subrata" /></div>
+      <div class="profile-wrap"><img src="/mnt/data/profile.jpg" alt="Subrata" /></div>
       <h2>Subrata Pramanik</h2>
-      <div class="sub">Research Scholar</div>
-      <nav class="nav">
+      <p class="subtitle">Research Scholar</p>
+      <nav class="side-nav">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="resume.html">Resume</a>
@@ -27,26 +26,26 @@
       </nav>
     </aside>
 
-    <main class="main">
-      <section class="section">
+    <main class="content">
+      <section class="card">
         <h1>Schedule a Meeting</h1>
-        <p>Please choose a suitable slot below to schedule a meeting.</p>
+        <p>Please pick a convenient slot below to book a meeting.</p>
+
+        <!-- Calendly inline widget -->
+        <div class="calendly-inline-widget" data-url="https://calendly.com/subrata-official111/30min" style="min-width:320px;height:700px;"></div>
       </section>
 
-      <div class="calendly-inline-widget" data-url="https://calendly.com/yourname/meeting" style="min-width:320px;height:700px;"></div>
-
-      <div class="footer-line">
-        <div>© <span id="year10"></span> Subrata Pramanik</div>
-        <div id="live-info10">Time: <span id="live-time10"></span> &nbsp; | &nbsp; Visitors: <span id="visitor-count10">0</span></div>
+      <div class="footer">
+        <div>© <span id="year-m"></span> Subrata Pramanik</div>
+        <div>Time: <span id="t-m"></span> | Visitors: <span id="v-m">0</span></div>
       </div>
-
-      <script>
-        document.getElementById('year10').textContent = new Date().getFullYear();
-        function updateTime10(){ document.getElementById('live-time10').textContent = new Date().toLocaleString(); }
-        updateTime10(); setInterval(updateTime10,1000);
-        document.getElementById('visitor-count10').textContent = localStorage.getItem('site_visits_total_v1') || '0';
-      </script>
     </main>
   </div>
+
+  <script>document.getElementById('year-m').textContent=new Date().getFullYear();
+  function um(){document.getElementById('t-m').textContent=new Date().toLocaleString()}um();setInterval(um,1000);
+  fetch('https://api.countapi.xyz/hit/subrata4532.github.io/pageviews').then(r=>r.json()).then(j=>{if(j.value)document.getElementById('v-m').textContent=j.value})
+  .catch(()=>document.getElementById('v-m').textContent = localStorage.getItem('vis_local_v1') || '1');
+  </script>
 </body>
 </html>
