@@ -4,12 +4,12 @@
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
+  <div class="wrapper">
     <aside class="sidebar">
-      <div class="photo"><img src="/mnt/data/5cff262e-f700-4872-9c29-ec8bdc648d97.png" alt="Subrata" /></div>
+      <div class="profile-wrap"><img src="/mnt/data/profile.jpg" alt="Subrata" /></div>
       <h2>Subrata Pramanik</h2>
-      <div class="sub">Research Scholar</div>
-      <nav class="nav">
+      <p class="subtitle">Research Scholar</p>
+      <nav class="side-nav">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="resume.html">Resume</a>
@@ -23,24 +23,24 @@
       </nav>
     </aside>
 
-    <main class="main">
-      <section class="section">
+    <main class="content">
+      <section class="card">
         <h1>Resume / CV</h1>
-        <p><a href="cv.pdf" target="_blank">Download CV (PDF)</a></p>
-        <p>(Upload a file named <code>cv.pdf</code> to the repo if you want this link to work.)</p>
+        <p><a href="cv.pdf" target="_blank" style="color:var(--accent)">Download CV (PDF)</a></p>
+        <p>(Upload a file named <code>cv.pdf</code> to the repo root so the link works.)</p>
       </section>
 
-      <div class="footer-line">
-        <div>© <span id="year5"></span> Subrata Pramanik</div>
-        <div id="live-info5">Time: <span id="live-time5"></span> &nbsp; | &nbsp; Visitors: <span id="visitor-count5">0</span></div>
+      <div class="footer">
+        <div>© <span id="year-r"></span> Subrata Pramanik</div>
+        <div>Time: <span id="t-r"></span> | Visitors: <span id="v-r">0</span></div>
       </div>
-
-      <script>document.getElementById('year5').textContent = new Date().getFullYear();
-        function updateTime5(){ document.getElementById('live-time5').textContent = new Date().toLocaleString(); }
-        updateTime5(); setInterval(updateTime5,1000);
-        document.getElementById('visitor-count5').textContent = localStorage.getItem('site_visits_total_v1') || '0';
-      </script>
     </main>
   </div>
+
+  <script>document.getElementById('year-r').textContent=new Date().getFullYear();
+  function ur(){document.getElementById('t-r').textContent = new Date().toLocaleString()}ur();setInterval(ur,1000);
+  fetch('https://api.countapi.xyz/hit/subrata4532.github.io/pageviews').then(r=>r.json()).then(j=>{if(j.value)document.getElementById('v-r').textContent=j.value})
+  .catch(()=>document.getElementById('v-r').textContent = localStorage.getItem('vis_local_v1') || '1');
+  </script>
 </body>
 </html>
