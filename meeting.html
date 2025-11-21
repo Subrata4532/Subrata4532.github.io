@@ -1,27 +1,25 @@
 <!doctype html>
-<html lang="en"><head>
-<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Schedule Meeting — Subrata</title>
+<html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Schedule Meeting — Subrata</title>
 <link rel="stylesheet" href="style.css"/>
 <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </head><body>
+<div class="bg-overlay"></div>
 <div class="container">
-  <aside class="sidebar">
-    <div class="profile-photo"><img src="profile.jpg" alt="Subrata"></div>
-    <h2>Subrata Pramanik</h2>
-  </aside>
+  <aside class="sidebar"><div class="profile"><img src="/profile.jpg" alt="Subrata"/></div>
+    <nav class="nav"><a href="index.html">Home</a><a href="meeting.html" class="active">Schedule Meeting</a></nav></aside>
 
-  <main class="content">
+  <main class="main">
     <section class="card">
       <h1>Schedule a Meeting</h1>
-      <p>Please pick a slot below.</p>
+      <p class="muted">Please pick a suitable slot below.</p>
       <div class="calendly-inline-widget" data-url="https://calendly.com/subrata-official111/30min" style="min-width:320px;height:650px;"></div>
     </section>
 
-    <div class="card footer">
+    <div class="card footer-strip">
       <div>© <span class="auto-year"></span> Subrata Pramanik</div>
       <div>Time: <span id="live-time"></span> | Visitors: <span id="visitor-count">0</span></div>
     </div>
   </main>
 </div>
-<script src="script.js"></script></body></html>
+<script src="script.js"></script>
+</body></html>
