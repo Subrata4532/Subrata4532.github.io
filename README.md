@@ -1,7 +1,7 @@
 # Subrata Pramanik — Personal website (GitHub Pages)
 
 Files included:
-- index.html, about.html, resume.html, publications.html, projects.html, gallery.html, worldmap.html, meeting.html,contact.html,others.html,services.html
+- index.html, about.html, resume.html, publications.html, projects.html, gallery.html, worldmap.html, meeting.html,contact.html,others.html,services.html,others.html,
 - style.css
 - script.js
 
