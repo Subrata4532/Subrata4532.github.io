@@ -1,40 +1,36 @@
 <!doctype html>
-<html lang="en">
-<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Projects — Subrata</title>
-<link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div class="app">
-    <aside class="sidebar">
-      <div class="profile"><img src="profile.jpg" alt="Subrata" style="width:96px;height:96px;border-radius:999px"/></div>
-      <h2 style="margin-top:8px">Subrata Pramanik</h2>
-      <nav class="side-nav">
-        <a href="index.html">Home</a>
-        <a href="projects.html" class="active">Projects</a>
-        <a href="publications.html">Publications</a>
-      </nav>
-    </aside>
+<html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Projects — Subrata</title>
+<link rel="stylesheet" href="style.css"/>
+</head><body>
+<div class="container">
+  <aside class="sidebar">
+    <div class="profile-photo"><img src="profile.jpg" alt="Subrata"></div>
+    <h2>Subrata Pramanik</h2>
+    <nav class="side-nav">
+      <a href="index.html">Home</a>
+      <a href="projects.html" class="active">Projects</a>
+    </nav>
+  </aside>
 
-    <main class="main">
-      <section class="card">
-        <h1>Projects</h1>
-        <h2>MDocAgent</h2>
-        <p style="color:var(--muted)">Multi-agent pipeline for document workflows: retrieval → extraction → reasoning → QA.</p>
+  <main class="content">
+    <section class="card">
+      <h1>Projects</h1>
+      <h2>MDocAgent</h2>
+      <p>Multi-agent pipeline for document workflows: retrieval → extraction → reasoning → QA.</p>
 
-        <h2>HM-RAG</h2>
-        <p style="color:var(--muted)">Hybrid retriever-augmented generator for multimodal documents.</p>
+      <h2>HM-RAG</h2>
+      <p>Hybrid retriever-augmented generator for multimodal documents.</p>
 
-        <h2>SCAN</h2>
-        <p style="color:var(--muted)">Spatial contrastive attention for layout-aware embeddings.</p>
-      </section>
+      <h2>SCAN</h2>
+      <p>Spatial contrastive attention for layout-aware document embeddings.</p>
+    </section>
 
-      <div class="footer">
-        <div>© <span class="auto-year"></span> Subrata Pramanik</div>
-        <div style="color:var(--muted)">Time: <span id="live-time"></span> • Visitors: <span id="visitor-count">0</span></div>
-      </div>
-    </main>
-  </div>
-
-  <script src="script.js"></script>
-</body>
-</html>
+    <div class="card footer">
+      <div>© <span class="auto-year"></span> Subrata Pramanik</div>
+      <div>Time: <span id="live-time"></span> | Visitors: <span id="visitor-count">0</span></div>
+    </div>
+  </main>
+</div>
+<script src="script.js"></script></body></html>
