@@ -1,25 +1,21 @@
 <!doctype html>
-<html lang="en"><head>
-<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>World Map — Subrata</title>
+<html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>World Map — Subrata</title>
 <link rel="stylesheet" href="style.css"/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-<style>#map-container{height:520px;border-radius:12px}</style>
 </head><body>
+<div class="bg-overlay"></div>
 <div class="container">
-  <aside class="sidebar">
-    <div class="profile-photo"><img src="profile.jpg" alt="Subrata"></div>
-    <h2>Subrata Pramanik</h2>
-  </aside>
+  <aside class="sidebar"><div class="profile"><img src="/profile.jpg" alt="Subrata"/><h2>Subrata Pramanik</h2></div>
+    <nav class="nav"><a href="index.html">Home</a><a href="worldmap.html" class="active">World Map</a></nav></aside>
 
-  <main class="content">
+  <main class="main">
     <section class="card">
       <h1>World Map</h1>
-      <p>Interactive map — click markers for notes.</p>
+      <p class="muted">Interactive map. Click markers for locations I am/was at.</p>
       <div id="map-container"></div>
     </section>
 
-    <div class="card footer">
+    <div class="card footer-strip">
       <div>© <span class="auto-year"></span> Subrata Pramanik</div>
       <div>Time: <span id="live-time"></span> | Visitors: <span id="visitor-count">0</span></div>
     </div>
@@ -27,12 +23,20 @@
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="script.js"></script>
 <script>
-  // Leaflet init
-  const map = L.map('map-container', {zoomControl:true}).setView([25.4358,81.8463],4);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18}).addTo(map);
-  const mk = L.marker([25.4358,81.8463]).addTo(map).bindPopup("<strong>Indian Institute of Information Technology Allahabad</strong><div style='font-size:0.9rem;color:#666'>Current: Junior Research Fellow</div>");
-  // additional sample markers
-  L.marker([19.0760,72.8777]).addTo(map).bindPopup("Mumbai — TCS (work)");
+  const map = L.map('map-container', {zoomControl:true}).setView([25.4358,81.8463], 3);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:19}).addTo(map);
+
+  const visited = [
+    {name:'Indian Institute of Information Technology Allahabad (IIITA)', lat:25.4358, lon:81.8463, note:'Current: M.Tech–PhD (2024–2028)'},
+    {name:'Kolkata (TCS office)', lat:22.5726, lon:88.3639, note:'Work location (TCS)'},
+    {name:'Mumbai', lat:19.0760, lon:72.8777, note:'Visited'},
+  ];
+
+  visited.forEach(v =>{
+    const mk = L.circleMarker([v.lat, v.lon], {radius:7, color:'#2b8cff', fillColor:'#2b8cff', fillOpacity:0.9}).addTo(map);
+    mk.bindPopup(`<strong>${v.name}</strong><div style="color:var(--muted)">${v.note}</div>`);
+  });
 </script>
-<script src="script.js"></script></body></html>
+</body></html>
