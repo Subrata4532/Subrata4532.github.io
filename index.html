@@ -1,17 +1,19 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Subrata Pramanik — Home</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="bg-overlay"></div>
-  <div class="wrapper">
+  <div class="app">
     <aside class="sidebar">
-      <div class="profile-wrap"><img src="/mnt/data/profile.jpg" data-profile="true" alt="Subrata Pramanik" /></div>
-      <h2>Subrata Pramanik</h2>
-      <p class="subtitle">M.Tech–PhD Student, IIIT Allahabad • Ex-TCS</p>
+      <div class="profile">
+        <img src="profile.jpg" alt="Subrata Pramanik" />
+        <h2>Subrata Pramanik</h2>
+        <p class="subtitle">Junior Research Fellow — Indian Institute of Information Technology Allahabad<br/>Ex-Assistant Systems Engineer, TCS</p>
+      </div>
 
       <nav class="side-nav">
         <a href="index.html" class="active">Home</a>
@@ -20,55 +22,66 @@
         <a href="publications.html">Publications</a>
         <a href="projects.html">Projects</a>
         <a href="services.html">Services</a>
+        <a href="updates.html">Job Updates</a>
         <a href="teaching.html">Teaching</a>
         <a href="gallery.html">Gallery</a>
-        <a href="jobupdates.html">Job Updates</a>
         <a href="worldmap.html">World Map</a>
         <a href="meeting.html">Schedule Meeting</a>
         <a href="contact.html">Contact</a>
         <a href="others.html">Others</a>
       </nav>
-
-      <div style="margin-top:auto; text-align:center; font-size:0.9rem; color:#9bb0b3">
-        <div>Email: <a href="mailto:subrata.official111@gmail.com" style="color:var(--accent)">subrata.official111@gmail.com</a></div>
+      <div style="margin-top:12px; text-align:center; color:var(--muted); font-size:0.9rem">
+        <div>Contact: <a href="mailto:subrata.official111@gmail.com">subrata.official111@gmail.com</a></div>
       </div>
     </aside>
 
-    <main class="content">
+    <main class="main">
       <section class="card">
         <h1>Welcome</h1>
-        <p>Hello — I am <strong>Subrata Pramanik</strong>, an M.Tech–PhD Student at IIIT Allahabad (2024–2028). Previously Assistant Systems Engineer at TCS (Aug 2022–Mar 2024). My research: Document AI, ML, DL, CV, Generative AI.</p>
+        <p>Hello — I am <strong>Subrata Pramanik</strong>, a M.Tech–PhD student at <strong>Indian Institute of Information Technology Allahabad</strong> (2024–2028). Previously Assistant Systems Engineer at <strong>TCS</strong> (Aug 2022 – Mar 2024). My research interests: Document AI, Natural Language Processing, Multi-modal ML and Generative AI.</p>
+
+        <div style="margin-top:12px">
+          <span class="tag">Document Understanding</span>
+          <span class="tag">Retrieval & RAG</span>
+          <span class="tag">Multi-modal ML</span>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Selected Projects</h2>
+        <ul style="color:var(--muted)">
+          <li><strong>MDocAgent</strong> — multi-agent pipeline for document workflows (retrieval, extraction, QA)</li>
+          <li><strong>HM-RAG</strong> — hybrid retriever-augmented generator for multimodal documents</li>
+          <li><strong>SCAN</strong> — spatial contrastive attention for layout-aware document embeddings</li>
+        </ul>
       </section>
 
       <section class="card accordion">
-        <div class="accordion-item">
-          <div class="accordion-header"><h3>Selected Projects</h3><small>Click to expand</small></div>
-          <div class="accordion-body">
-            <div class="projects">
-              <h4>MDocAgent</h4>
-              <p>Multi-agent pipeline for document workflows (retrieval → extraction → reasoning → QA).</p>
-              <h4>HM-RAG</h4>
-              <p>Hybrid retriever-augmented generator for multimodal documents.</p>
-              <h4>SCAN</h4>
-              <p>Spatial contrastive attention for layout-aware document embeddings.</p>
-            </div>
+        <div class="acc-item">
+          <div class="acc-head"><h3>Quick Info</h3><div style="color:var(--muted)">Click to expand</div></div>
+          <div class="acc-body">
+            <p>Email: <a href="mailto:subrata.official111@gmail.com">subrata.official111@gmail.com</a></p>
+            <p>Location: Indian Institute of Information Technology Allahabad (Prayagraj)</p>
+            <p>Weather: <span id="weather">loading…</span></p>
+            <p>Time: <span id="live-time"></span></p>
+            <p>Visitors: <strong id="visitor-count">0</strong></p>
           </div>
         </div>
 
-        <div class="accordion-item">
-          <div class="accordion-header"><h3>Quick Info</h3><small>Live time, weather & visitors</small></div>
-          <div class="accordion-body">
-            <p>Location: IIIT Allahabad (Prayagraj)</p>
-            <p>Weather: <span id="weather"><span style="color:var(--muted)">loading…</span></span></p>
-            <p>Current time: <span id="live-time"></span></p>
-            <p>Visitors: <span id="visitor-count">0</span></p>
+        <div class="acc-item">
+          <div class="acc-head"><h3>Teaching & TA</h3><div style="color:var(--muted)">Click to expand</div></div>
+          <div class="acc-body">
+            <ul style="color:var(--muted)">
+              <li>Problem Solving with Programming — TA (Jul–Dec 2024; Jul–Dec 2025)</li>
+              <li>Computer Organization & Architecture — TA (Jan–Jun 2025)</li>
+            </ul>
           </div>
         </div>
       </section>
 
       <div class="footer">
         <div>© <span class="auto-year"></span> Subrata Pramanik</div>
-        <div style="color:var(--muted)">Made for recruiters — clear & concise</div>
+        <div style="color:var(--muted)">Made for recruiters • Profile updates visible</div>
       </div>
     </main>
   </div>
