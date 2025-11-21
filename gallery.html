@@ -7,42 +7,30 @@
   <div class="bg-overlay"></div>
   <div class="wrapper">
     <aside class="sidebar">
-      <div class="profile-wrap"><img src="/mnt/data/profile.jpg" alt="Subrata" /></div>
+      <div class="profile-wrap"><img src="/mnt/data/profile.jpg" data-profile="true" alt="Subrata" /></div>
       <h2>Subrata Pramanik</h2>
-      <p class="subtitle">Junior Research Fellow</p>
+      <p class="subtitle">Gallery</p>
       <nav class="side-nav">
         <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="resume.html">Resume</a>
-         <a href="teaching.html">Teaching</a>
-        <a href="publications.html">Publications</a>
-        <a href="projects.html">Projects</a>
-         <a href="services.html">services</a>
-         <a href="updates.html">updates</a>
         <a href="gallery.html" class="active">Gallery</a>
-        <a href="others.html">others</a>
-        <a href="meeting.html">Schedule Meeting</a>
-         <a href="worldmap.html">World Map</a>
-          <a href="contact.html">contact</a>
-        
       </nav>
     </aside>
 
     <main class="content">
       <section class="card">
         <h1>Gallery</h1>
-        <p>Upload photos to folder <code>/images/</code> using names <code>1.jpg, 2.jpg, ...</code>. Click any image to open slideshow/lightbox.</p>
-
+        <p>Upload photos to <code>/images/</code> using names <code>1.jpg, 2.jpg, ...</code>. Click to view in slideshow/lightbox.</p>
         <div class="gallery-grid" id="gallery-grid"></div>
       </section>
 
       <div class="footer">
         <div>© <span class="auto-year"></span> Subrata Pramanik</div>
-        <div>Time: <span id="live-time"></span> | Visitors: <span id="visitor-count">0</span></div>
+        <div>Time: <span id="live-time"></span></div>
       </div>
     </main>
   </div>
 
+  <div id="lightbox" class="lightbox"><img id="lb-img" src="" alt=""></div>
   <script src="script.js"></script>
 </body>
 </html>
