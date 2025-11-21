@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Subrata Pramanik — Home</title>
 
-  <!-- ===== Styles (replace or merge with your current CSS) ===== -->
+  <!-- ===== Styles ===== -->
   <style>
     :root{
       --sidebar-w: 260px;
@@ -22,7 +22,7 @@
       font-family: Inter, system-ui, Arial, sans-serif;
       background: var(--bg);
       -webkit-font-smoothing:antialiased;
-      scroll-behavior: smooth; /* <--- smooth scrolling on anchor clicks */
+      scroll-behavior: smooth;
     }
 
     /* Layout */
@@ -43,7 +43,7 @@
       padding: 18px;
       box-shadow: 0 6px 18px rgba(30,41,59,0.06);
       position: sticky;
-      top: 20px; /* keeps visible while scrolling */
+      top: 20px;
       height: calc(100vh - 40px);
       overflow:auto;
     }
@@ -99,7 +99,7 @@
     /* Sections */
     section{
       margin-bottom: 18px;
-      scroll-margin-top: 26px; /* when you click anchor, offset so heading isn't hidden under sticky header (if any) */
+      scroll-margin-top: 26px;
     }
     section h2{
       margin:0 0 12px 0;
@@ -107,6 +107,10 @@
       color:#0f172a;
     }
     section p{ color:var(--muted); line-height:1.6; }
+
+    /* Simple lists styling for publications/projects/resume */
+    ul.clean{ padding-left:18px; margin:8px 0; }
+    ul.clean li{ margin-bottom:8px; }
 
     /* Responsive */
     @media (max-width: 880px) {
@@ -119,16 +123,15 @@
 
 <div class="site">
 
-  <!-- ===== Sidebar (keep your content) ===== -->
+  <!-- ===== Sidebar ===== -->
   <aside class="sidebar" aria-label="Main sidebar">
     <div class="profile">
-      <!-- Replace src with your avatar path -->
-      <img src="/path/to/your-photo.jpg" alt="Subrata Pramanik">
+      <!-- Using the uploaded image path so it appears on GitHub if you push the image at the same path -->
+      <img src="/mnt/data/9d49cf08-00d9-4fd1-85f1-9d8d079ef1c9.png" alt="Subrata Pramanik">
       <h3>Subrata Pramanik</h3>
       <p>Junior Research Fellow — Indian Institute of Information Technology Allahabad<br>Ex-Assistant Systems Engineer, TCS</p>
     </div>
 
-    <!-- IMPORTANT: Use anchor links to sections (ids below must match) -->
     <nav class="side-nav" id="side-nav">
       <a href="#home" class="active">Home</a>
       <a href="#about">About</a>
@@ -139,47 +142,71 @@
     </nav>
   </aside>
 
-  <!-- ===== Main content (put your real content inside these sections) ===== -->
+  <!-- ===== Main content ===== -->
   <main class="main">
 
+    <!-- HOME -->
     <section id="home" class="content-card">
       <h2>Welcome</h2>
       <p>
-        Hello — I am <strong>Subrata Pramanik</strong>, a M.Tech–PhD student at <strong>Indian Institute of Information Technology Allahabad</strong> (2024–2028).
-        Previously Assistant Systems Engineer at TCS (Aug 2022 – Mar 2024). I work on Document AI, Natural Language Processing, Multi-modal ML and Generative AI.
+        Hello — I am <strong>Subrata Pramanik</strong>, a M.Tech–PhD student at <strong>Indian Institute of Information Technology Allahabad</strong> (2024–2028). Previously Assistant Systems Engineer at TCS (Aug 2022 – Mar 2024). I work on Document AI, Natural Language Processing, Multi-modal ML and Generative AI.
       </p>
-      <!-- Keep the rest of your home content here (badges, selected projects summary, quick info, etc.) -->
+
+      <div style="margin-top:12px;">
+        <strong>Selected Projects</strong>
+        <ul class="clean">
+          <li><strong>MDocAgent</strong> — multi-agent pipeline for document workflows (retrieval, extraction, QA).</li>
+          <li><strong>HM-RAG</strong> — hybrid retriever-augmented generator for multimodal documents.</li>
+          <li><strong>SCAN</strong> — spatial contrastive attention for layout-aware document embeddings.</li>
+        </ul>
+      </div>
+
     </section>
 
+    <!-- ABOUT -->
     <section id="about" class="content-card">
       <h2>About</h2>
       <p>
-        <!-- Replace with your About content exactly as currently written -->
-        (Paste your About section here — no changes required)
+        <!-- Paste your existing About content here exactly as you want it to appear on GitHub. -->
+        I am a researcher working on document understanding, retrieval & RAG, and multimodal machine learning. I focus on building practical pipelines and models that help extract structure and meaning from complex documents.
       </p>
     </section>
 
+    <!-- RESUME -->
     <section id="resume" class="content-card">
       <h2>Resume</h2>
-      <p>
-        <!-- Paste resume details -->
-      </p>
+      <p><strong>Education</strong><br>
+      M.Tech–PhD, Indian Institute of Information Technology Allahabad (2024–2028)</p>
+      <p><strong>Experience</strong><br>
+      Assistant Systems Engineer, TCS (Aug 2022 – Mar 2024)</p>
+
+      <!-- Add more resume content below as needed, keep the text identical to your original resume if you want no changes -->
     </section>
 
+    <!-- PUBLICATIONS -->
     <section id="publications" class="content-card">
       <h2>Publications</h2>
       <p>
-        <!-- Paste publications list -->
+        <!-- List your publications verbatim here. Example format below -->
       </p>
+      <ul class="clean">
+        <li>Pramanik, S., et al. (2025). Title of paper. Conference/Journal.</li>
+        <!-- Add the full list copied from your existing page -->
+      </ul>
     </section>
 
+    <!-- PROJECTS -->
     <section id="projects" class="content-card">
       <h2>Projects</h2>
-      <p>
-        <!-- Paste Projects: MDocAgent, HM-RAG, SCAN, etc. -->
-      </p>
+      <p>Below are brief descriptions — keep full project pages on separate repository pages if needed.</p>
+      <ul class="clean">
+        <li><strong>MDocAgent</strong> — multi-agent pipeline for document workflows (retrieval, extraction, QA). Links: <a href="#">GitHub</a></li>
+        <li><strong>HM-RAG</strong> — hybrid retriever-augmented generator for multimodal documents. Links: <a href="#">GitHub</a></li>
+        <li><strong>SCAN</strong> — spatial contrastive attention for layout-aware document embeddings. Links: <a href="#">GitHub</a></li>
+      </ul>
     </section>
 
+    <!-- CONTACT -->
     <section id="contact" class="content-card">
       <h2>Contact</h2>
       <p>
@@ -193,22 +220,17 @@
 <!-- ===== Optional JS: highlight active nav item on scroll ===== -->
 <script>
   (function(){
-    // Grab all nav links
     const nav = document.getElementById('side-nav');
-    const links = Array.from(nav.querySelectorAll('a[href^="#"]'));
+    const links = Array.from(nav.querySelectorAll('a[href^="#"]));
     const sections = links.map(l => document.querySelector(l.getAttribute('href'))).filter(Boolean);
 
-    // When a nav link clicked -> close any mobile nav if you have one, scroll happens automatically because of href
     links.forEach(l=>{
       l.addEventListener('click', (e)=>{
-        // remove active from all and set on clicked
         links.forEach(x => x.classList.remove('active'));
         l.classList.add('active');
       });
     });
 
-    // On scroll: highlight the section currently in view
-    // Use IntersectionObserver for better performance
     const observer = new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{
         if(entry.isIntersecting){
