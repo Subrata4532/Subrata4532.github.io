@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>World Map — Subrata</title>
+
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+
+<body>
+  <div class="bg-overlay"></div>
+
+  <div class="wrapper">
+    <aside class="sidebar">
+      <div class="profile-wrap"><img src="/mnt/data/profile.jpg" alt="Subrata" /></div>
+      <h2>Subrata Pramanik</h2>
+      <p class="subtitle">M.Tech–PhD Research Scholar, IIITA</p>
+      <nav class="side-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="resume.html">Resume</a>
+        <a href="publications.html">Publications</a>
+        <a href="projects.html">Projects</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="worldmap.html" class="active">World Map</a>
+        <a href="meeting.html">Schedule Meeting</a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <section class="card">
+        <h1>World Map</h1>
+        <p>Interactive map — zoom & pan. Click markers to view captions. (I added a few sample markers.)</p>
+
+        <div id="map-container"></div>
+      </section>
+
+      <div class="footer">
+        <div>© <span class="auto-year"></span> Subrata Pramanik</div>
+        <div>Time: <span id="live-time"></span> | Visitors: <span id="visitor-count">0</span></div>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+
+  <script>
+    // initialize map
+    var map = L.map('map-container', {zoomControl:true, attributionControl:false}).setView([20, 0], 2);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18
+    }).addTo(map);
+
+    // sample markers (add your visited locations here)
+    var visited = [
+      {name: "Prayagraj (IIITA)", lat: 25.4358, lon: 81.8463, note: "Current: IIITA"},
+      {name: "Mumbai", lat: 19.0760, lon: 72.8777, note: "Work (TCS)"},
+      // add more if you want
+    ];
+
+    visited.forEach(v => {
+      var mk = L.circleMarker([v.lat, v.lon], {radius:8, color:'#18b2a8', fillColor:'#18b2a8', fillOpacity:0.9}).addTo(map);
+      mk.bindPopup(`<strong>${v.name}</strong><div style="font-size:0.9rem;color:var(--muted)">${v.note}</div>`);
+    });
+  </script>
+</body>
+</html>
