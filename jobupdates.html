@@ -1,140 +1,100 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Job Updates — Subrata Pramanik</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    /* small page-specific adjustments (same as earlier) */
-    .job-toolbar{display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:12px}
-    .job-filters{display:flex; gap:8px; align-items:center; flex-wrap:wrap}
-    .job-card{border-radius:10px;padding:14px;background:#fff;border:1px solid rgba(12,18,20,0.06);box-shadow:0 8px 20px rgba(12,18,20,0.04); margin-bottom:12px}
-    .job-card h3{margin:0 0 6px}
-    .job-meta{font-size:0.9rem;color:var(--muted);margin-bottom:10px}
-    .btn{display:inline-block;padding:8px 12px;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none;font-weight:700}
-    .btn.secondary{background:#eef6f5;color:var(--accent);border:1px solid rgba(15,157,154,0.08)}
-    .grid-cols{display:grid;grid-template-columns: repeat(auto-fit,minmax(320px,1fr)); gap:12px}
-    .muted-note{color:var(--muted);font-size:0.95rem;margin-bottom:8px}
-    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(8,12,14,0.6);z-index:9999;padding:18px}
-    .modal.open{display:flex}
-    .modal .box{background:#fff;padding:18px;border-radius:10px;width:100%;max-width:720px;box-shadow:0 10px 40px rgba(8,12,20,0.2)}
-    .form-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
-    .form-row input[type="text"], .form-row input[type="url"], .form-row select, .form-row textarea, .form-row input[type="date"]{
-      width:100%;padding:8px;border-radius:8px;border:1px solid #e6eef0;font-size:0.95rem
-    }
-    .form-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}
-    .pill{display:inline-block;padding:6px 8px;background:#eef6f6;border-radius:8px;color:var(--accent);font-weight:700}
-    .no-jobs{color:var(--muted);padding:18px;background:#fff;border-radius:10px;border:1px dashed rgba(12,18,20,0.04)}
-  </style>
-</head>
-<body>
-  <div class="bg-overlay"></div>
-  <div class="wrapper">
-    <aside class="sidebar">
-      <div class="profile-wrap"><img src="/mnt/data/profile.jpg" data-profile="true" alt="Subrata" /></div>
-      <h2>Subrata Pramanik</h2>
-      <p class="subtitle">M.Tech–PhD Student, IIIT Allahabad</p>
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Job Updates — Subrata</title>
+<link rel="stylesheet" href="style.css"/>
+</head><body>
+<div class="container">
+  <aside class="sidebar">
+    <div class="profile-photo"><img src="profile.jpg" alt="Subrata"></div>
+    <h2>Subrata Pramanik</h2>
+    <nav class="side-nav">
+      <a href="index.html">Home</a>
+      <a href="jobupdates.html" class="active">Job Updates</a>
+    </nav>
+  </aside>
 
-      <nav class="side-nav">
-        <a href="index.html">Home</a>
-        <a href="jobupdates.html" class="active">Job Updates</a>
-        <a href="contact.html">Contact</a>
-      </nav>
+  <main class="content">
+    <section class="card">
+      <h1>Job Updates — Post & View</h1>
+      <p class="lead">Share job opportunities (India / USA). Use the form below to add jobs — they will appear immediately in the list and in the daily updates panel.</p>
 
-      <div style="margin-top:auto;text-align:center;color:var(--muted);font-size:12px">Contact: subrata.official111@gmail.com</div>
-    </aside>
-
-    <main class="content">
-      <section class="card">
-        <h1>Job Updates</h1>
-        <p class="muted-note">Share job descriptions and links here — filter by country, level, and type. Entries are stored in the browser (localStorage). Use export/import to move between machines.</p>
-
-        <div class="job-toolbar">
-          <div style="flex:1;min-width:220px">
-            <input id="job-search" placeholder="Search by company, title, location, keywords..." style="width:100%;padding:10px;border-radius:8px;border:1px solid #e6eef0" />
-          </div>
-
-          <div class="job-filters">
-            <select id="filter-country">
-              <option value="all">All Countries</option>
-              <option value="India">India</option>
-              <option value="USA">USA</option>
-            </select>
-
-            <select id="filter-level">
-              <option value="all">All Levels</option>
-              <option value="Internship">Internship</option>
-              <option value="Early">Early-career</option>
-              <option value="Mid">Mid-level</option>
-              <option value="Experienced">Experienced</option>
-            </select>
-
-            <select id="filter-type">
-              <option value="all">All Types</option>
-              <option value="Full-time">Full-time</option>
-              <option value="Intern">Intern</option>
-              <option value="Contract">Contract</option>
-            </select>
-
-            <button id="clear-filters" class="btn secondary">Clear</button>
-            <button id="open-add" class="btn">+ Add Job</button>
-          </div>
-        </div>
-
-        <div id="job-list" class="grid-cols"></div>
-        <div id="no-jobs" class="no-jobs" style="display:none">No job posts yet. Click <strong>+ Add Job</strong> to publish your first job update.</div>
-
-        <div style="margin-top:14px" class="muted-note">
-          <span class="pill">India</span> &nbsp; &nbsp; <span class="pill">USA</span> &nbsp; &nbsp; <span class="pill">Intern / Early / Mid / Experienced</span>
-        </div>
-      </section>
-
-      <div class="footer">
-        <div>© <span class="auto-year"></span> Subrata Pramanik</div>
-        <div>Time: <span id="live-time"></span> | Visitors: <span id="visitor-count">0</span></div>
-      </div>
-    </main>
-  </div>
-
-  <!-- Add Job Modal -->
-  <div id="modal" class="modal" aria-hidden="true">
-    <div class="box" role="dialog" aria-modal="true">
-      <h2>Add Job Update</h2>
-
-      <div class="form-row">
-        <input id="job-company" type="text" placeholder="Company name (e.g. TCS, Google)" />
-        <input id="job-title" type="text" placeholder="Role / Title (e.g. Research Intern)" />
-      </div>
-
-      <div class="form-row">
-        <input id="job-location" type="text" placeholder="City / Location (e.g. Kolkata, Remote)" />
-        <select id="job-country"><option value="India">India</option><option value="USA">USA</option></select>
-      </div>
-
-      <div class="form-row">
-        <select id="job-level">
-          <option value="Internship">Internship</option><option value="Early">Early-career</option><option value="Mid">Mid-level</option><option value="Experienced">Experienced</option>
+      <form id="job-form" class="job-form">
+        <input name="title" placeholder="Job title (e.g., Research Engineer)" required/>
+        <input name="company" placeholder="Company / Organization" required/>
+        <input name="link" placeholder="Link to job description (URL)" />
+        <select name="region">
+          <option value="India">India</option>
+          <option value="USA">USA</option>
+          <option value="Remote">Remote</option>
         </select>
-        <select id="job-type"><option value="Full-time">Full-time</option><option value="Intern">Intern</option><option value="Contract">Contract</option></select>
-      </div>
+        <select name="level">
+          <option value="Internship">Internship</option>
+          <option value="Early">Early (0-2 yrs)</option>
+          <option value="Mid">Mid (2-5 yrs)</option>
+          <option value="Senior">Senior (5+ yrs)</option>
+        </select>
+        <textarea name="desc" placeholder="Short description (required)" required></textarea>
+        <button type="submit" style="padding:10px;border-radius:8px;background:var(--accent);color:#fff;border:0">Add Job</button>
+      </form>
+    </section>
 
-      <div class="form-row">
-        <input id="job-date" type="date" />
-        <input id="job-apply" type="url" placeholder="Apply link (https://...)" />
+    <section class="card">
+      <h2>Filters</h2>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <select id="filter-region">
+          <option value="">All regions</option>
+          <option value="India">India</option>
+          <option value="USA">USA</option>
+          <option value="Remote">Remote</option>
+        </select>
+        <select id="filter-level">
+          <option value="">All levels</option>
+          <option value="Internship">Internship</option>
+          <option value="Early">Early</option>
+          <option value="Mid">Mid</option>
+          <option value="Senior">Senior</option>
+        </select>
+        <input id="filter-q" placeholder="Search title/company/desc" />
       </div>
+    </section>
 
-      <div class="form-row">
-        <textarea id="job-desc" rows="4" placeholder="Short description (max 400 chars)"></textarea>
-      </div>
+    <section class="card">
+      <h2>Job Listings</h2>
+      <div id="jobs-list"></div>
+    </section>
 
-      <div class="form-actions">
-        <button id="save-job" class="btn">Save Job</button>
-        <button id="cancel-job" class="btn secondary">Cancel</button>
-      </div>
+    <section class="card">
+      <h2>Daily Updates (recent job posts)</h2>
+      <p>Recent posts show here (newest first):</p>
+      <div id="daily-updates"></div>
+    </section>
+
+    <div class="card footer">
+      <div>© <span class="auto-year"></span> Subrata Pramanik</div>
+      <div>Time: <span id="live-time"></span> | Visitors: <span id="visitor-count">0</span></div>
     </div>
-  </div>
+  </main>
+</div>
 
-  <script src="script.js"></script>
-</body>
-</html>
+<script src="script.js"></script>
+<script>
+/* small helper to mirror jobs into Daily Updates area */
+function refreshDailyUpdates(){
+  const jobs = JSON.parse(localStorage.getItem("jobs_v1")||"[]");
+  const container = document.getElementById("daily-updates");
+  if(!container) return;
+  container.innerHTML = "";
+  jobs.sort((a,b)=> new Date(b.date)-new Date(a.date));
+  jobs.slice(0,10).forEach(j=>{
+    const el = document.createElement("div");
+    el.className = "job-card";
+    el.innerHTML = `<strong>${j.title}</strong> — ${j.company} <div style="font-size:0.9rem;color:var(--muted)">${new Date(j.date).toLocaleString()} • ${j.region} • ${j.level} • <a href="${j.link}" target="_blank">link</a></div><div style="margin-top:8px">${j.desc}</div>`;
+    container.appendChild(el);
+  });
+}
+// initial
+refreshDailyUpdates();
+// also watch localStorage changes (other tab)
+window.addEventListener("storage", ()=> { refreshDailyUpdates(); });
+</script>
+</body></html>
