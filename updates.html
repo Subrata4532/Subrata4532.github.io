@@ -1,74 +1,29 @@
-<!doctype html>
-<html lang="en">
-<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Job Updates — Subrata</title>
-<link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div class="app">
-    <aside class="sidebar">
-      <div class="profile"><img src="profile.jpg" alt="Subrata" style="width:96px;height:96px;border-radius:999px"/></div>
-      <h2>Job Updates</h2>
-      <nav class="side-nav">
-        <a href="index.html">Home</a>
-        <a href="updates.html" class="active">Job Updates</a>
-      </nav>
-    </aside>
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Recent Updates — Subrata</title>
+<link rel="stylesheet" href="style.css"/>
+</head><body>
+<div class="container">
+  <aside class="sidebar">
+    <div class="profile-photo"><img src="profile.jpg" alt="Subrata"></div>
+    <h2>Subrata Pramanik</h2>
+  </aside>
 
-    <main class="main">
-      <section class="card">
-        <h1>Post a Job Update (visible on this page)</h1>
-        <p style="color:var(--muted)">Use this form to publish job openings or internship posts. Entries are saved in your browser (localStorage). If you want to share publicly (server), you'll need a backend — this is an easy local publishing tool.</p>
+  <main class="content">
+    <section class="card">
+      <h1>Recent Updates</h1>
+      <ul>
+        <li>[09/2025] Accepted at WACV</li>
+        <li>[07/2025] Thesis milestone update</li>
+        <li>[06/2025] Presentation at CVPR (example)</li>
+      </ul>
+      <p>To post daily updates automatically from LinkedIn: share a post on your LinkedIn and copy its URL into the Job Updates form or include it in a new update entry here.</p>
+    </section>
 
-        <form id="job-add-form" class="card" style="padding:12px">
-          <div class="form-row">
-            <input name="title" class="input" placeholder="Job title (e.g. Research Engineer)" required />
-            <input name="company" class="input" placeholder="Company (e.g. TCS / Google)" required />
-          </div>
-
-          <div class="form-row" style="margin-top:10px">
-            <select name="region" class="input" style="max-width:200px">
-              <option value="India">India</option>
-              <option value="USA">USA</option>
-            </select>
-            <select name="level" class="input" style="max-width:200px">
-              <option value="Intern">Intern</option>
-              <option value="Early">Early/Career</option>
-              <option value="Mid">Mid</option>
-              <option value="Senior">Senior/Experienced</option>
-            </select>
-          </div>
-
-          <div style="margin-top:10px">
-            <input name="link" class="input" placeholder="Link to job posting (URL)" />
-          </div>
-
-          <div style="margin-top:10px">
-            <textarea name="description" rows="4" placeholder="Short description (responsibilities/skills)"></textarea>
-          </div>
-
-          <div style="margin-top:10px">
-            <button class="btn" type="submit">Add Job</button>
-          </div>
-        </form>
-      </section>
-
-      <section class="card">
-        <h2>India-based Opportunities</h2>
-        <div id="jobs-india"></div>
-      </section>
-
-      <section class="card">
-        <h2>USA-based Opportunities</h2>
-        <div id="jobs-usa"></div>
-      </section>
-
-      <div class="footer">
-        <div>© <span class="auto-year"></span> Subrata Pramanik</div>
-        <div style="color:var(--muted)">Time: <span id="live-time"></span> • Visitors: <span id="visitor-count">0</span></div>
-      </div>
-    </main>
-  </div>
-
-  <script src="script.js"></script>
-</body>
-</html>
+    <div class="card footer">
+      <div>© <span class="auto-year"></span> Subrata Pramanik</div>
+      <div>Time: <span id="live-time"></span> | Visitors: <span id="visitor-count">0</span></div>
+    </div>
+  </main>
+</div>
+<script src="script.js"></script></body></html>
