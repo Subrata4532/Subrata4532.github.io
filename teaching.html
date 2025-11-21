@@ -4,35 +4,30 @@
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="bg-overlay"></div>
-  <div class="wrapper">
+  <div class="app">
     <aside class="sidebar">
-      <div class="profile-wrap"><img src="/mnt/data/profile.jpg" data-profile="true" alt="Subrata" /></div>
+      <div class="profile"><img src="profile.jpg" alt="Subrata" style="width:96px;height:96px;border-radius:999px"/></div>
       <h2>Subrata Pramanik</h2>
-      <p class="subtitle">Teaching</p>
       <nav class="side-nav">
         <a href="index.html">Home</a>
         <a href="teaching.html" class="active">Teaching</a>
       </nav>
     </aside>
 
-    <main class="content">
-      <section class="card accordion">
-        <div class="accordion-item">
-          <div class="accordion-header"><h3>Teaching Experience</h3><small>TA roles</small></div>
-          <div class="accordion-body">
-            <ul>
-              <li>Problem Solving With Programming — Jul 2024 – Dec 2024</li>
-              <li>Problem Solving With Programming — Jul 2025 – Dec 2025</li>
-              <li>Computer Organization & Architecture — Jan 2025 – Jun 2025</li>
-            </ul>
-          </div>
-        </div>
+    <main class="main">
+      <section class="card">
+        <h1>Teaching</h1>
+        <p style="color:var(--muted)">I have served as TA for:</p>
+        <ul style="color:var(--muted)">
+          <li>Problem Solving with Programming — July–Dec 2024, July–Dec 2025</li>
+          <li>Computer Organization & Architecture — Jan–Jun 2025</li>
+          <li>Machine Learning labs (example)</li>
+        </ul>
       </section>
 
       <div class="footer">
         <div>© <span class="auto-year"></span> Subrata Pramanik</div>
-        <div>Time: <span id="live-time"></span></div>
+        <div style="color:var(--muted)">Time: <span id="live-time"></span> • Visitors: <span id="visitor-count">0</span></div>
       </div>
     </main>
   </div>
