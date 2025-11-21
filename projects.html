@@ -4,45 +4,33 @@
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="bg-overlay"></div>
-  <div class="wrapper">
+  <div class="app">
     <aside class="sidebar">
-      <div class="profile-wrap"><img src="/mnt/data/profile.jpg" data-profile="true" alt="Subrata" /></div>
-      <h2>Subrata Pramanik</h2>
-      <p class="subtitle">Research Scholar</p>
+      <div class="profile"><img src="profile.jpg" alt="Subrata" style="width:96px;height:96px;border-radius:999px"/></div>
+      <h2 style="margin-top:8px">Subrata Pramanik</h2>
       <nav class="side-nav">
         <a href="index.html">Home</a>
         <a href="projects.html" class="active">Projects</a>
+        <a href="publications.html">Publications</a>
       </nav>
     </aside>
 
-    <main class="content">
-      <section class="card accordion">
-        <div class="accordion-item">
-          <div class="accordion-header"><h3>MDocAgent</h3><small>Multi-agent doc pipeline</small></div>
-          <div class="accordion-body">
-            <p>Multi-agent pipeline for document workflows: retrieval → extraction → reasoning → QA.</p>
-          </div>
-        </div>
+    <main class="main">
+      <section class="card">
+        <h1>Projects</h1>
+        <h2>MDocAgent</h2>
+        <p style="color:var(--muted)">Multi-agent pipeline for document workflows: retrieval → extraction → reasoning → QA.</p>
 
-        <div class="accordion-item">
-          <div class="accordion-header"><h3>HM-RAG</h3><small>Hybrid RAG</small></div>
-          <div class="accordion-body">
-            <p>Hybrid retriever-augmented generator for multimodal documents.</p>
-          </div>
-        </div>
+        <h2>HM-RAG</h2>
+        <p style="color:var(--muted)">Hybrid retriever-augmented generator for multimodal documents.</p>
 
-        <div class="accordion-item">
-          <div class="accordion-header"><h3>SCAN</h3><small>Layout-aware embeddings</small></div>
-          <div class="accordion-body">
-            <p>Spatial attention for layout-aware document embeddings.</p>
-          </div>
-        </div>
+        <h2>SCAN</h2>
+        <p style="color:var(--muted)">Spatial contrastive attention for layout-aware embeddings.</p>
       </section>
 
       <div class="footer">
         <div>© <span class="auto-year"></span> Subrata Pramanik</div>
-        <div>Time: <span id="live-time"></span></div>
+        <div style="color:var(--muted)">Time: <span id="live-time"></span> • Visitors: <span id="visitor-count">0</span></div>
       </div>
     </main>
   </div>
