@@ -4,35 +4,28 @@
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="bg-overlay"></div>
-  <div class="wrapper">
+  <div class="app">
     <aside class="sidebar">
-      <div class="profile-wrap"><img src="/mnt/data/profile.jpg" data-profile="true" alt="Subrata" /></div>
+      <div class="profile"><img src="profile.jpg" alt="Subrata" style="width:96px;height:96px;border-radius:999px"/></div>
       <h2>Subrata Pramanik</h2>
-      <p class="subtitle">Research Scholar</p>
       <nav class="side-nav">
         <a href="index.html">Home</a>
         <a href="services.html" class="active">Services</a>
       </nav>
     </aside>
 
-    <main class="content">
-      <section class="card accordion">
-        <div class="accordion-item">
-          <div class="accordion-header"><h3>Services I Offer</h3><small>Research & consulting</small></div>
-          <div class="accordion-body">
-            <ul>
-              <li>Research collaboration in Document AI</li>
-              <li>Consulting in information extraction & retrieval</li>
-              <li>Student supervision & TA duties</li>
-            </ul>
-          </div>
-        </div>
+    <main class="main">
+      <section class="card">
+        <h1>Services</h1>
+        <ul style="color:var(--muted)">
+          <li>Research collaboration (document AI, NLP)</li>
+          <li>TA / Lab assistance</li>
+        </ul>
       </section>
 
       <div class="footer">
         <div>© <span class="auto-year"></span> Subrata Pramanik</div>
-        <div>Time: <span id="live-time"></span></div>
+        <div style="color:var(--muted)">Time: <span id="live-time"></span> • Visitors: <span id="visitor-count">0</span></div>
       </div>
     </main>
   </div>
