@@ -1,18 +1,23 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Subrata Pramanik — Home</title>
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
+  <div class="bg-overlay"></div>
+
   <div class="container">
     <aside class="sidebar">
-      <div class="profile-photo"><img src="profile.jpg" alt="Subrata Pramanik"></div>
-      <h2>Subrata Pramanik</h2>
-      <div class="subtitle">Junior Research Fellow — Indian Institute of Information Technology Allahabad<br/>Ex-Assistant Systems Engineer, TCS</div>
+      <div class="profile">
+        <img src="/profile.jpg" alt="Subrata Pramanik"/>
+        <h2>Subrata Pramanik</h2>
+        <p>Junior Research Fellow — Indian Institute of Information Technology Allahabad<br/>Ex-Assistant Systems Engineer, TCS</p>
+      </div>
 
-      <nav class="side-nav">
+      <nav class="nav" aria-label="Main">
         <a href="index.html" class="active">Home</a>
         <a href="about.html">About</a>
         <a href="resume.html">Resume</a>
@@ -26,19 +31,18 @@
         <a href="worldmap.html">World Map</a>
         <a href="meeting.html">Schedule Meeting</a>
         <a href="contact.html">Contact</a>
-        <a href="others.html">Others</a>
+        <a href="others.html">Other Resources</a>
       </nav>
-
     </aside>
 
-    <main class="content">
+    <main class="main">
       <section class="card">
         <h1>Welcome</h1>
-        <p class="lead">Hello — I am <strong>Subrata Pramanik</strong>, a M.Tech–PhD student at <strong>Indian Institute of Information Technology Allahabad</strong> (2024–2028). Previously Assistant Systems Engineer at <strong>TCS</strong> (Aug 2022 — Mar 2024). My interests: Document AI, NLP, Multi-modal ML and Generative AI.</p>
-        <div class="tags">
-          <div class="tag">Document Understanding</div>
-          <div class="tag">Retrieval &amp; RAG</div>
-          <div class="tag">Multi-modal ML</div>
+        <p class="muted">Hello — I am <strong>Subrata Pramanik</strong>, a M.Tech–PhD student at <strong>Indian Institute of Information Technology Allahabad</strong> (2024–2028). Previously Assistant Systems Engineer at <strong>TCS</strong> (Aug 2022 – Mar 2024). I work on Document AI, Natural Language Processing, Multi-modal ML and Generative AI.</p>
+        <div class="tags" aria-hidden="true">
+          <span class="tag">Document Understanding</span>
+          <span class="tag">Retrieval &amp; RAG</span>
+          <span class="tag">Multi-modal ML</span>
         </div>
       </section>
 
@@ -51,15 +55,17 @@
         </ul>
       </section>
 
-      <section class="card">
-        <h2>Quick contact & live info</h2>
-        <div class="meta-line">Email: <a href="mailto:subrata.official111@gmail.com">subrata.official111@gmail.com</a></div>
-        <div class="meta-line">Location: Indian Institute of Information Technology Allahabad (Prayagraj)</div>
-        <div class="meta-line">Weather: <span id="weather">loading…</span></div>
+      <section class="card accordion">
+        <button>Quick Info <span style="font-size:0.9rem;color:var(--muted)"> (Click to expand)</span></button>
+        <div class="panel" style="display:block">
+          <p><strong>Email:</strong> <a href="mailto:subrata.official111@gmail.com">subrata.official111@gmail.com</a></p>
+          <p><strong>Location:</strong> Indian Institute of Information Technology Allahabad</p>
+          <p id="weather" class="muted">Weather: loading…</p>
+        </div>
       </section>
 
-      <div class="card footer">
-        <div>© <span class="auto-year"></span> Subrata Pramanik</div>
+      <div class="card footer-strip">
+        <div class="left">© <span class="auto-year"></span> Subrata Pramanik</div>
         <div>Time: <span id="live-time"></span> | Visitors: <span id="visitor-count">0</span></div>
       </div>
     </main>
