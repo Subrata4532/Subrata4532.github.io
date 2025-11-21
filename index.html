@@ -1,76 +1,228 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Subrata Pramanik — Home</title>
-  <link rel="stylesheet" href="style.css"/>
+
+  <!-- ===== Styles (replace or merge with your current CSS) ===== -->
+  <style>
+    :root{
+      --sidebar-w: 260px;
+      --bg: #f6fbff;
+      --card: #ffffff;
+      --muted: #6b7280;
+      --accent: #2b6cb0;
+      --radius: 14px;
+    }
+
+    html,body{
+      height:100%;
+      margin:0;
+      font-family: Inter, system-ui, Arial, sans-serif;
+      background: var(--bg);
+      -webkit-font-smoothing:antialiased;
+      scroll-behavior: smooth; /* <--- smooth scrolling on anchor clicks */
+    }
+
+    /* Layout */
+    .site {
+      display: flex;
+      min-height: 100vh;
+      gap: 24px;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: var(--sidebar-w);
+      min-width: var(--sidebar-w);
+      background: linear-gradient(180deg,#fff,#f7fbff);
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 6px 18px rgba(30,41,59,0.06);
+      position: sticky;
+      top: 20px; /* keeps visible while scrolling */
+      height: calc(100vh - 40px);
+      overflow:auto;
+    }
+    .profile {
+      text-align:center;
+      margin-bottom: 18px;
+    }
+    .profile img{
+      width:110px;
+      height:110px;
+      object-fit:cover;
+      border-radius:999px;
+      border:6px solid #fff;
+      box-shadow:0 6px 14px rgba(15,23,42,0.06);
+    }
+    .profile h3{ margin:10px 0 2px; font-size:16px; }
+    .profile p{ color:var(--muted); font-size:13px; margin:0; line-height:1.3; }
+
+    nav.side-nav{
+      margin-top:18px;
+    }
+    nav.side-nav a{
+      display:block;
+      padding:12px 12px;
+      border-radius:10px;
+      color:#111827;
+      text-decoration:none;
+      margin-bottom:8px;
+      font-weight:600;
+      font-size:14px;
+    }
+    nav.side-nav a:hover{ background:rgba(43,108,176,0.08); }
+    nav.side-nav a.active{
+      background:rgba(43,108,176,0.12);
+      color: var(--accent);
+      box-shadow: 0 4px 10px rgba(43,108,176,0.08);
+    }
+
+    /* Main content area */
+    .main {
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+    .content-card{
+      background:var(--card);
+      border-radius: var(--radius);
+      box-shadow: 0 6px 20px rgba(14,16,18,0.04);
+      padding: 20px;
+    }
+
+    /* Sections */
+    section{
+      margin-bottom: 18px;
+      scroll-margin-top: 26px; /* when you click anchor, offset so heading isn't hidden under sticky header (if any) */
+    }
+    section h2{
+      margin:0 0 12px 0;
+      font-size:24px;
+      color:#0f172a;
+    }
+    section p{ color:var(--muted); line-height:1.6; }
+
+    /* Responsive */
+    @media (max-width: 880px) {
+      .site{ flex-direction: column; padding:12px; }
+      .sidebar{ width: 100%; min-width:unset; position:relative; height:auto; top:auto; }
+    }
+  </style>
 </head>
 <body>
-  <div class="bg-overlay"></div>
 
-  <div class="container">
-    <aside class="sidebar">
-      <div class="profile">
-        <img src="/profile.jpg" alt="Subrata Pramanik"/>
-        <h2>Subrata Pramanik</h2>
-        <p>Junior Research Fellow — Indian Institute of Information Technology Allahabad<br/>Ex-Assistant Systems Engineer, TCS</p>
-      </div>
+<div class="site">
 
-      <nav class="nav" aria-label="Main">
-        <a href="index.html" class="active">Home</a>
-        <a href="about.html">About</a>
-        <a href="resume.html">Resume</a>
-        <a href="publications.html">Publications</a>
-        <a href="projects.html">Projects</a>
-        <a href="services.html">Services</a>
-        <a href="teaching.html">Teaching</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="jobupdates.html">Job Updates</a>
-        <a href="updates.html">Daily Updates</a>
-        <a href="worldmap.html">World Map</a>
-        <a href="meeting.html">Schedule Meeting</a>
-        <a href="contact.html">Contact</a>
-        <a href="others.html">Other Resources</a>
-      </nav>
-    </aside>
+  <!-- ===== Sidebar (keep your content) ===== -->
+  <aside class="sidebar" aria-label="Main sidebar">
+    <div class="profile">
+      <!-- Replace src with your avatar path -->
+      <img src="/path/to/your-photo.jpg" alt="Subrata Pramanik">
+      <h3>Subrata Pramanik</h3>
+      <p>Junior Research Fellow — Indian Institute of Information Technology Allahabad<br>Ex-Assistant Systems Engineer, TCS</p>
+    </div>
 
-    <main class="main">
-      <section class="card">
-        <h1>Welcome</h1>
-        <p class="muted">Hello — I am <strong>Subrata Pramanik</strong>, a M.Tech–PhD student at <strong>Indian Institute of Information Technology Allahabad</strong> (2024–2028). Previously Assistant Systems Engineer at <strong>TCS</strong> (Aug 2022 – Mar 2024). I work on Document AI, Natural Language Processing, Multi-modal ML and Generative AI.</p>
-        <div class="tags" aria-hidden="true">
-          <span class="tag">Document Understanding</span>
-          <span class="tag">Retrieval &amp; RAG</span>
-          <span class="tag">Multi-modal ML</span>
-        </div>
-      </section>
+    <!-- IMPORTANT: Use anchor links to sections (ids below must match) -->
+    <nav class="side-nav" id="side-nav">
+      <a href="#home" class="active">Home</a>
+      <a href="#about">About</a>
+      <a href="#resume">Resume</a>
+      <a href="#publications">Publications</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </aside>
 
-      <section class="card projects">
-        <h2>Selected Projects</h2>
-        <ul>
-          <li><strong>MDocAgent</strong> — multi-agent pipeline for document workflows (retrieval, extraction, QA).</li>
-          <li><strong>HM-RAG</strong> — hybrid retriever-augmented generator for multimodal documents.</li>
-          <li><strong>SCAN</strong> — spatial contrastive attention for layout-aware document embeddings.</li>
-        </ul>
-      </section>
+  <!-- ===== Main content (put your real content inside these sections) ===== -->
+  <main class="main">
 
-      <section class="card accordion">
-        <button>Quick Info <span style="font-size:0.9rem;color:var(--muted)"> (Click to expand)</span></button>
-        <div class="panel" style="display:block">
-          <p><strong>Email:</strong> <a href="mailto:subrata.official111@gmail.com">subrata.official111@gmail.com</a></p>
-          <p><strong>Location:</strong> Indian Institute of Information Technology Allahabad</p>
-          <p id="weather" class="muted">Weather: loading…</p>
-        </div>
-      </section>
+    <section id="home" class="content-card">
+      <h2>Welcome</h2>
+      <p>
+        Hello — I am <strong>Subrata Pramanik</strong>, a M.Tech–PhD student at <strong>Indian Institute of Information Technology Allahabad</strong> (2024–2028).
+        Previously Assistant Systems Engineer at TCS (Aug 2022 – Mar 2024). I work on Document AI, Natural Language Processing, Multi-modal ML and Generative AI.
+      </p>
+      <!-- Keep the rest of your home content here (badges, selected projects summary, quick info, etc.) -->
+    </section>
 
-      <div class="card footer-strip">
-        <div class="left">© <span class="auto-year"></span> Subrata Pramanik</div>
-        <div>Time: <span id="live-time"></span> | Visitors: <span id="visitor-count">0</span></div>
-      </div>
-    </main>
-  </div>
+    <section id="about" class="content-card">
+      <h2>About</h2>
+      <p>
+        <!-- Replace with your About content exactly as currently written -->
+        (Paste your About section here — no changes required)
+      </p>
+    </section>
 
-  <script src="script.js"></script>
+    <section id="resume" class="content-card">
+      <h2>Resume</h2>
+      <p>
+        <!-- Paste resume details -->
+      </p>
+    </section>
+
+    <section id="publications" class="content-card">
+      <h2>Publications</h2>
+      <p>
+        <!-- Paste publications list -->
+      </p>
+    </section>
+
+    <section id="projects" class="content-card">
+      <h2>Projects</h2>
+      <p>
+        <!-- Paste Projects: MDocAgent, HM-RAG, SCAN, etc. -->
+      </p>
+    </section>
+
+    <section id="contact" class="content-card">
+      <h2>Contact</h2>
+      <p>
+        Email: <a href="mailto:subrata.official111@gmail.com">subrata.official111@gmail.com</a>
+      </p>
+    </section>
+
+  </main>
+</div>
+
+<!-- ===== Optional JS: highlight active nav item on scroll ===== -->
+<script>
+  (function(){
+    // Grab all nav links
+    const nav = document.getElementById('side-nav');
+    const links = Array.from(nav.querySelectorAll('a[href^="#"]'));
+    const sections = links.map(l => document.querySelector(l.getAttribute('href'))).filter(Boolean);
+
+    // When a nav link clicked -> close any mobile nav if you have one, scroll happens automatically because of href
+    links.forEach(l=>{
+      l.addEventListener('click', (e)=>{
+        // remove active from all and set on clicked
+        links.forEach(x => x.classList.remove('active'));
+        l.classList.add('active');
+      });
+    });
+
+    // On scroll: highlight the section currently in view
+    // Use IntersectionObserver for better performance
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          const id = entry.target.id;
+          links.forEach(a=>{
+            a.classList.toggle('active', a.getAttribute('href') === '#'+id);
+          });
+        }
+      });
+    }, { root: null, rootMargin: '-20% 0px -50% 0px', threshold: 0 });
+
+    sections.forEach(s => observer.observe(s));
+  })();
+</script>
+
 </body>
 </html>
