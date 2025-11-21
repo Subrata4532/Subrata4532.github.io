@@ -6,9 +6,10 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="bg-overlay"></div>
   <div class="wrapper">
     <aside class="sidebar">
-      <div class="profile-wrap"><img src="/mnt/data/profile.jpg" alt="Subrata" /></div>
+      <div class="profile-wrap"><img src="profile.jpg" alt="Subrata" /></div>
       <h2>Subrata Pramanik</h2>
       <p class="subtitle">Research Scholar</p>
       <nav class="side-nav">
@@ -33,7 +34,7 @@
 
         <h2>Education</h2>
         <ul>
-          <li>M.Tech / PhD (Research Scholar) — Add institute details here</li>
+          <li>PhD / M.Tech — Institute name (replace with details)</li>
         </ul>
 
         <h2>Research Interests</h2>
@@ -45,18 +46,12 @@
       </section>
 
       <div class="footer">
-        <div>© <span id="year-a"></span> Subrata Pramanik</div>
-        <div>Time: <span id="t-a"></span> | Visitors: <span id="v-a">0</span></div>
+        <div>© <span class="year"></span> Subrata Pramanik</div>
+        <div>Time: <span id="live-time"></span> | Visitors: <span id="visitor-count">0</span></div>
       </div>
     </main>
   </div>
 
-  <script>
-    document.getElementById('year-a').textContent = new Date().getFullYear();
-    function u1(){document.getElementById('t-a').textContent = new Date().toLocaleString()}
-    u1(); setInterval(u1,1000);
-    fetch('https://api.countapi.xyz/hit/subrata4532.github.io/pageviews').then(r=>r.json()).then(j=>{if(j.value)document.getElementById('v-a').textContent=j.value})
-    .catch(()=>document.getElementById('v-a').textContent = localStorage.getItem('vis_local_v1') || '1');
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
