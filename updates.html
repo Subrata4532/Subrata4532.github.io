@@ -1,45 +1,39 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Recent Updates — Subrata</title>
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Updates — Subrata</title>
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="bg-overlay"></div>
   <div class="wrapper">
     <aside class="sidebar">
-      <div class="profile-wrap"><img src="profile.jpg" alt="Subrata" /></div>
+      <div class="profile-wrap"><img src="/mnt/data/profile.jpg" data-profile="true" alt="Subrata" /></div>
       <h2>Subrata Pramanik</h2>
-      <p class="subtitle">Junior Research Fellow</p>
+      <p class="subtitle">Updates</p>
       <nav class="side-nav">
         <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="resume.html">Resume</a>
-         <a href="teaching.html">Teaching</a>
-        <a href="publications.html">Publications</a>
-        <a href="projects.html">Projects</a>
-         <a href="services.html">services</a>
-         <a href="updates.html">updates</a>
-        <a href="gallery.html" class="active">Gallery</a>
-        <a href="others.html">others</a>
-        <a href="meeting.html">Schedule Meeting</a>
-         <a href="worldmap.html">World Map</a>
-          <a href="contact.html">contact</a>
+        <a href="updates.html" class="active">Updates</a>
       </nav>
     </aside>
 
     <main class="content">
-      <section class="card">
-        <h1>Recent Updates</h1>
-        <ul>
-          <li>[09/2025] Paper accepted at WACV.</li>
-          <li>[07/2025] Successfully defended thesis (placeholder).</li>
-          <li>[06/2025] Presented work at Conference ABC.</li>
-        </ul>
+      <section class="card accordion">
+        <div class="accordion-item">
+          <div class="accordion-header"><h3>Recent Updates</h3><small>News & milestones</small></div>
+          <div class="accordion-body">
+            <ul>
+              <li>[09/2025] Paper accepted at WACV (example)</li>
+              <li>[07/2025] Thesis milestone achieved (example)</li>
+              <li>[06/2025] Presented at Conference ABC (example)</li>
+            </ul>
+            <p>Use this section to post lab news, paper updates, and conference presentations.</p>
+          </div>
+        </div>
       </section>
 
       <div class="footer">
-        <div>© <span class="year"></span> Subrata Pramanik</div>
-        <div>Time: <span id="live-time"></span> | Visitors: <span id="visitor-count">0</span></div>
+        <div>© <span class="auto-year"></span> Subrata Pramanik</div>
+        <div>Time: <span id="live-time"></span></div>
       </div>
     </main>
   </div>
