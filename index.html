@@ -3,119 +3,142 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Subrata Pramanik — Home</title>
+  <title>Subrata Pramanik — Portfolio</title>
 
-  <!-- ===== Styles ===== -->
+  <!-- Google-Scholar-Like Minimal Clean Theme -->
   <style>
     :root{
-      --sidebar-w: 260px;
-      --bg: #f6fbff;
-      --card: #ffffff;
-      --muted: #6b7280;
-      --accent: #2b6cb0;
-      --radius: 14px;
+      --sidebar-width: 260px;
+      --bg: #ffffff;
+      --text: #1a1a1a;
+      --muted: #666666;
+      --border: #e5e5e5;
+      --highlight: #1a73e8; /* Google blue */
     }
 
-    html,body{
-      height:100%;
+    body{
       margin:0;
-      font-family: Inter, system-ui, Arial, sans-serif;
+      font-family: "Roboto", "Inter", Arial, sans-serif;
       background: var(--bg);
-      -webkit-font-smoothing:antialiased;
+      color: var(--text);
       scroll-behavior: smooth;
     }
 
-    /* Layout */
-    .site {
-      display: flex;
-      min-height: 100vh;
-      gap: 24px;
-      padding: 24px;
-      box-sizing: border-box;
+    .site{
+      display:flex;
+      min-height:100vh;
     }
 
     /* Sidebar */
-    .sidebar {
-      width: var(--sidebar-w);
-      min-width: var(--sidebar-w);
-      background: linear-gradient(180deg,#fff,#f7fbff);
-      border-radius: 14px;
-      padding: 18px;
-      box-shadow: 0 6px 18px rgba(30,41,59,0.06);
-      position: sticky;
-      top: 20px;
-      height: calc(100vh - 40px);
-      overflow:auto;
+    .sidebar{
+      width:var(--sidebar-width);
+      border-right:1px solid var(--border);
+      padding:20px;
+      position:sticky;
+      top:0;
+      height:100vh;
+      overflow-y:auto;
+      background:#fafafa;
     }
-    .profile {
+
+    .profile{
       text-align:center;
-      margin-bottom: 18px;
+      margin-bottom:20px;
     }
+
     .profile img{
-      width:110px;
-      height:110px;
+      width:120px;
+      height:120px;
+      border-radius:50%;
       object-fit:cover;
-      border-radius:999px;
-      border:6px solid #fff;
-      box-shadow:0 6px 14px rgba(15,23,42,0.06);
+      border:3px solid #fff;
+      box-shadow:0 2px 6px rgba(0,0,0,0.1);
     }
-    .profile h3{ margin:10px 0 2px; font-size:16px; }
-    .profile p{ color:var(--muted); font-size:13px; margin:0; line-height:1.3; }
 
-    nav.side-nav{
-      margin-top:18px;
-    }
-    nav.side-nav a{
-      display:block;
-      padding:12px 12px;
-      border-radius:10px;
-      color:#111827;
-      text-decoration:none;
-      margin-bottom:8px;
+    .profile h3{
+      margin:10px 0 4px;
+      font-size:20px;
       font-weight:600;
+    }
+
+    .profile p{
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.4;
+    }
+
+    nav a{
+      display:block;
+      padding:10px 12px;
+      text-decoration:none;
+      color:var(--text);
+      border-radius:6px;
+      margin-bottom:6px;
       font-size:14px;
-    }
-    nav.side-nav a:hover{ background:rgba(43,108,176,0.08); }
-    nav.side-nav a.active{
-      background:rgba(43,108,176,0.12);
-      color: var(--accent);
-      box-shadow: 0 4px 10px rgba(43,108,176,0.08);
+      font-weight:500;
     }
 
-    /* Main content area */
-    .main {
+    nav a:hover{
+      background:#e8f1ff;
+    }
+
+    nav a.active{
+      background:#e7f0fe;
+      color:var(--highlight);
+      font-weight:600;
+      border-left:3px solid var(--highlight);
+    }
+
+    /* Main content */
+    .main{
       flex:1;
-      display:flex;
-      flex-direction:column;
-      gap:18px;
-    }
-    .content-card{
-      background:var(--card);
-      border-radius: var(--radius);
-      box-shadow: 0 6px 20px rgba(14,16,18,0.04);
-      padding: 20px;
+      padding:30px;
     }
 
-    /* Sections */
     section{
-      margin-bottom: 18px;
-      scroll-margin-top: 26px;
+      max-width:900px;
+      margin-bottom:40px;
+      padding-bottom:20px;
+      border-bottom:1px solid var(--border);
+      scroll-margin-top:40px;
     }
-    section h2{
-      margin:0 0 12px 0;
-      font-size:24px;
-      color:#0f172a;
+
+    h2{
+      margin-top:0;
+      font-size:26px;
+      font-weight:600;
+      color:#202124;
     }
-    section p{ color:var(--muted); line-height:1.6; }
 
-    /* Simple lists styling for publications/projects/resume */
-    ul.clean{ padding-left:18px; margin:8px 0; }
-    ul.clean li{ margin-bottom:8px; }
+    ul.clean{
+      padding-left:20px;
+    }
 
-    /* Responsive */
-    @media (max-width: 880px) {
-      .site{ flex-direction: column; padding:12px; }
-      .sidebar{ width: 100%; min-width:unset; position:relative; height:auto; top:auto; }
+    ul.clean li{
+      margin-bottom:6px;
+      line-height:1.5;
+    }
+
+    a{
+      color:var(--highlight);
+      text-decoration:none;
+    }
+
+    a:hover{
+      text-decoration:underline;
+    }
+
+    @media(max-width:900px){
+      .site{
+        flex-direction:column;
+      }
+      .sidebar{
+        width:100%;
+        height:auto;
+        position:relative;
+        border-right:none;
+        border-bottom:1px solid var(--border);
+      }
     }
   </style>
 </head>
@@ -123,127 +146,203 @@
 
 <div class="site">
 
-  <!-- ===== Sidebar ===== -->
-  <aside class="sidebar" aria-label="Main sidebar">
+  <!-- LEFT SIDEBAR -->
+  <aside class="sidebar">
     <div class="profile">
-      <!-- Using the uploaded image path so it appears on GitHub if you push the image at the same path -->
-      <img src="/mnt/data/9d49cf08-00d9-4fd1-85f1-9d8d079ef1c9.png" alt="Subrata Pramanik">
+      <img src="profile.jpg" alt="Subrata Pramanik">
       <h3>Subrata Pramanik</h3>
-      <p>Junior Research Fellow — Indian Institute of Information Technology Allahabad<br>Ex-Assistant Systems Engineer, TCS</p>
+      <p>
+        M.Tech–PhD Student, IIIT Allahabad<br>
+        Ex-Assistant Systems Engineer, TCS
+      </p>
     </div>
 
-    <nav class="side-nav" id="side-nav">
+    <!-- Navigation Menu (16 sections) -->
+    <nav id="side-nav">
       <a href="#home" class="active">Home</a>
       <a href="#about">About</a>
+      <a href="#education">Education</a>
+      <a href="#experience">Experience</a>
+      <a href="#teaching">Teaching</a>
+      <a href="#courses">Courses</a>
       <a href="#resume">Resume</a>
       <a href="#publications">Publications</a>
       <a href="#projects">Projects</a>
+      <a href="#selected-projects">Selected Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#awards">Awards</a>
+      <a href="#talks">Talks</a>
+      <a href="#services">Services</a>
+      <a href="#blog">Blog</a>
       <a href="#contact">Contact</a>
     </nav>
   </aside>
 
-  <!-- ===== Main content ===== -->
+  <!-- MAIN CONTENT -->
   <main class="main">
 
-    <!-- HOME -->
-    <section id="home" class="content-card">
+    <!-- SECTION 1 -->
+    <section id="home">
       <h2>Welcome</h2>
       <p>
-        Hello — I am <strong>Subrata Pramanik</strong>, a M.Tech–PhD student at <strong>Indian Institute of Information Technology Allahabad</strong> (2024–2028). Previously Assistant Systems Engineer at TCS (Aug 2022 – Mar 2024). I work on Document AI, Natural Language Processing, Multi-modal ML and Generative AI.
+        I am <strong>Subrata Pramanik</strong>, a M.Tech–PhD student at
+        <strong>IIIT Allahabad</strong> (2024–2028). Previously Assistant Systems Engineer at TCS.
       </p>
 
-      <div style="margin-top:12px;">
-        <strong>Selected Projects</strong>
-        <ul class="clean">
-          <li><strong>MDocAgent</strong> — multi-agent pipeline for document workflows (retrieval, extraction, QA).</li>
-          <li><strong>HM-RAG</strong> — hybrid retriever-augmented generator for multimodal documents.</li>
-          <li><strong>SCAN</strong> — spatial contrastive attention for layout-aware document embeddings.</li>
-        </ul>
-      </div>
-
+      <h3>Research Areas</h3>
+      <ul class="clean">
+        <li>Document AI</li>
+        <li>Retrieval & RAG</li>
+        <li>Multimodal Machine Learning</li>
+        <li>Generative AI</li>
+      </ul>
     </section>
 
-    <!-- ABOUT -->
-    <section id="about" class="content-card">
+    <!-- SECTION 2 -->
+    <section id="about">
       <h2>About</h2>
       <p>
-        <!-- Paste your existing About content here exactly as you want it to appear on GitHub. -->
-        I am a researcher working on document understanding, retrieval & RAG, and multimodal machine learning. I focus on building practical pipelines and models that help extract structure and meaning from complex documents.
+        I work on Document Understanding, Retrieval systems, and Multimodal AI. 
+        My research focuses on practical, high-impact solutions that extract structure and meaning from complex documents.
       </p>
     </section>
 
-    <!-- RESUME -->
-    <section id="resume" class="content-card">
+    <!-- SECTION 3 -->
+    <section id="education">
+      <h2>Education</h2>
+      <ul class="clean">
+        <li><strong>M.Tech–PhD</strong>, IIIT Allahabad (2024–2028)</li>
+        <li><strong>B.Tech</strong>, [Your College Name]</li>
+      </ul>
+    </section>
+
+    <!-- SECTION 4 -->
+    <section id="experience">
+      <h2>Experience</h2>
+      <ul class="clean">
+        <li><strong>Assistant Systems Engineer</strong>, TCS (2022–2024)</li>
+        <li><strong>Junior Research Fellow</strong>, IIIT Allahabad (2024–Present)</li>
+      </ul>
+    </section>
+
+    <!-- SECTION 5 -->
+    <section id="teaching">
+      <h2>Teaching</h2>
+      <p>Courses assisted: Machine Learning, NLP Lab, Data Structures.</p>
+    </section>
+
+    <!-- SECTION 6 -->
+    <section id="courses">
+      <h2>Courses</h2>
+      <ul class="clean">
+        <li>Advanced NLP</li>
+        <li>Deep Learning</li>
+        <li>Information Retrieval</li>
+      </ul>
+    </section>
+
+    <!-- SECTION 7 -->
+    <section id="resume">
       <h2>Resume</h2>
-      <p><strong>Education</strong><br>
-      M.Tech–PhD, Indian Institute of Information Technology Allahabad (2024–2028)</p>
-      <p><strong>Experience</strong><br>
-      Assistant Systems Engineer, TCS (Aug 2022 – Mar 2024)</p>
-
-      <!-- Add more resume content below as needed, keep the text identical to your original resume if you want no changes -->
+      <p><a href="resume.pdf" download>Download Resume (PDF)</a></p>
     </section>
 
-    <!-- PUBLICATIONS -->
-    <section id="publications" class="content-card">
+    <!-- SECTION 8 -->
+    <section id="publications">
       <h2>Publications</h2>
-      <p>
-        <!-- List your publications verbatim here. Example format below -->
-      </p>
       <ul class="clean">
-        <li>Pramanik, S., et al. (2025). Title of paper. Conference/Journal.</li>
-        <!-- Add the full list copied from your existing page -->
+        <li>Pramanik, S. et al., 2025 — Title of Paper — Conference</li>
       </ul>
     </section>
 
-    <!-- PROJECTS -->
-    <section id="projects" class="content-card">
-      <h2>Projects</h2>
-      <p>Below are brief descriptions — keep full project pages on separate repository pages if needed.</p>
+    <!-- SECTION 9 -->
+    <section id="projects">
+      <h2>Projects (Overview)</h2>
       <ul class="clean">
-        <li><strong>MDocAgent</strong> — multi-agent pipeline for document workflows (retrieval, extraction, QA). Links: <a href="#">GitHub</a></li>
-        <li><strong>HM-RAG</strong> — hybrid retriever-augmented generator for multimodal documents. Links: <a href="#">GitHub</a></li>
-        <li><strong>SCAN</strong> — spatial contrastive attention for layout-aware document embeddings. Links: <a href="#">GitHub</a></li>
+        <li>MDocAgent — Multi-Agent Document Workflow Pipeline</li>
+        <li>HM-RAG — Hybrid Retriever-Augmented Generator</li>
+        <li>SCAN — Spatial Contrastive Attention</li>
       </ul>
     </section>
 
-    <!-- CONTACT -->
-    <section id="contact" class="content-card">
+    <!-- SECTION 10 -->
+    <section id="selected-projects">
+      <h2>Selected Projects (Detailed)</h2>
+      <ul class="clean">
+        <li><strong>MDocAgent:</strong> Retrieval, extraction, QA.</li>
+        <li><strong>HM-RAG:</strong> Multimodal RAG pipeline.</li>
+        <li><strong>SCAN:</strong> Layout-aware embeddings.</li>
+      </ul>
+    </section>
+
+    <!-- SECTION 11 -->
+    <section id="skills">
+      <h2>Skills</h2>
+      <p>Python, PyTorch, TensorFlow, NLP, Document AI, RAG, Git, Docker.</p>
+    </section>
+
+    <!-- SECTION 12 -->
+    <section id="awards">
+      <h2>Awards & Honors</h2>
+      <ul class="clean">
+        <li>Best Paper Award — XYZ Conference</li>
+      </ul>
+    </section>
+
+    <!-- SECTION 13 -->
+    <section id="talks">
+      <h2>Talks</h2>
+      <ul class="clean">
+        <li>Document AI — Talk at IIIT Allahabad</li>
+      </ul>
+    </section>
+
+    <!-- SECTION 14 -->
+    <section id="services">
+      <h2>Professional Services</h2>
+      <p>Reviewer for conferences, student mentoring.</p>
+    </section>
+
+    <!-- SECTION 15 -->
+    <section id="blog">
+      <h2>Blog</h2>
+      <p><a href="#">Understanding Document Layouts — New Post</a></p>
+    </section>
+
+    <!-- SECTION 16 -->
+    <section id="contact">
       <h2>Contact</h2>
-      <p>
-        Email: <a href="mailto:subrata.official111@gmail.com">subrata.official111@gmail.com</a>
-      </p>
+      <p>Email: <a href="mailto:subrata.official111@gmail.com">subrata.official111@gmail.com</a></p>
     </section>
 
   </main>
 </div>
 
-<!-- ===== Optional JS: highlight active nav item on scroll ===== -->
+<!-- Smooth Scroll + Active Section Highlight -->
 <script>
-  (function(){
-    const nav = document.getElementById('side-nav');
-    const links = Array.from(nav.querySelectorAll('a[href^="#"]));
-    const sections = links.map(l => document.querySelector(l.getAttribute('href'))).filter(Boolean);
+  const nav = document.getElementById("side-nav");
+  const links = nav.querySelectorAll("a");
+  const sections = [...links].map(a => document.querySelector(a.getAttribute("href")));
 
-    links.forEach(l=>{
-      l.addEventListener('click', (e)=>{
-        links.forEach(x => x.classList.remove('active'));
-        l.classList.add('active');
-      });
+  links.forEach(link => {
+    link.addEventListener("click", () => {
+      links.forEach(l => l.classList.remove("active"));
+      link.classList.add("active");
     });
+  });
 
-    const observer = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting){
-          const id = entry.target.id;
-          links.forEach(a=>{
-            a.classList.toggle('active', a.getAttribute('href') === '#'+id);
-          });
-        }
-      });
-    }, { root: null, rootMargin: '-20% 0px -50% 0px', threshold: 0 });
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        links.forEach(a => a.classList.toggle(
+          "active",
+          a.getAttribute("href") === "#" + entry.target.id
+        ));
+      }
+    });
+  }, {threshold:0.4});
 
-    sections.forEach(s => observer.observe(s));
-  })();
+  sections.forEach(sec => observer.observe(sec));
 </script>
 
 </body>
