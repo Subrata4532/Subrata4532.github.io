@@ -1,50 +1,40 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Resume — Subrata</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div class="app">
-    <aside class="sidebar">
-      <div class="profile">
-        <img src="profile.jpg" alt="Subrata Pramanik" />
-        <h2>Subrata Pramanik</h2>
-        <p class="subtitle">Junior Research Fellow — IIIT Allahabad</p>
-      </div>
+<html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Resume — Subrata</title>
+<link rel="stylesheet" href="style.css"/>
+</head><body>
+<div class="container">
+  <aside class="sidebar">
+    <div class="profile-photo"><img src="profile.jpg" alt="Subrata"></div>
+    <h2>Subrata Pramanik</h2>
+    <div class="subtitle">Junior Research Fellow — IIIT Allahabad</div>
+    <nav class="side-nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="resume.html" class="active">Resume</a>
+    </nav>
+  </aside>
 
-      <nav class="side-nav">
-        <a href="index.html">Home</a>
-        <a href="resume.html" class="active">Resume</a>
-        <a href="cv.pdf">Download CV (PDF)</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-    </aside>
+  <main class="content">
+    <section class="card">
+      <h1>Resume / CV</h1>
+      <p><a href="cv.pdf" target="_blank">Download CV (PDF)</a> — upload a file named <code>cv.pdf</code> to the repo root for this link to work.</p>
 
-    <main class="main">
-      <section class="card">
-        <h1>Resume / CV</h1>
-        <p><a href="cv.pdf" target="_blank">Download CV (PDF)</a></p>
+      <h2>Summary</h2>
+      <p>Junior Research Fellow (M.Tech–PhD) at Indian Institute of Information Technology Allahabad. Assistant Systems Engineer — TCS (Aug 2022 – Mar 2024).</p>
 
-        <h2>Summary</h2>
-        <p style="color:var(--muted)">Junior Research Fellow (M.Tech–PhD) at Indian Institute of Information Technology Allahabad. Former Assistant Systems Engineer at TCS. Research: Document AI, NLP, Multi-modal ML.</p>
+      <h2>Teaching Assistant roles</h2>
+      <ul>
+        <li>Problem Solving with Programming — Jul 2024 – Dec 2024; Jul 2025 – Dec 2025</li>
+        <li>Computer Organization & Architecture — Jan 2025 – Jun 2025</li>
+      </ul>
+    </section>
 
-        <h2>Education & Experience</h2>
-        <ul style="color:var(--muted)">
-          <li>M.Tech–PhD — Indian Institute of Information Technology Allahabad (2024–2028)</li>
-          <li>Assistant Systems Engineer — TCS (Aug 2022–Mar 2024)</li>
-        </ul>
-      </section>
-
-      <div class="footer">
-        <div>© <span class="auto-year"></span> Subrata Pramanik</div>
-        <div style="color:var(--muted)">Time: <span id="live-time"></span> • Visitors: <span id="visitor-count">0</span></div>
-      </div>
-    </main>
-  </div>
-
-  <script src="script.js"></script>
-</body>
-</html>
+    <div class="card footer">
+      <div>© <span class="auto-year"></span> Subrata Pramanik</div>
+      <div>Time: <span id="live-time"></span> | Visitors: <span id="visitor-count">0</span></div>
+    </div>
+  </main>
+</div>
+<script src="script.js"></script></body></html>
