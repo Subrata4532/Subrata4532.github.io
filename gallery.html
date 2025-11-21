@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Gallery — Subrata</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg-overlay"></div>
+  <div class="wrapper">
+    <aside class="sidebar">
+      <div class="profile-wrap"><img src="profile.jpg" alt="Subrata" /></div>
+      <h2>Subrata Pramanik</h2>
+      <p class="subtitle">Research Scholar</p>
+      <nav class="side-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="resume.html">Resume</a>
+        <a href="publications.html">Publications</a>
+        <a href="projects.html">Projects</a>
+        <a href="gallery.html" class="active">Gallery</a>
+        <a href="updates.html">Recent Updates</a>
+        <a href="teaching.html">Teaching</a>
+        <a href="meeting.html">Schedule Meeting</a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <section class="card">
+        <h1>Gallery</h1>
+        <p>Upload your photos to the repository folder <code>/images/</code> with filenames like <code>1.jpg, 2.jpg, 3.jpg</code>. They will automatically appear here.</p>
+
+        <div class="gallery-grid" id="gallery-grid">
+          <!-- Images will be inserted here automatically if named 1.jpg..6.jpg in /images/ -->
+        </div>
+      </section>
+
+      <div class="footer">
+        <div>© <span class="auto-year"></span> Subrata Pramanik</div>
+        <div>Time: <span id="live-time"></span> | Visitors: <span id="visitor-count">0</span></div>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // dynamically add images from /images/1.jpg .. /images/12.jpg if they exist
+    (function populateGallery(){
+      const grid = document.getElementById('gallery-grid');
+      if(!grid) return;
+      for(let i=1;i<=12;i++){
+        const path = `images/${i}.jpg`;
+        const img = new Image();
+        img.src = path;
+        img.onload = ()=> {
+          const el = document.createElement('img');
+          el.src = path;
+          el.alt = `Photo ${i}`;
+          grid.appendChild(el);
+        };
+        // no onerror handler — simply ignore missing files
+      }
+    })();
+  </script>
+</body>
+</html>
