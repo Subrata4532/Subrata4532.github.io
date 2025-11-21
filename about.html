@@ -1,51 +1,50 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>About — Subrata</title>
-<link rel="stylesheet" href="style.css" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About — Subrata</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="bg-overlay"></div>
-  <div class="wrapper">
+  <div class="app">
     <aside class="sidebar">
-      <div class="profile-wrap"><img src="/mnt/data/profile.jpg" data-profile="true" alt="Subrata" /></div>
-      <h2>Subrata Pramanik</h2>
-      <p class="subtitle">M.Tech–PhD Student, IIIT Allahabad</p>
+      <div class="profile">
+        <img src="profile.jpg" alt="Subrata Pramanik" />
+        <h2>Subrata Pramanik</h2>
+        <p class="subtitle">Junior Research Fellow — Indian Institute of Information Technology Allahabad</p>
+      </div>
+
       <nav class="side-nav">
         <a href="index.html">Home</a>
         <a href="about.html" class="active">About</a>
         <a href="resume.html">Resume</a>
         <a href="publications.html">Publications</a>
         <a href="projects.html">Projects</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="meeting.html">Schedule Meeting</a>
       </nav>
     </aside>
 
-    <main class="content">
-      <section class="card accordion">
-        <div class="accordion-item">
-          <div class="accordion-header"><h3>Biography</h3><small>Short bio</small></div>
-          <div class="accordion-body">
-            <p>I am <strong>Subrata Pramanik</strong>, an M.Tech–PhD student at IIIT Allahabad (2024–2028). Previously Assistant Systems Engineer at TCS (Aug 2022–Mar 2024). My research areas: Document AI, Machine Learning, Deep Learning, Computer Vision, Generative AI.</p>
-          </div>
-        </div>
+    <main class="main">
+      <section class="card">
+        <h1>About</h1>
+        <p>I am a M.Tech–PhD student at Indian Institute of Information Technology Allahabad (2024–2028). My research focuses on document understanding, retrieval-augmented generation, and multi-modal machine learning. I currently serve as Junior Research Fellow and contribute to teaching and research projects.</p>
 
-        <div class="accordion-item">
-          <div class="accordion-header"><h3>Education & Teaching</h3><small>Degrees and TA roles</small></div>
-          <div class="accordion-body">
-            <h4>Education</h4>
-            <ul><li>M.Tech–PhD (IIIT Allahabad) — 2024–2028</li></ul>
-            <h4>Teaching Assistant</h4>
-            <ul>
-              <li>Problem Solving With Programming — Jul 2024 – Dec 2024</li>
-              <li>Problem Solving With Programming — Jul 2025 – Dec 2025</li>
-              <li>Computer Organization & Architecture — Jan 2025 – Jun 2025</li>
-            </ul>
-          </div>
-        </div>
+        <h2>Education</h2>
+        <ul style="color:var(--muted)">
+          <li>M.Tech–PhD (Indian Institute of Information Technology Allahabad), 2024–2028 (Junior Research Fellow)</li>
+        </ul>
+
+        <h2>Work Experience</h2>
+        <ul style="color:var(--muted)">
+          <li>Assistant Systems Engineer — TCS (Aug 2022 – Mar 2024)</li>
+        </ul>
       </section>
 
       <div class="footer">
         <div>© <span class="auto-year"></span> Subrata Pramanik</div>
-        <div>Time: <span id="live-time"></span></div>
+        <div style="color:var(--muted)">Time: <span id="live-time"></span> • Visitors: <span id="visitor-count">0</span></div>
       </div>
     </main>
   </div>
