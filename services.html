@@ -4,47 +4,39 @@
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
+  <div class="bg-overlay"></div>
+  <div class="wrapper">
     <aside class="sidebar">
-      <div class="photo"><img src="/mnt/data/5cff262e-f700-4872-9c29-ec8bdc648d97.png" alt="Subrata" /></div>
+      <div class="profile-wrap"><img src="/mnt/data/profile.jpg" data-profile="true" alt="Subrata" /></div>
       <h2>Subrata Pramanik</h2>
-      <div class="sub">Junior Research Fellow</div>
-      <nav class="nav">
-       <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="resume.html">Resume</a>
-         <a href="teaching.html">Teaching</a>
-        <a href="publications.html">Publications</a>
-        <a href="projects.html">Projects</a>
-         <a href="services.html">services</a>
-         <a href="updates.html">updates</a>
-        <a href="gallery.html" class="active">Gallery</a>
-        <a href="others.html">others</a>
-        <a href="meeting.html">Schedule Meeting</a>
-         <a href="worldmap.html">World Map</a>
-          <a href="contact.html">contact</a>
+      <p class="subtitle">Research Scholar</p>
+      <nav class="side-nav">
+        <a href="index.html">Home</a>
+        <a href="services.html" class="active">Services</a>
       </nav>
     </aside>
 
-    <main class="main">
-      <section class="section">
-        <h1>Services</h1>
-        <ul>
-          <li>Research </li>
-        </ul>
+    <main class="content">
+      <section class="card accordion">
+        <div class="accordion-item">
+          <div class="accordion-header"><h3>Services I Offer</h3><small>Research & consulting</small></div>
+          <div class="accordion-body">
+            <ul>
+              <li>Research collaboration in Document AI</li>
+              <li>Consulting in information extraction & retrieval</li>
+              <li>Student supervision & TA duties</li>
+            </ul>
+          </div>
+        </div>
       </section>
 
-      <div class="footer-line">
-        <div>© <span id="year6"></span> Subrata Pramanik</div>
-        <div id="live-info6">Time: <span id="live-time6"></span> &nbsp; | &nbsp; Visitors: <span id="visitor-count6">0</span></div>
+      <div class="footer">
+        <div>© <span class="auto-year"></span> Subrata Pramanik</div>
+        <div>Time: <span id="live-time"></span></div>
       </div>
-
-      <script>document.getElementById('year6').textContent = new Date().getFullYear();
-        function updateTime6(){ document.getElementById('live-time6').textContent = new Date().toLocaleString(); }
-        updateTime6(); setInterval(updateTime6,1000);
-        document.getElementById('visitor-count6').textContent = localStorage.getItem('site_visits_total_v1') || '0';
-      </script>
     </main>
   </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
