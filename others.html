@@ -4,9 +4,10 @@
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="bg-overlay"></div>
   <div class="wrapper">
     <aside class="sidebar">
-      <div class="profile-wrap"><img src="/mnt/data/profile.jpg" alt="Subrata" /></div>
+      <div class="profile-wrap"><img src="profile.jpg" alt="Subrata" /></div>
       <h2>Subrata Pramanik</h2>
       <p class="subtitle">Research Scholar</p>
       <nav class="side-nav">
@@ -34,16 +35,12 @@
       </section>
 
       <div class="footer">
-        <div>© <span id="year-o"></span> Subrata Pramanik</div>
-        <div>Time: <span id="t-o"></span> | Visitors: <span id="v-o">0</span></div>
+        <div>© <span class="year"></span> Subrata Pramanik</div>
+        <div>Time: <span id="live-time"></span> | Visitors: <span id="visitor-count">0</span></div>
       </div>
     </main>
   </div>
 
-  <script>document.getElementById('year-o').textContent=new Date().getFullYear();
-  function uo(){document.getElementById('t-o').textContent=new Date().toLocaleString()}uo();setInterval(uo,1000);
-  fetch('https://api.countapi.xyz/hit/subrata4532.github.io/pageviews').then(r=>r.json()).then(j=>{if(j.value)document.getElementById('v-o').textContent=j.value})
-  .catch(()=>document.getElementById('v-o').textContent = localStorage.getItem('vis_local_v1') || '1');
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
