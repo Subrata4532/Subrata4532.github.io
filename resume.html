@@ -7,38 +7,35 @@
   <div class="bg-overlay"></div>
   <div class="wrapper">
     <aside class="sidebar">
-      <div class="profile-wrap"><img src="/mnt/data/profile.jpg" alt="Subrata" /></div>
+      <div class="profile-wrap"><img src="/mnt/data/profile.jpg" data-profile="true" alt="Subrata" /></div>
       <h2>Subrata Pramanik</h2>
-      <p class="subtitle">Junior Research Fellow</p>
+      <p class="subtitle">M.Tech–PhD Student</p>
       <nav class="side-nav">
-       <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="resume.html">Resume</a>
-         <a href="teaching.html">Teaching</a>
-        <a href="publications.html">Publications</a>
-        <a href="projects.html">Projects</a>
-         <a href="services.html">services</a>
-         <a href="updates.html">updates</a>
-        <a href="gallery.html" class="active">Gallery</a>
-        <a href="others.html">others</a>
-        <a href="meeting.html">Schedule Meeting</a>
-         <a href="worldmap.html">World Map</a>
-          <a href="contact.html">contact</a>
+        <a href="index.html">Home</a>
+        <a href="resume.html" class="active">Resume</a>
       </nav>
     </aside>
 
     <main class="content">
-      <section class="card">
-        <h1>Resume / CV</h1>
-        <p><a href="cv.pdf" target="_blank" style="color:var(--accent)">Download CV (PDF)</a></p>
-        <p>(Upload a file named <code>cv.pdf</code> to repo root to make this link work.)</p>
-        <h2>Summary</h2>
-        <p>Junior Research Fellow (M.Tech-PhD), Indian Institute Of Information Technology Allahabad. Assistant Systems Engineer — TCS.</p>
+      <section class="card accordion">
+        <div class="accordion-item">
+          <div class="accordion-header"><h3>Download CV</h3><small>Click to show link</small></div>
+          <div class="accordion-body">
+            <p><a href="cv.pdf" class="btn" target="_blank">Download CV (PDF)</a></p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header"><h3>Professional Summary</h3><small>Short summary</small></div>
+          <div class="accordion-body">
+            <p>Junior Research Fellow (M.Tech–PhD) at IIIT Allahabad. Previously Assistant Systems Engineer at TCS. Research interests: Document AI, Retrieval & RAG, Multi-modal ML, Generative AI.</p>
+          </div>
+        </div>
       </section>
 
       <div class="footer">
         <div>© <span class="auto-year"></span> Subrata Pramanik</div>
-        <div>Time: <span id="live-time"></span> | Visitors: <span id="visitor-count">0</span></div>
+        <div>Time: <span id="live-time"></span></div>
       </div>
     </main>
   </div>
