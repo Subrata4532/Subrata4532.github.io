@@ -4,36 +4,33 @@
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
+  <div class="bg-overlay"></div>
+  <div class="wrapper">
     <aside class="sidebar">
-      <div class="photo"><img src="/mnt/data/5cff262e-f700-4872-9c29-ec8bdc648d97.png" alt="Subrata" /></div>
+      <div class="profile-wrap"><img src="/mnt/data/profile.jpg" data-profile="true" alt="Subrata" /></div>
       <h2>Subrata Pramanik</h2>
-      <div class="sub">Junior Research Fellow</div>
-      <nav class="nav">
+      <p class="subtitle">Contact</p>
+      <nav class="side-nav">
         <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="resume.html">Resume</a>
-         <a href="teaching.html">Teaching</a>
-        <a href="publications.html">Publications</a>
-        <a href="projects.html">Projects</a>
-         <a href="services.html">services</a>
-         <a href="updates.html">updates</a>
-        <a href="gallery.html" class="active">Gallery</a>
-        <a href="others.html">others</a>
-        <a href="meeting.html">Schedule Meeting</a>
-         <a href="worldmap.html">World Map</a>
-          <a href="contact.html">contact</a>
+        <a href="contact.html" class="active">Contact</a>
       </nav>
     </aside>
 
-    <main class="main">
-      <section class="section">
+    <main class="content">
+      <section class="card">
         <h1>Contact</h1>
-        <p>Email: <a href="mailto:your.email@example.com">subrata.official111@gmail.com</a></p>
-        <p>Office: Kolkata, India</p>
+        <p>Email: <a href="mailto:subrata.official111@gmail.com">subrata.official111@gmail.com</a></p>
+        <p>Office: IIIT Allahabad (Prayagraj)</p>
         <p>Social: <a href="#" target="_blank">LinkedIn</a> · <a href="#" target="_blank">Google Scholar</a></p>
       </section>
+
+      <div class="footer">
+        <div>© <span class="auto-year"></span> Subrata Pramanik</div>
+        <div>Time: <span id="live-time"></span></div>
+      </div>
     </main>
   </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
