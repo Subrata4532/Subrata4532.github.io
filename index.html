@@ -7,12 +7,14 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- background overlay to help readability -->
+  <div class="bg-overlay"></div>
+
   <div class="wrapper">
     <!-- SIDEBAR -->
     <aside class="sidebar" aria-label="Sidebar">
       <div class="profile-wrap">
-        <!-- use uploaded path. Replace with profile.jpg if you uploaded to repo -->
-        <img src="/mnt/data/profile.jpg" alt="Subrata Pramanik" />
+        <img src="profile.jpg" alt="Subrata Pramanik" />
       </div>
       <h2>Subrata Pramanik</h2>
       <p class="subtitle">Research Scholar — Document AI · NLP · Multi-modal ML</p>
@@ -30,21 +32,21 @@
         <a href="meeting.html" style="color:var(--accent)">Schedule Meeting</a>
       </nav>
 
-      <div style="margin-top:auto; text-align:center; width:100%;">
+      <div style="margin-top:auto; width:100%; text-align:center; font-size:0.9rem;">
         <div class="tag">IIT · Research Scholar</div>
         <div style="height:10px"></div>
-        <div style="font-size:12px;color:var(--muted)">Contact: <a href="mailto:your.email@example.com" style="color:var(--accent)">your.email@example.com</a></div>
+        <div style="color:var(--muted); margin-top:8px">
+          <div>Contact:</div>
+          <a href="mailto:your.email@example.com" style="color:var(--accent)">your.email@example.com</a>
+        </div>
       </div>
     </aside>
 
     <!-- MAIN CONTENT -->
     <main class="content" role="main">
-      <!-- Hero -->
       <section class="card" aria-label="Hero">
         <h1>Welcome</h1>
-        <p style="color:var(--muted);font-size:1rem;line-height:1.5rem">
-          Hello — I am <strong>Subrata Pramanik</strong>, a Research Scholar working on Document AI, Natural Language Processing, and Multi-modal Machine Learning. I build systems for extracting knowledge from complex documents, retrieval-augmented generation, and layout-aware models.
-        </p>
+        <p>Hello — I am <strong>Subrata Pramanik</strong>, a Research Scholar working on Document AI, Natural Language Processing, and Multi-modal Machine Learning. I build systems for extracting knowledge from complex documents, retrieval-augmented generation, and layout-aware models.</p>
 
         <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap">
           <div class="tag">Document Understanding</div>
@@ -53,8 +55,7 @@
         </div>
       </section>
 
-      <!-- Projects highlight -->
-      <section class="card projects" aria-label="Selected Projects">
+      <section class="card projects">
         <h2>Selected Projects</h2>
         <ul>
           <li><strong>MDocAgent</strong> — multi-agent pipeline for complex document tasks (retrieval, extraction, QA).</li>
@@ -63,50 +64,23 @@
         </ul>
       </section>
 
-      <!-- Quick contact -->
-      <section class="card" aria-label="Contact">
+      <section class="card">
         <h2>Quick contact</h2>
         <div class="meta-line">Email: <a href="mailto:your.email@example.com">your.email@example.com</a></div>
         <div class="meta-line">Location: Mumbai, India</div>
+        <div class="meta-line" id="weather" style="margin-top:8px">Weather: <span style="color:var(--muted)">loading…</span></div>
       </section>
 
-      <!-- Footer line with live time and visitor count -->
-      <div class="footer" role="contentinfo">
-        <div>© <span id="year"></span> Subrata Pramanik</div>
-        <div class="kv">
+      <div class="footer">
+        <div>© <span class="year"></span> Subrata Pramanik</div>
+        <div style="display:flex; gap:14px; align-items:center;">
           <div>Time: <span id="live-time"></span></div>
-          <div style="width:12px"></div>
           <div>Visitors: <span id="visitor-count">0</span></div>
         </div>
       </div>
     </main>
   </div>
 
-  <!-- JS: year, live time & visitor counter (simple) -->
-  <script>
-    // year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // live local time - updates every second
-    function updateTime(){
-      document.getElementById('live-time').textContent = new Date().toLocaleString();
-    }
-    updateTime(); setInterval(updateTime,1000);
-
-    // simple site-wide visitor counter using countapi.xyz
-    // first call to ensure a key exists, then display value
-    const apiKey = 'subrata4532.github.io'; // namespace for countapi
-    fetch('https://api.countapi.xyz/hit/'+apiKey+'/pageviews')
-      .then(r=>r.json())
-      .then(j=>{
-        if(j && j.value) document.getElementById('visitor-count').textContent = j.value;
-      }).catch(()=> {
-        // fallback: per-browser localStorage
-        const k='vis_local_v1';
-        if(!localStorage.getItem(k)) localStorage.setItem(k, '1');
-        else localStorage.setItem(k, String(Number(localStorage.getItem(k))+1));
-        document.getElementById('visitor-count').textContent = localStorage.getItem(k);
-      });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
