@@ -3,139 +3,101 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Personal Webpage — Modern Academic</title>
+  <title>Subrata Pramanik — Personal Webpage</title>
 
-  <!-- Leaflet CSS for map -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="" crossorigin=""/>
+  <!-- Leaflet CSS (free, no API key) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
   <style>
-    /* ---------------------------
-       Global styles & typography
-       --------------------------- */
+    /* ===== page-wide gradient and side decorations (Option A) ===== */
     :root{
-      --accent1: #6b1f5b;
-      --accent2: #3a1f2f;
-      --bg: #fafafa;
-      --card: rgba(255,255,255,0.85);
-      --muted: #666;
-      --glass: rgba(255,255,255,0.6);
-      --border-gradient: linear-gradient(90deg,#6b1f5b, #9b2b79 60%, #3a1f2f);
-      --glass-border: rgba(255,255,255,0.7);
-      --max-width: 1150px;
+      --accent1:#6b1f5b;
+      --accent2:#3a1f2f;
+      --bg:#fbf6fb;
+      --card: rgba(255,255,255,0.95);
+      --muted:#6d6d6d;
+      --max-width:1100px;
     }
-    html,body{
-      margin:0; padding:0; font-family: "Georgia", serif; background: var(--bg);
-      color:#111; -webkit-font-smoothing:antialiased;
+    html,body{ margin:0; padding:0; font-family: "Georgia", serif; background: var(--bg); }
+
+    /* Soft fixed side gradients that fill the blank left & right areas */
+    body::before, body::after{
+      content:"";
+      position:fixed;
+      top:0;
+      bottom:0;
+      width:160px;
+      z-index:-1;
+      pointer-events:none;
+      filter: blur(28px) saturate(1.05);
+      opacity:0.65;
+    }
+    body::before{
+      left:0;
+      background: linear-gradient(180deg, rgba(107,31,91,0.10), rgba(155,43,121,0.06) 40%, rgba(255,255,255,0) 100%);
+      transform: translateX(-20px);
+    }
+    body::after{
+      right:0;
+      background: linear-gradient(180deg, rgba(58,31,47,0.09), rgba(107,31,91,0.05) 45%, rgba(255,255,255,0) 100%);
+      transform: translateX(20px);
     }
 
-    /* ---------------------------
-       Header / Nav
-       --------------------------- */
+    /* Header and nav */
     header.topbar{
-      background: var(--border-gradient);
-      color:white;
-      padding: 28px 0 8px;
-      box-shadow: 0 8px 18px rgba(45,20,40,0.25);
-      position: sticky; top:0; z-index:50;
+      background: linear-gradient(90deg, rgba(107,31,91,0.95), rgba(58,31,47,0.95));
+      color:#fff;
+      padding:28px 0 8px;
+      box-shadow:0 10px 20px rgba(0,0,0,0.12);
+      position: sticky; top:0; z-index:30;
     }
-    .wrap{ max-width:var(--max-width); margin:0 auto; padding:0 18px; }
-    header .title{
-      text-align:center; font-size:30px; font-weight:700; letter-spacing:0.6px;
-      margin-bottom:6px;
-    }
-    nav.global{
-      display:flex; justify-content:center; gap:12px; background: rgba(0,0,0,0.15);
-      padding:10px 8px; border-top: 3px solid rgba(255,255,255,0.06);
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      backdrop-filter: blur(4px);
-    }
-    nav.global a{
-      color: #fff; text-decoration:none; padding:6px 12px; border-radius:6px;
-      font-weight:600; font-size:15px;
-    }
-    nav.global a:hover{ background: rgba(255,255,255,0.08); }
+    .wrap{ max-width:var(--max-width); margin:0 auto; padding:0 20px; }
+    .title{ text-align:center; font-size:30px; font-weight:700; }
+    nav.global{ display:flex; justify-content:center; gap:12px; padding:10px 8px; background: rgba(0,0,0,0.08); }
+    nav.global a{ color:#fff; text-decoration:none; padding:6px 12px; border-radius:6px; font-weight:600; }
+    nav.global a:hover{ background: rgba(255,255,255,0.06); }
 
-    /* ---------------------------
-       Main layout
-       --------------------------- */
-    main.container{ max-width:var(--max-width); margin:30px auto; padding:0 18px; display:grid; grid-template-columns: 240px 1fr 320px; gap:24px; align-items:start; }
-    @media (max-width:1100px){ main.container{ grid-template-columns: 1fr; } .right-col{ order:3; } .left-col{ order:1; } .center-col{ order:2; } }
+    /* Main grid: left, center, right */
+    main.container{ max-width:var(--max-width); margin:30px auto; padding:0 20px; display:grid; grid-template-columns: 260px 1fr 320px; gap:24px; align-items:start; }
+    @media (max-width:1100px){ main.container{ grid-template-columns: 1fr; } .left-col{ order:1 } .center-col{ order:2 } .right-col{ order:3 } body::before,body::after{ display:none; } }
 
-    /* Left profile card */
-    .left-col .profile{
-      background:var(--card); border-radius:12px; padding:18px; box-shadow:0 8px 20px rgba(30,10,30,0.08);
-      border: 6px solid transparent; background-origin: border-box;
-      position:relative;
-    }
+    /* Cards */
+    .section-card{ background:var(--card); border-radius:12px; padding:18px; margin-bottom:20px; box-shadow:0 8px 24px rgba(40,10,30,0.04); border:1px solid rgba(0,0,0,0.03); }
+    .section-card h2{ margin-top:0; color:var(--accent2); font-size:18px; border-bottom:1px dashed rgba(0,0,0,0.06); padding-bottom:8px; }
+
+    /* Left profile */
     .profile .img{ width:100%; height:260px; overflow:hidden; border-radius:8px; background:#ddd; display:flex; align-items:center; justify-content:center; }
-    .profile img{ width:100%; object-fit:cover; display:block; }
+    .profile img{ width:100%; height:100%; object-fit:cover; display:block; }
     .profile h3{ text-align:center; margin:12px 0 6px; font-size:18px; }
     .profile p.meta{ text-align:center; font-size:13px; color:var(--muted); line-height:1.4; }
 
-    /* Right column (updates) */
-    .right-col .card{
-      background: #eaf6ec; padding:14px; border-radius:10px; border-left:6px solid #cfe9d0;
-      box-shadow:0 6px 16px rgba(10,20,10,0.03);
-    }
-
-    /* Center content section cards */
-    .section-card{
-      background:var(--card); padding:18px; border-radius:12px; margin-bottom:20px;
-      box-shadow:0 8px 20px rgba(30,10,30,0.05);
-      border: 1px solid rgba(0,0,0,0.03);
-    }
-    .section-card h2{ margin-top:0; color:var(--accent2); font-size:18px; border-bottom:1px dashed rgba(0,0,0,0.06); padding-bottom:8px; }
-
-    /* Table / lists */
-    ul.clean{ padding-left:18px; color:#222; }
-    .meta-list{ font-size:14px; color:var(--muted); }
-
     /* Map */
-    #map{ width:100%; height:330px; border-radius:10px; border:1px solid rgba(0,0,0,0.06); }
+    #map{ width:100%; height:320px; border-radius:10px; border:1px solid rgba(0,0,0,0.06); }
 
-    /* Jobs widget */
-    .jobs-header{ display:flex; gap:12px; align-items:center; justify-content:space-between; }
-    .jobs-tabs{ display:flex; gap:8px; }
-    .tabs button{ padding:8px 12px; border-radius:8px; border:none; background:rgba(0,0,0,0.06); cursor:pointer; }
-    .tabs button.active{ background:var(--accent1); color:white; }
-    .filter-row{ display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
-    .filter-row select, .filter-row input{ padding:6px 8px; border-radius:6px; border:1px solid #ddd; }
+    /* Jobs */
+    .job-card{ background:#fff; padding:10px 12px; border-radius:10px; margin:10px 0; border-left:6px solid var(--accent1); box-shadow:0 6px 12px rgba(30,10,30,0.03); }
+    .pill{ display:inline-block; background:rgba(0,0,0,0.06); padding:4px 8px; border-radius:200px; font-size:12px; }
 
-    .job-card{ background:white; border-radius:10px; padding:10px 12px; margin:10px 0; border-left:6px solid var(--accent1); box-shadow:0 6px 14px rgba(30,10,30,0.04); }
-    .job-card .meta{ font-size:13px; color:var(--muted); display:flex; gap:10px; flex-wrap:wrap; }
-
-    /* Tiny footer with counter */
+    /* Footer */
     footer{ margin-top:30px; padding:18px 0; text-align:center; background:var(--accent2); color:white; }
 
-    /* nice border (impressive) */
-    body::before{
-      content:""; position:fixed; inset:12px; pointer-events:none; border-radius:14px; z-index:9999;
-      background: linear-gradient(180deg, rgba(255,255,255,0.0), rgba(0,0,0,0.0));
-      box-shadow: 0 0 0 4px rgba(255,255,255,0.02), 0 0 30px rgba(107,31,91,0.15) inset;
-    }
-
     /* small helpers */
-    .muted{ color:var(--muted); font-size:14px; }
-    .btn{ background:var(--accent1); color:white; padding:8px 12px; border-radius:8px; border:none; cursor:pointer; }
     .small{ font-size:13px; color:var(--muted); }
-    .pill{ display:inline-block; background:rgba(0,0,0,0.05); padding:4px 8px; border-radius:200px; font-size:12px; }
+    .btn{ background:var(--accent1); color:white; padding:8px 12px; border-radius:8px; border:none; cursor:pointer; }
 
-    /* Contact form */
-    form.contact label{ display:block; margin:6px 0 4px; font-size:13px; }
-    form.contact input, form.contact textarea{ width:100%; padding:8px 10px; border-radius:8px; border:1px solid #ddd; }
+    /* thin dotted separators between centered cards to make vertical rhythm */
+    .section-card + .section-card{ border-top: 6px solid rgba(0,0,0,0.02); padding-top:22px; }
 
   </style>
 </head>
 <body>
 
-  <!-- ===========================
-       Header + Navigation
-       =========================== -->
+  <!-- Header -->
   <header class="topbar">
     <div class="wrap">
       <div class="title">Welcome to My Webpage</div>
     </div>
     <nav class="global" aria-label="Main navigation">
-      <!-- Add/remove links as you like -->
       <a href="#home">Home</a>
       <a href="#about">About</a>
       <a href="#education">Education</a>
@@ -156,44 +118,37 @@
     </nav>
   </header>
 
-  <!-- ===========================
-       Main layout: left | center | right
-       =========================== -->
   <main class="container" role="main">
 
-    <!-- LEFT COLUMN: profile + quick links -->
+    <!-- LEFT: profile -->
     <aside class="left-col">
       <div class="profile section-card">
-        <!-- Use your uploaded image path (developer instruction): -->
-        <div class="img"><img src="/mnt/data/Screenshot (33).png" alt="Profile image (replace with your hosted image)"></div>
-
-        <h3>Dr. Anjali Gautam</h3>
-        <p class="meta">Assistant Professor • Department of Information Technology • IIIT Allahabad<br>
-          <span class="small">Contact: +91 532 292 2535 • anjaligautam@iiita.ac.in</span></p>
-
-        <div style="margin-top:12px; display:flex; gap:8px; justify-content:center;">
-          <a class="pill" href="#" title="Google Scholar">GS</a>
-          <a class="pill" href="#" title="ResearchGate">RG</a>
-          <a class="pill" href="#" title="LinkedIn">LI</a>
+        <!-- Uploaded image path (replace with repo path when publishing) -->
+        <div class="img">
+          <img src="/mnt/data/Screenshot (33).png" alt="Subrata Pramanik profile image">
         </div>
+        <h3>Subrata Pramanik</h3>
+        <p class="meta">Junior Research Fellow<br>
+          M.Tech – Ph.D., Indian Institute of Information Technology Allahabad<br>
+          <span class="small">Contact: add-your-phone • add-your-email@example.com</span>
+        </p>
 
         <div style="margin-top:12px;">
           <div class="small">Current time</div>
           <div id="clock" style="font-weight:700; margin-top:6px;">--:--:--</div>
-          <div id="date" class="small muted"></div>
+          <div id="date" class="small"></div>
         </div>
 
         <div style="margin-top:12px;">
           <div class="small">Local temperature</div>
-          <div id="temperature" style="font-weight:700; margin-top:6px;">Loading...</div>
-          <div class="small muted">Weather data via OpenWeatherMap (API key required)</div>
+          <div id="temperature" style="font-weight:700; margin-top:6px;">API key required</div>
+          <div class="small">(Add OpenWeather API key in script to show live temp)</div>
         </div>
       </div>
 
-      <!-- compact quick nav -->
       <div class="section-card" style="margin-top:14px;">
         <h2>Quick Links</h2>
-        <ul class="clean">
+        <ul>
           <li><a href="#resume">Resume</a></li>
           <li><a href="#publications">Publications</a></li>
           <li><a href="#projects">Projects</a></li>
@@ -202,239 +157,162 @@
       </div>
     </aside>
 
-    <!-- CENTER COLUMN: main sections -->
+    <!-- CENTER: main content -->
     <section class="center-col">
 
-      <!-- HOME -->
       <div id="home" class="section-card">
         <h2>Home</h2>
-        <p>Welcome! This is a modern academic profile template with clear sections, a jobs board, live map and weather. Use the navigation above to jump between sections. Replace content with your details.</p>
+        <p>Welcome — I am <strong>Subrata Pramanik</strong>, M.Tech – Ph.D. from Indian Institute of Information Technology Allahabad. This page shows my profile, publications, projects, and job updates.</p>
       </div>
 
-      <!-- ABOUT -->
       <div id="about" class="section-card">
         <h2>About</h2>
-        <p>I have done my M.Tech and Ph.D in Medical Image Analysis... (replace with your full bio). Click <a href="#">here</a> for CV.</p>
+        <p>Replace this paragraph with a short biography. Keep it professional and concise.</p>
       </div>
 
-      <!-- EDUCATION -->
       <div id="education" class="section-card">
         <h2>Education</h2>
         <ul>
-          <li>Ph.D — Medical Image Analysis — IIT Roorkee</li>
-          <li>M.Tech — Image Processing — GB Pant Engg College</li>
+          <li>M.Tech — (specialization) — Indian Institute of Information Technology Allahabad</li>
+          <li>Ph.D — (specialization) — Indian Institute of Information Technology Allahabad</li>
         </ul>
       </div>
 
-      <!-- EXPERIENCE -->
       <div id="experience" class="section-card">
         <h2>Experience</h2>
-        <ul class="meta-list">
-          <li>Assistant Professor – IIIT Allahabad</li>
-          <li>Previously — Women Institute of Technology Dehradun, UPES Dehradun</li>
+        <ul class="small">
+          <li>Junior Research Fellow — (current)</li>
+          <li>Previous roles — add details here</li>
         </ul>
       </div>
 
-      <!-- TEACHING -->
-      <div id="teaching" class="section-card">
-        <h2>Teaching</h2>
-        <p>Courses taught: Image Processing, Computer Vision, Machine Learning, Medical Imaging.</p>
-      </div>
+      <div id="teaching" class="section-card"><h2>Teaching</h2><p>Courses taught (if any).</p></div>
+      <div id="courses" class="section-card"><h2>Courses</h2><p>List of courses.</p></div>
 
-      <!-- COURSES -->
-      <div id="courses" class="section-card">
-        <h2>Courses</h2>
-        <ul>
-          <li>Computer Vision (UG/PG)</li>
-          <li>Digital Image Processing</li>
-        </ul>
-      </div>
-
-      <!-- RESUME -->
       <div id="resume" class="section-card">
         <h2>Resume</h2>
         <p><a href="#" download>Download Resume (PDF)</a></p>
       </div>
 
-      <!-- PUBLICATIONS -->
       <div id="publications" class="section-card">
         <h2>Publications</h2>
         <ol>
-          <li>Paper 1 — Journal/Conference (2024)</li>
-          <li>Paper 2 — Journal/Conference (2023)</li>
+          <li>Paper 1 — Journal/Conference (Year)</li>
+          <li>Paper 2 — Journal/Conference (Year)</li>
         </ol>
       </div>
 
-      <!-- PROJECTS -->
       <div id="projects" class="section-card">
         <h2>Projects</h2>
         <ul>
-          <li>Project A — Deep learning for medical image segmentation</li>
-          <li>Project B — Explainable AI in healthcare</li>
+          <li>Project A — short description</li>
+          <li>Project B — short description</li>
         </ul>
       </div>
 
-      <!-- SKILLS -->
       <div id="skills" class="section-card">
         <h2>Skills</h2>
         <p>Image Processing • Computer Vision • Deep Learning • Python • PyTorch • MATLAB</p>
       </div>
 
-      <!-- AWARDS -->
       <div id="awards" class="section-card">
         <h2>Awards & Honours</h2>
-        <ul>
-          <li>Uttarakhand Council Young Scientist Award (2018)</li>
-        </ul>
+        <ul><li>Add awards here</li></ul>
       </div>
 
-      <!-- TALKS -->
-      <div id="talks" class="section-card">
-        <h2>Talks</h2>
-        <ul>
-          <li>Invited talk: Medical AI Workshop — 2024</li>
-        </ul>
-      </div>
+      <div id="talks" class="section-card"><h2>Talks</h2><p>Invited talks / seminars.</p></div>
 
-      <!-- PROFESSIONAL SERVICES -->
-      <div id="services" class="section-card">
-        <h2>Professional Services</h2>
-        <p>Reviewer for Journal X • Program Committee Member • Session Chair</p>
-      </div>
+      <div id="services" class="section-card"><h2>Professional Services</h2><p>Reviewer, PC member, etc.</p></div>
 
-      <!-- BLOG -->
-      <div id="blog" class="section-card">
-        <h2>Blog</h2>
-        <p>Short research notes and tutorials — <a href="#">Visit blog</a></p>
-      </div>
+      <div id="blog" class="section-card"><h2>Blog</h2><p>Link to blog or articles.</p></div>
 
-      <!-- CONTACT -->
       <div id="contact" class="section-card">
         <h2>Contact</h2>
         <form class="contact" onsubmit="return contactFormSubmit(event)">
-          <label>Name</label>
-          <input type="text" id="c_name" required/>
-          <label>Email</label>
-          <input type="email" id="c_email" required/>
-          <label>Message</label>
-          <textarea id="c_msg" rows="4" required></textarea>
+          <label>Name</label><input type="text" id="c_name" required />
+          <label>Email</label><input type="email" id="c_email" required />
+          <label>Message</label><textarea id="c_msg" rows="4" required></textarea>
           <div style="margin-top:10px;"><button class="btn">Send Message</button></div>
         </form>
       </div>
 
-      <!-- UPDATES -->
       <div id="updates" class="section-card">
         <h2>Latest Updates</h2>
         <ul>
-          <li>Conducted Workshop: 31 May 2025</li>
-          <li>New Project Funding: SERB (2025)</li>
+          <li>Add your latest workshop / event here</li>
         </ul>
       </div>
 
-      <!-- JOB UPDATES (big interactive widget) -->
+      <!-- JOBS -->
       <div id="jobs" class="section-card">
-        <div class="jobs-header">
-          <div>
-            <h2>Job Updates</h2>
-            <div class="small">Two streams: <strong>India</strong> and <strong>USA</strong>. Add and filter daily postings (Intern, Full-time, Remote, Hybrid, Senior).</div>
+        <h2>Job Updates</h2>
+        <div class="small">India / USA streams available. Add and filter postings below.</div>
+
+        <div style="margin-top:10px;">
+          <div style="display:flex; gap:8px; margin-bottom:8px;">
+            <button class="btn" onclick="setTab('India')">India</button>
+            <button class="btn" onclick="setTab('USA')">USA</button>
+            <input id="search-key" placeholder="Search title or company" style="flex:1; padding:8px; border-radius:8px; border:1px solid #ddd;" />
+            <button class="btn" onclick="renderJobs()">Apply</button>
           </div>
-          <div class="jobs-controls">
-            <div id="job-stats" class="small muted">0 jobs</div>
-          </div>
-        </div>
 
-        <div style="margin-top:10px;" class="tabs">
-          <div class="jobs-tabs">
-            <button class="tab-btn active" data-target="India">India</button>
-            <button class="tab-btn" data-target="USA">USA</button>
-          </div>
-        </div>
+          <div id="job-list"></div>
 
-        <div class="filter-row" style="margin-top:10px;">
-          <select id="filter-type"><option value="">All Types</option><option>Intern</option><option>Full-time</option><option>Early</option><option>Experienced</option><option>Hybrid</option><option>Remote</option></select>
-          <input id="search-key" placeholder="Search title or company" />
-          <button class="btn" onclick="renderJobs()">Apply</button>
-        </div>
-
-        <div id="job-list" style="margin-top:12px;"></div>
-
-        <hr style="margin:12px 0;" />
-
-        <!-- Add job form -->
-        <div style="display:grid; gap:8px;">
+          <hr style="margin:12px 0;" />
           <h3 style="margin:0 0 6px;">Add New Job</h3>
-          <input id="new-title" placeholder="Role title (e.g., Research Intern)" />
-          <input id="new-company" placeholder="Company / Institute" />
-          <select id="new-country">
-            <option>India</option>
-            <option>USA</option>
-          </select>
-          <select id="new-type">
-            <option>Intern</option><option>Full-time</option><option>Early</option><option>Experienced</option><option>Hybrid</option><option>Remote</option>
-          </select>
-          <input id="new-location" placeholder="City / Remote" />
-          <input id="new-url" placeholder="Application URL (optional)" />
-          <div style="display:flex; gap:8px;">
-            <button class="btn" onclick="addJob()">Add Job</button>
-            <button onclick="clearJobs()" style="padding:8px 12px;border-radius:8px;border:1px solid #ddd;">Clear All</button>
+          <input id="new-title" placeholder="Role title" style="width:100%; padding:8px; margin-top:6px" />
+          <input id="new-company" placeholder="Company / Institute" style="width:100%; padding:8px; margin-top:6px" />
+          <div style="display:flex; gap:8px; margin-top:6px;">
+            <select id="new-country"><option>India</option><option>USA</option></select>
+            <select id="new-type"><option>Intern</option><option>Full-time</option><option>Remote</option><option>Hybrid</option></select>
+            <input id="new-location" placeholder="City / Remote" style="flex:1" />
           </div>
+          <div style="margin-top:8px;"><button class="btn" onclick="addJob()">Add Job</button> <button onclick="clearJobs()" style="padding:8px;border-radius:8px;border:1px solid #ddd;">Clear All</button></div>
         </div>
       </div>
 
-      <!-- Map area -->
+      <!-- World map (Leaflet) -->
       <div class="section-card">
         <h2>World Map</h2>
         <div id="map"></div>
-        <div class="small muted" style="margin-top:8px;">Interactive map (Leaflet + OpenStreetMap). Click or search coords to center map.</div>
+        <div class="small" style="margin-top:8px;">Interactive map (OpenStreetMap + Leaflet). Marker: Indian Institute of Information Technology Allahabad.</div>
       </div>
 
     </section>
 
-    <!-- RIGHT COLUMN: latest updates / events -->
+    <!-- RIGHT: updates + weather -->
     <aside class="right-col">
-      <div class="card section-card">
-        <h2>Latest Updates</h2>
+      <div class="section-card">
+        <h2>Latest Events</h2>
         <ul>
-          <li>One Day Faculty Workshop — 31 May 2025</li>
-          <li>Ph.D. positions available — Contact: anjaligautam@iiita.ac.in</li>
+          <li>Ph.D. positions — contact when available</li>
+          <li>Workshops & announcements</li>
         </ul>
       </div>
 
       <div class="section-card" style="margin-top:16px;">
         <h2>Quick Weather</h2>
-        <div id="mini-weather">Loading...</div>
+        <div id="mini-weather">API key required to show live weather.</div>
       </div>
-
-      <div style="height:16px;"></div>
     </aside>
+
   </main>
 
-  <!-- Footer -->
   <footer>
-    <div class="wrap">
-      <div id="footer-count">© 2025 Anjali's Webpage. All Rights Reserved.</div>
-    </div>
+    <div class="wrap">© 2025 Subrata Pramanik. All Rights Reserved.</div>
   </footer>
 
-  <!-- --------------------
-       Scripts (JS)
-       -------------------- -->
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <script>
-    /* ===========================
-       Config / constants
-       - Replace OPENWEATHER_API_KEY with your key to enable live temperature.
-       - Get free key: https://openweathermap.org/api
-       =========================== */
-    const OPENWEATHER_API_KEY = ""; // <-- paste your key here (or leave blank for fallback)
-    const OPENWEATHER_UNITS = "metric"; // or 'imperial'
-    const DEFAULT_COORDS = { lat: 26.8467, lon: 80.9462 }; // fallback (Allahabad / Prayagraj approx)
+    /* ======= Configuration =======
+       NOTE: Map + tiles use OpenStreetMap via Leaflet (free, no API key).
+       Coordinates set to Indian Institute of Information Technology Allahabad.
+    */
+    const IIIT_ALLAHABAD_COORDS = { lat: 25.4878, lon: 81.8489 }; // approximate location for marker
 
-    /* ---------------------------
-       Clock & Date
-       --------------------------- */
+    /* Clock & Date */
     function updateClock() {
       const now = new Date();
       const hh = String(now.getHours()).padStart(2,'0');
@@ -446,204 +324,93 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    /* ---------------------------
-       Weather fetch helper
-       --------------------------- */
-    async function fetchWeatherByCoords(lat, lon) {
-      if(!OPENWEATHER_API_KEY){
-        document.getElementById('temperature').innerText = "API key missing — add OPENWEATHER_API_KEY in script.";
-        document.getElementById('mini-weather').innerText = "Weather unavailable (no API key).";
-        return;
-      }
-      try{
-        const resp = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${OPENWEATHER_API_KEY}&units=${OPENWEATHER_UNITS}`);
-        if(!resp.ok) throw new Error('Weather fetch failed');
-        const data = await resp.json();
-        const t = Math.round(data.main.temp);
-        const desc = data.weather && data.weather[0] ? data.weather[0].description : "";
-        document.getElementById('temperature').innerText = `${t}°C — ${desc}`;
-        document.getElementById('mini-weather').innerText = `At ${data.name}: ${t}°C — ${desc}`;
-      }catch(e){
-        document.getElementById('temperature').innerText = "Unable to fetch weather.";
-        document.getElementById('mini-weather').innerText = "Weather fetch failed.";
-        console.warn(e);
-      }
-    }
-
-    /* Try to get browser geolocation, else fallback coordinates */
-    function initWeather() {
-      if(OPENWEATHER_API_KEY && navigator.geolocation){
-        navigator.geolocation.getCurrentPosition(pos => {
-          fetchWeatherByCoords(pos.coords.latitude, pos.coords.longitude);
-          map.setView([pos.coords.latitude, pos.coords.longitude], 4);
-        }, err => {
-          fetchWeatherByCoords(DEFAULT_COORDS.lat, DEFAULT_COORDS.lon);
-        }, { timeout:6000 });
-      } else {
-        fetchWeatherByCoords(DEFAULT_COORDS.lat, DEFAULT_COORDS.lon);
-      }
-    }
-
-    /* ---------------------------
-       Leaflet map init
-       --------------------------- */
-    const map = L.map('map', { zoomControl:true, attributionControl:true }).setView([DEFAULT_COORDS.lat, DEFAULT_COORDS.lon], 3);
+    /* Leaflet map init (no API key needed) */
+    const map = L.map('map').setView([IIIT_ALLAHABAD_COORDS.lat, IIIT_ALLAHABAD_COORDS.lon], 5);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19, attribution: '&copy; OpenStreetMap contributors'
+      maxZoom:19, attribution:'&copy; OpenStreetMap contributors'
     }).addTo(map);
 
-    // Add marker on click
+    // add marker with popup
+    const marker = L.marker([IIIT_ALLAHABAD_COORDS.lat, IIIT_ALLAHABAD_COORDS.lon]).addTo(map);
+    marker.bindPopup("<strong>Indian Institute of Information Technology Allahabad</strong>").openPopup();
+
+    // clicking map shows coords in popup
     map.on('click', function(e){
-      L.popup()
-        .setLatLng(e.latlng)
-        .setContent("Lat: " + e.latlng.lat.toFixed(4) + ", Lon: " + e.latlng.lng.toFixed(4))
-        .openOn(map);
+      L.popup().setLatLng(e.latlng).setContent("Lat: " + e.latlng.lat.toFixed(4) + ", Lon: " + e.latlng.lng.toFixed(4)).openOn(map);
     });
 
-    /* ---------------------------
-       Job board (India / USA) with localStorage persistence
-       --------------------------- */
-    const JOBS_KEY = "profile_jobs_v1";
-
-    // seed example jobs if none exist
+    /* ===== Jobs logic (localStorage) ===== */
+    const JOBS_KEY = "subrata_jobs_v1";
     function seedJobs(){
-      const existing = localStorage.getItem(JOBS_KEY);
-      if(existing) return;
+      if(localStorage.getItem(JOBS_KEY)) return;
       const seed = [
-        {id: Date.now()+1, title:"Research Intern - Medical Imaging", company:"IIIT Allahabad", country:"India", type:"Intern", location:"Allahabad", url:"", date: new Date().toISOString()},
-        {id: Date.now()+2, title:"Postdoc - Computer Vision", company:"University of X", country:"USA", type:"Full-time", location:"Boston, MA", url:"", date: new Date().toISOString()},
+        {id: Date.now()+1, title:"Research Intern - Medical Imaging", company:"Indian Institute of Information Technology Allahabad", country:"India", type:"Intern", location:"Allahabad", url:"", date: new Date().toISOString()},
+        {id: Date.now()+2, title:"Postdoc - Computer Vision", company:"University of X", country:"USA", type:"Full-time", location:"Boston, MA", url:"", date: new Date().toISOString()}
       ];
       localStorage.setItem(JOBS_KEY, JSON.stringify(seed));
     }
-
-    function readJobs(){
-      seedJobs();
-      const data = JSON.parse(localStorage.getItem(JOBS_KEY) || "[]");
-      return data.sort((a,b)=> new Date(b.date) - new Date(a.date));
-    }
-
-    function saveJobs(list){
-      localStorage.setItem(JOBS_KEY, JSON.stringify(list));
-    }
-
+    function readJobs(){ seedJobs(); return JSON.parse(localStorage.getItem(JOBS_KEY) || "[]").sort((a,b)=> new Date(b.date)-new Date(a.date)); }
+    function saveJobs(list){ localStorage.setItem(JOBS_KEY, JSON.stringify(list)); }
+    let activeTab = "India";
+    function setTab(t){ activeTab = t; renderJobs(); }
     function renderJobs(){
       const all = readJobs();
-      const activeTab = document.querySelector('.tab-btn.active').dataset.target;
-      const typeFilter = document.getElementById('filter-type').value.trim();
       const searchKey = document.getElementById('search-key').value.trim().toLowerCase();
-
-      let filtered = all.filter(j => j.country === activeTab);
-      if(typeFilter) filtered = filtered.filter(j => j.type === typeFilter);
-      if(searchKey) filtered = filtered.filter(j => (j.title + ' ' + j.company + ' ' + j.location).toLowerCase().includes(searchKey));
-
-      const listEl = document.getElementById('job-list');
-      listEl.innerHTML = "";
-      if(filtered.length === 0){
-        listEl.innerHTML = "<div class='small muted'>No job updates match this filter.</div>";
-      } else {
-        filtered.forEach(j=>{
-          const div = document.createElement('div');
-          div.className = "job-card";
-          div.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;">
-              <div style="flex:1">
-                <div style="font-weight:700">${escapeHtml(j.title)}</div>
-                <div class="meta">${escapeHtml(j.company)} • ${escapeHtml(j.location)} • <span class="small muted">${new Date(j.date).toLocaleDateString()}</span></div>
-                <div style="margin-top:8px;"><span class="pill">${escapeHtml(j.type)}</span> <a href="${escapeAttr(j.url)}" target="_blank" class="small" style="margin-left:8px">${j.url ? 'Apply' : ''}</a></div>
-              </div>
-              <div style="margin-left:12px;"><button onclick="removeJob(${j.id})" style="background:#fff;border:1px solid #eee;padding:6px 8px;border-radius:8px;cursor:pointer">Remove</button></div>
-            </div>`;
-          listEl.appendChild(div);
-        });
-      }
-      document.getElementById('job-stats').innerText = `${filtered.length} showing • ${readJobs().length} total`;
+      let filtered = all.filter(j=> j.country === activeTab);
+      if(searchKey) filtered = filtered.filter(j=> (j.title + ' ' + j.company + ' ' + j.location).toLowerCase().includes(searchKey));
+      const listEl = document.getElementById('job-list'); listEl.innerHTML = "";
+      if(filtered.length === 0){ listEl.innerHTML = "<div class='small'>No job updates.</div>"; return; }
+      filtered.forEach(j=>{
+        const div = document.createElement('div');
+        div.className = "job-card";
+        div.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;">
+          <div style="flex:1">
+            <div style="font-weight:700">${escapeHtml(j.title)}</div>
+            <div class="small">${escapeHtml(j.company)} • ${escapeHtml(j.location)} • <span class="small">${new Date(j.date).toLocaleDateString()}</span></div>
+            <div style="margin-top:8px;"><span class="pill">${escapeHtml(j.type)}</span> ${j.url ? '<a href="'+escapeAttr(j.url)+'" target="_blank" class="small" style="margin-left:8px">Apply</a>' : ''}</div>
+          </div>
+          <div style="margin-left:12px;"><button onclick="removeJob('+j.id+')" style="padding:6px 8px;border-radius:8px;border:1px solid #eee;background:#fff;cursor:pointer">Remove</button></div>
+        </div>`;
+        listEl.appendChild(div);
+      });
     }
-
     function addJob(){
       const title = document.getElementById('new-title').value.trim();
       const company = document.getElementById('new-company').value.trim();
       const country = document.getElementById('new-country').value;
       const type = document.getElementById('new-type').value;
       const location = document.getElementById('new-location').value.trim();
-      const url = document.getElementById('new-url').value.trim();
-
-      if(!title || !company){
-        alert("Enter title and company.");
-        return;
-      }
+      if(!title || !company){ alert("Enter title and company."); return; }
       const jobs = readJobs();
-      jobs.unshift({ id: Date.now(), title, company, country, type, location, url, date:new Date().toISOString()});
+      jobs.unshift({ id: Date.now(), title, company, country, type, location, url:"", date:new Date().toISOString()});
       saveJobs(jobs);
-      // clear form
-      document.getElementById('new-title').value="";
-      document.getElementById('new-company').value="";
-      document.getElementById('new-location').value="";
-      document.getElementById('new-url').value="";
+      document.getElementById('new-title').value=""; document.getElementById('new-company').value=""; document.getElementById('new-location').value="";
       renderJobs();
     }
-
-    function removeJob(id){
-      if(!confirm('Remove this job?')) return;
-      const jobs = readJobs().filter(j=> j.id !== id);
-      saveJobs(jobs);
-      renderJobs();
-    }
-
-    function clearJobs(){
-      if(!confirm('Clear all job postings?')) return;
-      localStorage.removeItem(JOBS_KEY);
-      seedJobs();
-      renderJobs();
-    }
-
-    // small helpers
+    function removeJob(id){ if(!confirm('Remove this job?')) return; const jobs = readJobs().filter(j=> j.id !== id); saveJobs(jobs); renderJobs(); }
+    function clearJobs(){ if(!confirm('Clear all job postings?')) return; localStorage.removeItem(JOBS_KEY); seedJobs(); renderJobs(); }
     function escapeHtml(s){ if(!s) return ''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
     function escapeAttr(s){ if(!s) return ''; return s.replace(/"/g,'&quot;'); }
 
-    // tabs
-    document.querySelectorAll('.tab-btn').forEach(btn=>{
-      btn.addEventListener('click', function(){
-        document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-        this.classList.add('active');
-        renderJobs();
-      });
-    });
+    /* Contact form placeholder */
+    function contactFormSubmit(e){ e.preventDefault(); alert("Thanks! Message saved locally (demo). Replace this with a real mail handler if needed."); document.getElementById('c_name').value=''; document.getElementById('c_email').value=''; document.getElementById('c_msg').value=''; return false; }
 
-    /* ---------------------------
-       Contact form (simple)
-       --------------------------- */
-    function contactFormSubmit(e){
-      e.preventDefault();
-      const name = document.getElementById('c_name').value;
-      const email = document.getElementById('c_email').value;
-      const msg = document.getElementById('c_msg').value;
-      alert("Thanks " + name + "! Message saved locally (demo). Replace this handler with real mail/send function.");
-      // clear
-      document.getElementById('c_name').value="";
-      document.getElementById('c_email').value="";
-      document.getElementById('c_msg').value="";
-      return false;
-    }
+    /* Initialize on load */
+    document.addEventListener('DOMContentLoaded', function(){ seedJobs(); renderJobs(); });
 
-    /* ---------------------------
-       Initialize things on load
-       --------------------------- */
-    document.addEventListener('DOMContentLoaded', function(){
-      seedJobs();
-      renderJobs();
-      initWeather();
-    });
-
-    /* ---------------------------
-       Optional: attempt to update footer counter (visits)
-       --------------------------- */
-    (function updateFooterCounter(){
+    /* Optional weather: left as placeholder (requires OpenWeather API key) */
+    const OPENWEATHER_API_KEY = ""; // add key here to show live temperature
+    async function fetchWeather(lat,lon){
+      if(!OPENWEATHER_API_KEY) return;
       try{
-        const k = 'site_visits_demo';
-        let v = parseInt(localStorage.getItem(k) || "0");
-        v++; localStorage.setItem(k, v);
-        document.getElementById('footer-count').innerText = `0${String(v).padStart(4,'0')} © 2025 Anjali's Webpage. All Rights Reserved.`;
-      }catch(e){}
-    })();
+        const r = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${OPENWEATHER_API_KEY}&units=metric`);
+        if(!r.ok) throw new Error('fail');
+        const d = await r.json();
+        document.getElementById('temperature').innerText = Math.round(d.main.temp) + "°C — " + (d.weather[0].description || '');
+        document.getElementById('mini-weather').innerText = `At ${d.name}: ${Math.round(d.main.temp)}°C — ${d.weather[0].description || ''}`;
+      }catch(e){ console.warn('weather failed', e); }
+    }
+    // fetchWeather(IIIT_ALLAHABAD_COORDS.lat, IIIT_ALLAHABAD_COORDS.lon); // uncomment after adding API key
 
   </script>
 </body>
