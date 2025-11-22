@@ -1,391 +1,202 @@
-/* ---------------------------------------------------
-   GLOBAL ROOT VARIABLES
----------------------------------------------------- */
-:root {
-  --accent1: #2b5fa8;
-  --accent2: #213e63;
-  --bg: #eef6ff;
-  --card: rgba(255, 255, 255, 0.98);
-  --muted: #596472;
-  --max-width: 1200px;
-  --flower-img: url("images/flower_hd.png");   /* ensure correct filename */
-}
-
-/* DARK THEME */
-body.dark-theme {
-  --bg: #1a1a1a;
-  --card: #222;
-  --accent1: #4e8cff;
-  --accent2: #3058a8;
-  --muted: #cccccc;
-  color: white;
-  background: #1a1a1a;
-}
-
-
-/* ---------------------------------------------------
-   RESET & BASE
----------------------------------------------------- */
-html, body {
+/* ============================ */
+/* GLOBAL BASIC STYLING        */
+/* ============================ */
+* {
   margin: 0;
   padding: 0;
-  font-family: "Georgia", serif;
-  background: var(--bg);
-  color: #111;
+  box-sizing: border-box;
   scroll-behavior: smooth;
 }
 
-
-/* ---------------------------------------------------
-   LEFT + RIGHT FLOWER BACKGROUND
----------------------------------------------------- */
-body::before,
-body::after {
-  content: "";
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  width: 220px;
-  z-index: -1;
-  pointer-events: none;
-  background-repeat: no-repeat;
+body {
+  font-family: Arial, sans-serif;
+  background: url("images/flower_hd.png");
   background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   background-position: center;
-  opacity: 0.90;
-  filter: saturate(1.1) brightness(1.01);
+  color: #111;
 }
 
-body::before {
-  left: 0;
-  background-image: var(--flower-img);
-  transform: translateX(-18px);
+body.dark {
+  background: #0d1b2a;
+  color: #eee;
 }
 
-body::after {
-  right: 0;
-  background-image: var(--flower-img);
-  transform: translateX(18px) scaleX(-1);
-}
-
-@media (max-width: 1100px) {
-  body::before,
-  body::after {
-    display: none;
-  }
-}
-
-
-/* ---------------------------------------------------
-   LOADING SCREEN
----------------------------------------------------- */
-#loading-screen {
-  position: fixed;
-  inset: 0;
-  background: #ffffff;
-  z-index: 9999;
+/* Wrapper to keep center content readable */
+.container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  transition: opacity .6s ease;
-  font-family: Georgia, serif;
+  justify-content: space-between;
+  padding: 20px;
 }
 
-.welcome-text {
-  font-size: 26px;
-  font-weight: bold;
-  color: #2b5fa8;
-  margin-bottom: 18px;
+/* Cards */
+.section-card {
+  background: rgba(255, 255, 255, 0.78);
+  padding: 20px;
+  margin-bottom: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
 }
 
-.loader {
-  border: 6px solid #eee;
-  border-top: 6px solid #2b5fa8;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-.loading-text {
-  margin-top: 20px;
-  font-size: 14px;
-  color: #666;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-
-/* ---------------------------------------------------
-   HEADER
----------------------------------------------------- */
-header.topbar {
-  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+body.dark .section-card {
+  background: rgba(255, 255, 255, 0.10);
   color: #fff;
-  padding: 22px 0 8px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+  border: 1px solid #ffffff22;
+}
+
+/* ============================ */
+/* HEADER + NAVIGATION          */
+/* ============================ */
+.topbar {
+  background: #0a3d62;
+  padding: 15px 0;
   position: sticky;
   top: 0;
-  z-index: 120;
+  z-index: 2000;
+  border-bottom: 3px solid #062c49;
 }
 
-.wrap {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.title {
+.topbar .title {
   text-align: center;
-  font-size: 28px;
+  color: white;
+  font-size: 32px;
   font-weight: 700;
 }
 
-
-/* ---------------------------------------------------
-   NAVIGATION
----------------------------------------------------- */
 nav.global {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  padding: 10px 8px;
-  background: rgba(0, 0, 0, 0.05);
   flex-wrap: wrap;
+  margin-top: 10px;
 }
 
 nav.global a {
-  color: #fff;
-  text-decoration: none;
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-weight: 600;
-  transition: 0.2s;
-}
-
-nav.global a:hover {
-  background: rgba(255, 255, 255, 0.12);
-  transform: translateY(-2px);
-}
-
-nav.global a.active {
-  box-shadow: inset 0 -3px 0 rgba(255, 255, 255, 0.3);
-}
-
-
-/* ---------------------------------------------------
-   THEME BUTTON
----------------------------------------------------- */
-#theme-toggle {
-  position: absolute;
-  right: 50px;
-  top: 10px;
-  padding: 6px 10px;
-  border-radius: 6px;
-  border: none;
-  background: rgba(255,255,255,0.3);
-  cursor: pointer;
-  font-size: 20px;
-}
-
-
-/* ---------------------------------------------------
-   LANGUAGE SWITCHER
----------------------------------------------------- */
-#language-switcher {
-  position: absolute;
-  right: 100px;
-  top: 10px;
-  padding: 6px 10px;
-  border-radius: 6px;
-  border: 1px solid rgba(255,255,255,0.7);
-  background: rgba(255,255,255,0.3);
   color: white;
-  font-size: 14px;
-  cursor: pointer;
+  padding: 10px 15px;
+  text-decoration: none;
+  font-weight: bold;
 }
 
-body.dark-theme #language-switcher {
-  border: 1px solid rgba(255,255,255,0.4);
-  background: rgba(255,255,255,0.15);
+nav.global a:hover,
+nav.global a.active {
+  background: #145a8d;
+  border-radius: 6px;
 }
 
-
-/* ---------------------------------------------------
-   LAYOUT GRID
----------------------------------------------------- */
-main.container {
-  max-width: var(--max-width);
-  margin: 30px auto 80px;
-  padding: 0 20px;
-  display: grid;
-  grid-template-columns: 280px 1fr 340px;
-  gap: 28px;
+/* ============================ */
+/* SIDEBARS                     */
+/* ============================ */
+.left-col,
+.right-col {
+  width: 22%;
 }
 
-@media (max-width: 1100px) {
-  main.container {
-    grid-template-columns: 1fr;
+.center-col {
+  width: 54%;
+}
+
+/* Responsiveness */
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+  }
+  .left-col,
+  .right-col,
+  .center-col {
+    width: 100%;
   }
 }
 
-
-/* ---------------------------------------------------
-   SECTION CARDS
----------------------------------------------------- */
-.section-card {
-  background: var(--card);
-  padding: 18px;
-  border-radius: 12px;
-  margin-bottom: 20px;
-  box-shadow: 0 10px 30px rgba(40, 10, 40, 0.06);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-
-  opacity: 0;
-  transform: translateY(14px);
-  transition: all 0.5s ease;
-}
-
-.section-card.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.section-card h2 {
-  margin-top: 0;
-  border-bottom: 1px dashed rgba(0, 0, 0, 0.12);
-  padding-bottom: 8px;
-  color: var(--accent2);
-}
-
-
-/* ---------------------------------------------------
-   PROFILE CARD
----------------------------------------------------- */
-.profile .img {
+/* ============================ */
+/* PROFILE IMAGE                */
+/* ============================ */
+#card-profile img {
   width: 100%;
-  height: 260px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(180deg, #fff, #eef6ff);
-}
-
-.profile img {
-  width: 220px;
-  height: 220px;
-  object-fit: cover;
   border-radius: 50%;
-  border: 6px solid rgba(255,255,255,0.85);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  border: 5px solid white;
 }
 
-.profile h3 {
-  text-align: center;
-  margin: 12px 0 6px;
-}
-
-
-/* ---------------------------------------------------
-   GALLERY
----------------------------------------------------- */
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 12px;
-}
-
-.gallery-item img {
+/* ============================ */
+/* MAP                          */
+/* ============================ */
+#map {
   width: 100%;
-  height: 140px;
-  border-radius: 8px;
+  height: 300px;
+  border-radius: 12px;
+}
+
+/* ============================ */
+/* GALLERY                      */
+/* ============================ */
+.gallery-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.gallery-grid img {
+  width: 120px;
+  height: 120px;
   object-fit: cover;
-  transition: 0.3s;
-}
-
-.gallery-item img:hover {
-  transform: scale(1.05);
-}
-
-
-/* ---------------------------------------------------
-   MODAL
----------------------------------------------------- */
-#modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.7);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
-}
-
-#modal img {
-  max-width: 90%;
   border-radius: 8px;
+  cursor: pointer;
 }
 
-
-/* ---------------------------------------------------
-   CHATBOT
----------------------------------------------------- */
+/* ============================ */
+/* CHATBOT                      */
+/* ============================ */
 #chatbot-bubble {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
-  background: var(--accent1);
+  bottom: 25px;
+  right: 25px;
+  background: #0a3d62;
   color: white;
-  padding: 12px 16px;
+  padding: 15px;
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-  font-size: 22px;
-  z-index: 9000;
+  font-size: 25px;
 }
 
 #chatbot-box {
   position: fixed;
   bottom: 90px;
-  right: 30px;
+  right: 25px;
   width: 300px;
-  background: var(--card);
+  background: white;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 0 15px rgba(0,0,0,0.4);
   display: none;
   flex-direction: column;
-  z-index: 9000;
 }
 
 #chatbot-header {
-  background: var(--accent1);
-  color: white;
+  background: #0a3d62;
   padding: 10px;
+  color: white;
   font-weight: bold;
   border-radius: 12px 12px 0 0;
 }
 
 #chatbot-messages {
-  height: 260px;
-  overflow-y: auto;
   padding: 10px;
+  height: 250px;
+  overflow-y: auto;
 }
 
 .chatbot-msg {
   margin-bottom: 10px;
-  padding: 8px;
-  border-radius: 6px;
 }
 
 .chatbot-msg.bot {
-  background: #e1ecff;
+  background: #daf1ff;
+  padding: 8px 10px;
+  border-radius: 6px;
 }
-
 .chatbot-msg.user {
-  background: #d2ffd6;
+  background: #b2f7cc;
+  padding: 8px 10px;
+  border-radius: 6px;
   text-align: right;
 }
 
@@ -396,26 +207,56 @@ main.container {
 
 #chatbot-input {
   flex: 1;
-  padding: 8px;
   border: none;
+  padding: 10px;
 }
 
 #chatbot-send {
-  padding: 8px 14px;
-  background: var(--accent1);
+  background: #0a3d62;
   color: white;
   border: none;
+  padding: 10px;
+  cursor: pointer;
 }
 
+/* ============================ */
+/* LOADING SCREEN               */
+/* ============================ */
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 5000;
+}
 
-/* ---------------------------------------------------
-   FOOTER
----------------------------------------------------- */
-.footer-line {
-  text-align: center;
-  margin-top: 20px;
-  padding: 12px;
-  font-size: 15px;
-  background: rgba(255,255,255,0.6);
-  border-radius: 10px;
+.welcome-text {
+  font-size: 28px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.loader {
+  border: 5px solid #ccc;
+  border-top: 5px solid #0a3d62;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-size: 14px;
+  color: #666;
 }
