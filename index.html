@@ -5,27 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Subrata Pramanik</title>
 
+  <!-- main stylesheet -->
   <link rel="stylesheet" href="style.css" />
 
-  <!-- Leaflet CSS -->
+  <!-- Leaflet CSS (kept for mini-map, map code retained but hidden by CSS) -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 
 <body>
 
-  <!-- TRICOLOR TOP RIBBON -->
+  <!-- tricolor ribbon -->
   <div class="tricolor-ribbon" aria-hidden="true">
     <span class="saffron"></span><span class="white"></span><span class="green"></span>
   </div>
 
-  <!-- LOADING SCREEN -->
-  <div id="loading-screen">
+  <!-- loading -->
+  <div id="loading-screen" aria-hidden="false">
     <div class="welcome-text">🙏 Namaskar 🙏</div>
-    <div class="loader"></div>
+    <div class="loader" role="progressbar" aria-label="Loading"></div>
     <div class="loading-text">…loading…</div>
   </div>
 
-  <!-- TOP INFO (DAY | DATE | TIME | LOCATION ) -->
+  <!-- top info: day | date | time | location -->
   <div id="top-info" aria-live="polite">
     <span id="top-day">—</span> |
     <span id="top-date">—</span> |
@@ -33,42 +34,36 @@
     📍 <span id="top-location">Detecting…</span>
   </div>
 
-  <!-- MINI USER MAP -->
-  <div id="user-map"></div>
+  <!-- mini user map (kept in DOM but will be hidden via CSS) -->
+  <div id="user-map" aria-hidden="true"></div>
 
-  <!-- HEADER -->
-  <header class="topbar" id="site-header">
+  <!-- header -->
+  <header class="topbar" id="site-header" role="banner">
     <div class="wrap">
-      <div class="title">Subrata Pramanik</div>
+      <div class="title" id="site-title">Subrata Pramanik</div>
 
-      <div class="header-controls">
-        <select id="language-switcher">
+      <div class="header-controls" role="toolbar" aria-label="Header controls">
+        <select id="language-switcher" title="Choose Language" aria-label="Choose language">
           <option value="en">EN</option>
           <option value="hi">HI</option>
           <option value="bn">BN</option>
         </select>
 
-        <button id="theme-toggle">🌙</button>
-        <button id="download-cv" class="btn cv-btn">Download CV</button>
+        <button id="theme-toggle" title="Toggle theme" aria-pressed="false">🌙</button>
+        <button id="download-cv" class="btn cv-btn" title="Download CV">Download CV</button>
       </div>
     </div>
 
-    <!-- NAVIGATION -->
-    <nav class="global">
+    <nav class="global" aria-label="Main navigation">
       <a href="#home">Home</a>
       <a href="#about">About</a>
       <a href="#education">Education</a>
       <a href="#experience">Experience</a>
       <a href="#teaching">Teaching</a>
-      <a href="#courses">Courses</a>
-      <a href="#resume">Resume</a>
-      <a href="#publications">Publications</a>
       <a href="#projects">Projects</a>
       <a href="#skills">Skills</a>
-      <a href="#awards">Awards</a>
-      <a href="#talks">Talks</a>
-      <a href="#services">Services</a>
-      <a href="#blog">Blog</a>
+      <a href="#resume">Resume</a>
+      <a href="#publications">Publications</a>
       <a href="#memory">Memory</a>
       <a href="#jobs">Job Updates</a>
       <a href="#meeting">Meeting</a>
@@ -77,32 +72,29 @@
     </nav>
   </header>
 
-  <!-- MAIN -->
-  <main class="container">
+  <!-- main layout -->
+  <main class="container" id="page-main" role="main">
 
-    <!-- LEFT COLUMN -->
-    <aside class="left-col">
-
-      <div class="section-card profile">
+    <!-- LEFT -->
+    <aside class="left-col" role="complementary">
+      <div class="section-card profile" id="card-profile">
         <div class="img">
-          <img id="profile-img" src="images/subrata_profile_circle_HD_new.png" alt="Profile photo">
+          <img id="profile-img" src="images/subrata_profile_circle_HD_new.png" alt="Profile photo of Subrata Pramanik">
         </div>
-
         <h3 id="profile-name">Subrata Pramanik</h3>
-        <p class="meta">Junior Research Fellow<br> Indian Institute Of Information Technology, Allahabad</p>
+        <p class="meta">Junior Research Fellow<br>Indian Institute Of Information Technology, Allahabad</p>
 
-        <!-- CLOCK -->
-        <div class="info-block">
+        <div class="info-block" aria-live="polite">
           <div class="small">Now</div>
           <div id="clock" class="big">--:--:--</div>
           <div id="date" class="small">--</div>
           <div id="dayname" class="small">--</div>
         </div>
 
-        <!-- WEATHER -->
         <div class="info-block">
-          <div class="small">Local Temperature</div>
-          <div id="temperature" class="big">--°C</div>
+          <div class="small">Local temperature</div>
+          <div id="temperature" class="big">—°C</div>
+          <div id="daily-forecast" class="small">—</div>
         </div>
       </div>
 
@@ -115,144 +107,110 @@
           <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
-
     </aside>
 
-    <!-- CENTER COLUMN -->
+    <!-- CENTER -->
     <section class="center-col">
 
-      <section id="home" class="section-card">
-        <h2>Home</h2>
-        <p>Hello — I am <strong>Subrata Pramanik</strong>. This page shows my profile, projects, gallery, research and job updates.</p>
+      <section id="home" class="section-card"><h2>Home</h2>
+        <p>Hello — I am <strong id="intro-name">Subrata Pramanik</strong>. This page shows my profile, projects, gallery (memory) and more.</p>
       </section>
 
-      <section id="about" class="section-card">
-        <h2>About</h2>
-        <p>...</p>
+      <section id="about" class="section-card"><h2>About</h2><p>...</p></section>
+
+      <section id="education" class="section-card"><h2>Education</h2>
+        <ul><li>M.TECH + Ph.D — Indian Institute Of Information Technology, Allahabad — (2024-2028)</li></ul>
       </section>
 
-      <section id="education" class="section-card">
-        <h2>Education</h2>
-        <ul>
-          <li>M.Tech + Ph.D — Indian Institute Of Information Technology, Allahabad — (2024-2028)</li>
-        </ul>
-      </section>
+      <section id="experience" class="section-card"><h2>Experience</h2><ul><li>Junior Research Fellow — (current)</li></ul></section>
 
-      <section id="experience" class="section-card">
-        <h2>Experience</h2>
-        <ul><li>Junior Research Fellow — (Current)</li></ul>
-      </section>
-
-      <section id="teaching" class="section-card"><h2>Teaching</h2><p>...</p></section>
-      <section id="courses" class="section-card"><h2>Courses</h2><p>...</p></section>
-
-      <!-- RESUME -->
-      <section id="resume" class="section-card">
-        <h2>Resume</h2>
-        <button id="cv-open" class="btn cv-btn">Open CV</button>
-      </section>
-
-      <!-- PUBLICATIONS -->
-      <section id="publications" class="section-card">
-        <h2>Publications</h2>
-        <ol>
-          <li>...</li>
-        </ol>
-      </section>
-
-      <!-- PROJECTS -->
-      <section id="projects" class="section-card">
-        <h2>Projects</h2>
-        <ul><li>...</li></ul>
-      </section>
-
+      <section id="teaching" class="section-card"><h2>Teaching</h2><p>..</p></section>
+      <section id="projects" class="section-card"><h2>Projects</h2><p>..</p></section>
       <section id="skills" class="section-card"><h2>Skills</h2><p>Python</p></section>
 
-      <section id="awards" class="section-card"><h2>Awards & Honours</h2><p>...</p></section>
-      <section id="talks" class="section-card"><h2>Talks</h2><p>...</p></section>
-      <section id="services" class="section-card"><h2>Services</h2><p>...</p></section>
-      <section id="blog" class="section-card"><h2>Blog</h2><p>...</p></section>
-
-      <!-- MEMORY / GALLERY -->
-      <section id="memory" class="section-card">
-        <h2>Memory (Gallery)</h2>
-        <select id="year-select"></select>
-        <input id="image-file" type="file" accept="image/*" />
-        <button onclick="addGalleryImage()">Add</button>
-        <button onclick="clearGallery()">Clear</button>
-        <div id="gallery-grid" class="gallery-grid"></div>
+      <section id="resume" class="section-card">
+        <h2>Resume</h2>
+        <p><button id="cv-open" class="btn cv-btn">Open CV (print/save)</button></p>
       </section>
 
-      <!-- JOBS -->
+      <section id="publications" class="section-card"><h2>Publications</h2>
+        <ol><li>..</li></ol>
+      </section>
+
+      <section id="memory" class="section-card">
+        <h2>Memory (Gallery)</h2>
+        <div class="gallery-controls">
+          <select id="year-select" aria-label="Choose year"></select>
+          <input id="image-file" type="file" accept="image/*" aria-label="Upload image" />
+          <button class="btn" onclick="addGalleryImage()">Add</button>
+          <button class="btn" onclick="clearGallery()">Clear</button>
+        </div>
+        <div id="gallery-grid" class="gallery-grid" aria-live="polite"></div>
+      </section>
+
       <section id="jobs" class="section-card">
         <h2>Job Updates</h2>
         <div id="job-list"></div>
       </section>
 
-      <!-- MEETING -->
       <section id="meeting" class="section-card">
         <h2>Schedule a Meeting</h2>
-        <a class="btn" href="https://calendly.com/subrata-official111/30min" target="_blank">Book Meeting</a>
+        <a class="btn" href="https://calendly.com/subrata-official111/30min" target="_blank" rel="noopener">Book 30min</a>
       </section>
 
-      <!-- MAP (IIIT) -->
       <section class="section-card">
         <h2>World Map</h2>
-        <div id="map"></div>
+        <div id="map" style="min-height:260px;"></div>
       </section>
 
-      <!-- CONTACT -->
       <section id="contact" class="section-card">
         <h2>Contact</h2>
-        <form onsubmit="return contactFormSubmit(event)">
-          <input id="c_name" placeholder="Name" required />
-          <input id="c_email" type="email" placeholder="Email" required />
-          <textarea id="c_msg" placeholder="Message" required></textarea>
-          <button class="btn">Send</button>
+        <form id="contact-form" onsubmit="return contactFormSubmit(event)">
+          <label>Name</label><input type="text" id="c_name" required />
+          <label>Email</label><input type="email" id="c_email" required />
+          <label>Message</label><textarea id="c_msg" rows="4" required></textarea>
+          <div style="margin-top:10px;"><button class="btn" type="submit">Send Message</button></div>
         </form>
       </section>
 
-      <section id="updates" class="section-card">
-        <h2>Latest Updates</h2>
-        <ul><li>...</li></ul>
-      </section>
-
+      <section id="updates" class="section-card"><h2>Latest Updates</h2><ul><li>..</li></ul></section>
     </section>
 
-    <!-- RIGHT COLUMN -->
-    <aside class="right-col">
-      <div class="section-card"><h2>Latest Events</h2><p>Coming soon…</p></div>
+    <!-- RIGHT -->
+    <aside class="right-col" role="complementary">
+      <div class="section-card"><h2>Latest Events</h2><ul><li>Coming soon</li></ul></div>
       <div class="section-card"><h2>7-day Weather</h2><div id="daily-weather">Loading…</div></div>
     </aside>
-
   </main>
 
-  <!-- FOOTER -->
+  <!-- footer -->
   <footer>
     <div class="footer-line">
-      <span>© 2025 Subrata Pramanik | Profile views: <strong id="view-count-footer">0</strong></span>
+      <div class="footer-inner">
+        <span id="footer-text">© 2025 Subrata Pramanik. All Rights Reserved.</span>
+        <span class="sep">|</span>
+        <span>Profile views on this browser: <strong id="view-count-footer">0</strong></span>
+      </div>
     </div>
   </footer>
 
-  <!-- MODAL -->
-  <div id="modal" class="modal">
-    <div class="content"><img id="modal-img" /></div>
+  <!-- modal -->
+  <div id="modal" class="modal" onclick="closeModal(event)">
+    <div class="content" id="modal-content"><img id="modal-img" src="" alt=""></div>
   </div>
 
-  <!-- CHATBOT -->
-  <div id="chatbot-bubble">💬</div>
-  <div id="chatbot-box">
-    <div id="chatbot-header">Assistant</div>
-    <div id="chatbot-messages"></div>
-    <div id="chatbot-input-area">
-      <input id="chatbot-input" />
-      <button id="chatbot-send">Send</button>
-    </div>
-  </div>
+  <!-- chatbot -->
+  <div id="chatbot-bubble" title="Open chat">💬</div>
+  <div id="chatbot-box" aria-hidden="true"><div id="chatbot-header">Assistant</div><div id="chatbot-messages"><div class="chatbot-msg bot">Hello! I’m your assistant. How can I help you?</div></div><div id="chatbot-input-area"><input type="text" id="chatbot-input" placeholder="Type a message..." /><button id="chatbot-send">Send</button></div></div>
 
-  <!-- JS -->
+  <!-- kept Leaflet JS for the map (map code retained) -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- main script -->
   <script src="script.js"></script>
+
+  <!-- reference: uploaded screenshot (local path) -->
+  <!-- /mnt/data/7f2b785a-728d-4a27-bafb-b34602ae9bca.png -->
 
 </body>
 </html>
