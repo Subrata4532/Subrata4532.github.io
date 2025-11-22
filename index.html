@@ -1,580 +1,554 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Subrata Pramanik — Personal Webpage</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Subrata Pramanik — Personal Webpage</title>
 
-<!-- Leaflet CSS -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
-<style>
-  :root{
-    --accent1:#6b1f5b;
-    --accent2:#3a1f2f;
-    --bg:#fbf6fb;
-    --card: rgba(255,255,255,0.96);
-    --muted:#6d6d6d;
-    --max-width:1100px;
-    /* Flower image path (replace when uploading to GitHub) */
-    --flower-img: url("/mnt/data/pngtree-blue-watercolor-floral-background-flower-bouquet-illustration-wedding-invitation-design-spring-image_16961730.jpg");
-  }
+  <style>
+    :root{
+      --accent1:#6b1f5b;
+      --accent2:#3a1f2f;
+      --bg:#fbf6fb;
+      --card: rgba(255,255,255,0.96);
+      --muted:#6d6d6d;
+      --max-width:1100px;
+      /* Flower image path in repo */
+      --flower-img: url("images/flower.jpg");
+    }
 
-  html,body{ margin:0; padding:0; font-family: "Georgia", serif; background: var(--bg); scroll-behavior:smooth; color:#111; }
+    html,body{ margin:0; padding:0; font-family: "Georgia", serif; background: var(--bg); scroll-behavior:smooth; color:#111; }
 
-  /* Side floral panels (tinted) */
-  body::before, body::after{
-    content:"";
-    position:fixed;
-    top:0;
-    bottom:0;
-    width:180px;
-    z-index:-1;
-    pointer-events:none;
-    background-repeat:no-repeat;
-    background-size:cover;
-    background-position:center;
-    opacity:0.95;
-    filter: saturate(0.95) brightness(0.96);
-  }
-  body::before{
-    left:0;
-    background-image: linear-gradient(180deg, rgba(107,31,91,0.12), rgba(255,255,255,0.00)), var(--flower-img);
-    transform: translateX(-20px);
-    box-shadow: 0 0 60px rgba(107,31,91,0.06) inset;
-  }
-  body::after{
-    right:0;
-    background-image: linear-gradient(180deg, rgba(58,31,47,0.12), rgba(255,255,255,0.00)), var(--flower-img);
-    transform: translateX(20px) scaleX(-1); /* mirrored */
-    box-shadow: 0 0 60px rgba(58,31,47,0.05) inset;
-    background-position: top right;
-  }
+    /* Side floral panels (tinted) */
+    body::before, body::after{
+      content:"";
+      position:fixed;
+      top:0; bottom:0;
+      width:180px;
+      z-index:-1;
+      pointer-events:none;
+      background-repeat:no-repeat;
+      background-size:cover;
+      background-position:center;
+      opacity:0.95;
+      filter: saturate(0.95) brightness(0.96);
+    }
+    body::before{
+      left:0;
+      background-image: linear-gradient(180deg, rgba(107,31,91,0.12), rgba(255,255,255,0.00)), var(--flower-img);
+      transform: translateX(-20px);
+      box-shadow: 0 0 60px rgba(107,31,91,0.06) inset;
+    }
+    body::after{
+      right:0;
+      background-image: linear-gradient(180deg, rgba(58,31,47,0.12), rgba(255,255,255,0.00)), var(--flower-img);
+      transform: translateX(20px) scaleX(-1); /* mirrored */
+      box-shadow: 0 0 60px rgba(58,31,47,0.05) inset;
+      background-position: top right;
+    }
 
-  /* Header and nav */
-  header.topbar{
-    background: linear-gradient(90deg, rgba(107,31,91,0.95), rgba(58,31,47,0.95));
-    color:#fff; padding:28px 0 8px; box-shadow:0 10px 20px rgba(0,0,0,0.12);
-    position: sticky; top:0; z-index:100;
-  }
-  .wrap{ max-width:var(--max-width); margin:0 auto; padding:0 20px; }
-  .title{ text-align:center; font-size:30px; font-weight:700; }
-  nav.global{ display:flex; justify-content:center; gap:12px; padding:10px 8px; background: rgba(0,0,0,0.08); flex-wrap:wrap; }
-  nav.global a{ color:#fff; text-decoration:none; padding:6px 12px; border-radius:6px; font-weight:600; }
-  nav.global a:hover{ background: rgba(255,255,255,0.06); }
+    /* Header & nav */
+    header.topbar{
+      background: linear-gradient(90deg, rgba(107,31,91,0.95), rgba(58,31,47,0.95));
+      color:#fff; padding:24px 0 8px; box-shadow:0 10px 20px rgba(0,0,0,0.12);
+      position: sticky; top:0; z-index:100;
+    }
+    .wrap{ max-width:var(--max-width); margin:0 auto; padding:0 20px; }
+    .title{ text-align:center; font-size:28px; font-weight:700; }
+    nav.global{ display:flex; justify-content:center; gap:10px; padding:10px 8px; background: rgba(0,0,0,0.06); flex-wrap:wrap; }
+    nav.global a{ color:#fff; text-decoration:none; padding:6px 10px; border-radius:6px; font-weight:600; }
+    nav.global a:hover{ background: rgba(255,255,255,0.06); }
 
-  /* Layout */
-  main.container{ max-width:var(--max-width); margin:26px auto 50px; padding:0 20px; display:grid; grid-template-columns: 260px 1fr 320px; gap:24px; align-items:start; }
-  @media (max-width:1100px){ main.container{ grid-template-columns: 1fr; } body::before, body::after{ display:none; } }
+    /* Layout */
+    main.container{ max-width:var(--max-width); margin:26px auto 60px; padding:0 20px; display:grid; grid-template-columns:260px 1fr 320px; gap:24px; align-items:start; }
+    @media (max-width:1100px){ main.container{ grid-template-columns: 1fr; } body::before, body::after{ display:none; } }
 
-  .section-card{ background:var(--card); border-radius:12px; padding:18px; margin-bottom:20px; box-shadow:0 8px 24px rgba(40,10,30,0.04); border:1px solid rgba(0,0,0,0.03); }
-  .section-card h2{ margin-top:0; color:var(--accent2); font-size:18px; border-bottom:1px dashed rgba(0,0,0,0.06); padding-bottom:8px; }
-  section[id]{ scroll-margin-top:120px; } /* ensures the sticky header won't cover content */
+    /* Section cards */
+    .section-card{ background:var(--card); border-radius:12px; padding:18px; margin-bottom:20px; box-shadow:0 8px 24px rgba(40,10,30,0.04); border:1px solid rgba(0,0,0,0.03); }
+    .section-card h2{ margin-top:0; color:var(--accent2); font-size:18px; border-bottom:1px dashed rgba(0,0,0,0.06); padding-bottom:8px; }
+    section[id]{ scroll-margin-top:120px; } /* so sticky header won't hide section */
 
-  /* Profile */
-  .profile .img{ width:100%; height:260px; overflow:hidden; border-radius:8px; background:#ddd; display:flex; align-items:center; justify-content:center; }
-  .profile img{ width:100%; height:100%; object-fit:cover; display:block; }
-  .profile h3{ text-align:center; margin:12px 0 6px; font-size:18px; }
-  .profile p.meta{ text-align:center; font-size:13px; color:var(--muted); line-height:1.4; }
+    /* Profile */
+    .profile .img{ width:100%; height:260px; overflow:hidden; border-radius:12px; display:flex; align-items:center; justify-content:center; background:linear-gradient(180deg,#fff,#f3f1f5); }
+    .profile .img img{ width:220px; height:220px; object-fit:cover; border-radius:50%; box-shadow:0 6px 18px rgba(0,0,0,0.12); border:6px solid rgba(255,255,255,0.6); }
+    .profile h3{ text-align:center; margin:12px 0 6px; font-size:18px; }
+    .profile p.meta{ text-align:center; font-size:13px; color:var(--muted); line-height:1.4; }
 
-  /* Map */
-  #map{ width:100%; height:320px; border-radius:10px; border:1px solid rgba(0,0,0,0.06); }
+    /* Map */
+    #map{ width:100%; height:320px; border-radius:10px; border:1px solid rgba(0,0,0,0.06); }
 
-  /* Jobs */
-  .job-card{ background:#fff; padding:10px 12px; border-radius:10px; margin:10px 0; border-left:6px solid var(--accent1); box-shadow:0 6px 12px rgba(30,10,30,0.03); }
-  .pill{ display:inline-block; background:rgba(0,0,0,0.06); padding:4px 8px; border-radius:200px; font-size:12px; }
+    /* Jobs */
+    .job-card{ background:#fff; padding:10px 12px; border-radius:10px; margin:10px 0; border-left:6px solid var(--accent1); box-shadow:0 6px 12px rgba(30,10,30,0.03); }
+    .pill{ display:inline-block; background:rgba(0,0,0,0.06); padding:4px 8px; border-radius:200px; font-size:12px; }
 
-  /* Gallery */
-  .gallery-grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr)); gap:10px; }
-  .gallery-item{ border-radius:8px; overflow:hidden; background:#f8f8f8; cursor:pointer; border:1px solid rgba(0,0,0,0.04); }
-  .gallery-item img{ width:100%; height:140px; object-fit:cover; display:block; }
-  .year-tabs{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px; }
+    /* Gallery */
+    .gallery-grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr)); gap:10px; }
+    .gallery-item{ border-radius:8px; overflow:hidden; background:#f8f8f8; cursor:pointer; border:1px solid rgba(0,0,0,0.04); }
+    .gallery-item img{ width:100%; height:140px; object-fit:cover; display:block; }
 
-  /* Modal */
-  .modal{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; background: rgba(0,0,0,0.6); z-index:200; }
-  .modal .content{ max-width:900px; width:90%; background:white; padding:12px; border-radius:10px; }
-  .modal img{ width:100%; height:auto; display:block; border-radius:6px; }
+    /* Modal */
+    .modal{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; background: rgba(0,0,0,0.6); z-index:200; }
+    .modal .content{ max-width:900px; width:90%; background:white; padding:12px; border-radius:10px; }
+    .modal img{ width:100%; height:auto; display:block; border-radius:6px; }
 
-  /* Footer */
-  footer{ margin-top:30px; padding:18px 0; text-align:center; background:var(--accent2); color:white; }
+    /* Footer */
+    footer{ margin-top:30px; padding:18px 0; text-align:center; background:var(--accent2); color:white; }
 
-  .small{ font-size:13px; color:var(--muted); }
-  .btn{ background:var(--accent1); color:white; padding:8px 12px; border-radius:8px; border:none; cursor:pointer; }
-
-  /* small responsive helpers */
-  @media (max-width:560px){
-    .profile .img{ height:200px; }
-    #map{ height:240px; }
-  }
-</style>
+    .small{ font-size:13px; color:var(--muted); }
+    .btn{ background:var(--accent1); color:white; padding:8px 12px; border-radius:8px; border:none; cursor:pointer; }
+    input, textarea, select{ font-family:inherit; }
+  </style>
 </head>
 <body>
 
-<header class="topbar">
-  <div class="wrap">
-    <div class="title">Welcome to My Webpage</div>
+  <header class="topbar">
+    <div class="wrap">
+      <div class="title">Subrata Pramanik — Junior Research Fellow</div>
+    </div>
+
+    <nav class="global" aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#education">Education</a>
+      <a href="#experience">Experience</a>
+      <a href="#teaching">Teaching</a>
+      <a href="#courses">Courses</a>
+      <a href="#resume">Resume</a>
+      <a href="#publications">Publications</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#awards">Awards</a>
+      <a href="#talks">Talks</a>
+      <a href="#services">Services</a>
+      <a href="#blog">Blog</a>
+      <a href="#memory">Memory</a>
+      <a href="#contact">Contact</a>
+      <a href="#updates">Updates</a>
+      <a href="#jobs">Job Updates</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- LEFT: profile -->
+    <aside class="left-col">
+      <div class="profile section-card">
+        <div class="img">
+          <!-- GitHub path (place the image at images/subrata_profile_circle.png) -->
+          <img src="images/subrata_profile_circle.png" alt="Subrata Pramanik profile image">
+        </div>
+        <h3>Subrata Pramanik</h3>
+        <p class="meta">Junior Research Fellow<br>M.Tech – Ph.D., Indian Institute of Information Technology Allahabad<br>
+          <span class="small">Contact: +91-your-phone • your-email@example.com</span></p>
+
+        <div style="margin-top:12px;">
+          <div class="small">Current time</div>
+          <div id="clock" style="font-weight:700; margin-top:6px;">--:--:--</div>
+          <div id="date" class="small"></div>
+        </div>
+
+        <div style="margin-top:12px;">
+          <div class="small">Local temperature</div>
+          <div id="temperature" style="font-weight:700; margin-top:6px;">Loading...</div>
+          <div class="small">(Uses browser location — no API key)</div>
+        </div>
+
+        <div style="margin-top:12px;">
+          <div class="small">Profile views (this browser)</div>
+          <div id="view-count" style="font-weight:700; margin-top:6px;">0</div>
+          <div class="small">To count global visits, I can add a simple serverless counter later.</div>
+        </div>
+      </div>
+
+      <div class="section-card" style="margin-top:14px;">
+        <h2>Quick Links</h2>
+        <ul>
+          <li><a href="#resume">Resume</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- CENTER: main content -->
+    <section class="center-col">
+
+      <section id="home" class="section-card">
+        <h2>Home</h2>
+        <p>Welcome — I am <strong>Subrata Pramanik</strong>, M.Tech – Ph.D. from Indian Institute of Information Technology Allahabad. This page shows my profile, publications, projects, gallery (memory), and job updates.</p>
+      </section>
+
+      <section id="about" class="section-card">
+        <h2>About</h2>
+        <p>Replace this paragraph with a short biography about your research interests, current work, and contact details.</p>
+      </section>
+
+      <section id="education" class="section-card">
+        <h2>Education</h2>
+        <ul>
+          <li>M.Tech — (specialization) — Indian Institute of Information Technology Allahabad</li>
+          <li>Ph.D — (specialization) — Indian Institute of Information Technology Allahabad</li>
+        </ul>
+      </section>
+
+      <section id="experience" class="section-card">
+        <h2>Experience</h2>
+        <ul class="small">
+          <li>Junior Research Fellow — (current)</li>
+          <li>Previous roles — add details here</li>
+        </ul>
+      </section>
+
+      <section id="teaching" class="section-card"><h2>Teaching</h2><p>Courses taught (if any).</p></section>
+      <section id="courses" class="section-card"><h2>Courses</h2><p>List of courses.</p></section>
+
+      <section id="resume" class="section-card"><h2>Resume</h2><p><a href="#" download>Download Resume (PDF)</a></p></section>
+
+      <section id="publications" class="section-card">
+        <h2>Publications</h2>
+        <ol>
+          <li>Paper 1 — Journal/Conference (Year)</li>
+          <li>Paper 2 — Journal/Conference (Year)</li>
+        </ol>
+      </section>
+
+      <section id="projects" class="section-card">
+        <h2>Projects</h2>
+        <ul>
+          <li>Project A — short description</li>
+          <li>Project B — short description</li>
+        </ul>
+      </section>
+
+      <section id="skills" class="section-card"><h2>Skills</h2>
+        <p>Image Processing • Computer Vision • Deep Learning • Python • PyTorch • MATLAB</p>
+      </section>
+
+      <section id="awards" class="section-card"><h2>Awards & Honours</h2><ul><li>Add awards here</li></ul></section>
+
+      <section id="talks" class="section-card"><h2>Talks</h2><p>Invited talks / seminars.</p></section>
+
+      <section id="services" class="section-card"><h2>Professional Services</h2><p>Reviewer, PC member, etc.</p></section>
+
+      <section id="blog" class="section-card"><h2>Blog</h2><p>Link to blog or articles.</p></section>
+
+      <!-- MEMORY / GALLERY -->
+      <section id="memory" class="section-card">
+        <h2>Memory (Gallery)</h2>
+
+        <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+          <div class="year-tabs" id="year-tabs"></div>
+
+          <select id="year-select">
+            <option>2025</option><option>2024</option><option>2023</option><option>2022</option><option>2021</option>
+          </select>
+
+          <input id="image-file" type="file" accept="image/*" style="margin-left:8px;" />
+          <button class="btn" onclick="addGalleryImage()">Add to selected year</button>
+          <button onclick="clearGallery()" style="padding:8px;border-radius:8px;border:1px solid #ddd;">Clear Gallery</button>
+        </div>
+
+        <div id="gallery-grid" class="gallery-grid" style="margin-top:12px;"></div>
+      </section>
+
+      <!-- JOBS -->
+      <section id="jobs" class="section-card">
+        <h2>Job Updates</h2>
+        <div class="small">India / USA streams available. Add and filter postings below.</div>
+
+        <div style="margin-top:10px;">
+          <div style="display:flex; gap:8px; margin-bottom:8px;">
+            <button class="btn" onclick="setTab('India')">India</button>
+            <button class="btn" onclick="setTab('USA')">USA</button>
+            <input id="search-key" placeholder="Search title or company" style="flex:1; padding:8px; border-radius:8px; border:1px solid #ddd;" />
+            <button class="btn" onclick="renderJobs()">Apply</button>
+          </div>
+
+          <div id="job-list"></div>
+
+          <hr style="margin:12px 0;" />
+          <h3 style="margin:0 0 6px;">Add New Job</h3>
+          <input id="new-title" placeholder="Role title" style="width:100%; padding:8px; margin-top:6px" />
+          <input id="new-company" placeholder="Company / Institute" style="width:100%; padding:8px; margin-top:6px" />
+          <div style="display:flex; gap:8px; margin-top:6px;">
+            <select id="new-country"><option>India</option><option>USA</option></select>
+            <select id="new-type"><option>Intern</option><option>Full-time</option><option>Remote</option><option>Hybrid</option></select>
+            <input id="new-location" placeholder="City / Remote" style="flex:1" />
+          </div>
+          <div style="margin-top:8px;"><button class="btn" onclick="addJob()">Add Job</button> <button onclick="clearJobs()" style="padding:8px;border-radius:8px;border:1px solid #ddd;">Clear All</button></div>
+        </div>
+      </section>
+
+      <!-- Map -->
+      <section class="section-card">
+        <h2>World Map</h2>
+        <div id="map"></div>
+        <div class="small" style="margin-top:8px;">Interactive map (OpenStreetMap + Leaflet). Marker: Indian Institute of Information Technology Allahabad.</div>
+      </section>
+
+      <section id="contact" class="section-card">
+        <h2>Contact</h2>
+        <form class="contact" onsubmit="return contactFormSubmit(event)">
+          <label>Name</label><input type="text" id="c_name" required />
+          <label>Email</label><input type="email" id="c_email" required />
+          <label>Message</label><textarea id="c_msg" rows="4" required></textarea>
+          <div style="margin-top:10px;"><button class="btn">Send Message</button></div>
+        </form>
+      </section>
+
+      <section id="updates" class="section-card">
+        <h2>Latest Updates</h2>
+        <ul>
+          <li>Add your latest workshop / event here</li>
+        </ul>
+      </section>
+
+    </section>
+
+    <!-- RIGHT: updates + weather -->
+    <aside class="right-col">
+      <div class="section-card">
+        <h2>Latest Events</h2>
+        <ul>
+          <li>Ph.D. positions — contact when available</li>
+          <li>Workshops & announcements</li>
+        </ul>
+      </div>
+
+      <div class="section-card" style="margin-top:16px;">
+        <h2>Quick Weather</h2>
+        <div id="mini-weather">Loading...</div>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    <div class="wrap">© 2025 Subrata Pramanik. All Rights Reserved.</div>
+  </footer>
+
+  <!-- Gallery modal -->
+  <div id="modal" class="modal" onclick="closeModal(event)">
+    <div class="content" id="modal-content"><img id="modal-img" src="" alt=""/></div>
   </div>
-  <nav class="global" aria-label="Main navigation">
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#education">Education</a>
-    <a href="#experience">Experience</a>
-    <a href="#teaching">Teaching</a>
-    <a href="#courses">Courses</a>
-    <a href="#resume">Resume</a>
-    <a href="#publications">Publications</a>
-    <a href="#projects">Projects</a>
-    <a href="#skills">Skills</a>
-    <a href="#awards">Awards</a>
-    <a href="#talks">Talks</a>
-    <a href="#services">Services</a>
-    <a href="#blog">Blog</a>
-    <a href="#memory">Memory</a>
-    <a href="#contact">Contact</a>
-    <a href="#updates">Updates</a>
-    <a href="#jobs">Job Updates</a>
-  </nav>
-</header>
 
-<main class="container">
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-  <!-- LEFT: profile -->
-  <aside class="left-col">
-    <div class="profile section-card">
-      <div class="img">
-        <!-- replace with repo path after uploading -->
-        <img src="/mnt/data/Screenshot (33).png" alt="Subrata Pramanik profile image">
-      </div>
-      <h3>Subrata Pramanik</h3>
-      <p class="meta">Junior Research Fellow<br>M.Tech – Ph.D., Indian Institute of Information Technology Allahabad<br>
-        <span class="small">Contact: add-your-phone • add-your-email@example.com</span>
-      </p>
+  <script>
+    /* ---------- Config ---------- */
+    const IIIT_COORDS = { lat: 25.4878, lon: 81.8489 }; // marker coordinates
+    const GALLERY_KEY = 'subrata_gallery_v1';
+    const JOBS_KEY = 'subrata_jobs_v1';
+    const VIEW_KEY = 'subrata_view_count';
 
-      <div style="margin-top:12px;">
-        <div class="small">Current time</div>
-        <div id="clock" style="font-weight:700; margin-top:6px;">--:--:--</div>
-        <div id="date" class="small"></div>
-      </div>
-
-      <div style="margin-top:12px;">
-        <div class="small">Local temperature</div>
-        <div id="temperature" style="font-weight:700; margin-top:6px;">Loading...</div>
-        <div class="small">(Uses browser location — no API key)</div>
-      </div>
-
-      <div style="margin-top:12px;">
-        <div class="small">Profile views (this browser)</div>
-        <div id="view-count" style="font-weight:700; margin-top:6px;">0</div>
-        <div class="small">Note: to count global visits you'll need a server-side counter (I can help set that up).</div>
-      </div>
-    </div>
-
-    <div class="section-card" style="margin-top:14px;">
-      <h2>Quick Links</h2>
-      <ul>
-        <li><a href="#resume">Resume</a></li>
-        <li><a href="#publications">Publications</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div>
-  </aside>
-
-  <!-- CENTER: main content -->
-  <section class="center-col">
-
-    <section id="home" class="section-card">
-      <h2>Home</h2>
-      <p>Welcome — I am <strong>Subrata Pramanik</strong>, M.Tech – Ph.D. from Indian Institute of Information Technology Allahabad. This page shows my profile, publications, projects, gallery (memory), and job updates.</p>
-    </section>
-
-    <section id="about" class="section-card">
-      <h2>About</h2>
-      <p>Replace this paragraph with a short biography. Keep it professional and concise.</p>
-    </section>
-
-    <section id="education" class="section-card">
-      <h2>Education</h2>
-      <ul>
-        <li>M.Tech — (specialization) — Indian Institute of Information Technology Allahabad</li>
-        <li>Ph.D — (specialization) — Indian Institute of Information Technology Allahabad</li>
-      </ul>
-    </section>
-
-    <section id="experience" class="section-card">
-      <h2>Experience</h2>
-      <ul class="small">
-        <li>Junior Research Fellow — (current)</li>
-        <li>Previous roles — add details here</li>
-      </ul>
-    </section>
-
-    <section id="teaching" class="section-card"><h2>Teaching</h2><p>Courses taught (if any).</p></section>
-    <section id="courses" class="section-card"><h2>Courses</h2><p>List of courses.</p></section>
-
-    <section id="resume" class="section-card">
-      <h2>Resume</h2>
-      <p><a href="#" download>Download Resume (PDF)</a></p>
-    </section>
-
-    <section id="publications" class="section-card">
-      <h2>Publications</h2>
-      <ol>
-        <li>Paper 1 — Journal/Conference (Year)</li>
-        <li>Paper 2 — Journal/Conference (Year)</li>
-      </ol>
-    </section>
-
-    <section id="projects" class="section-card">
-      <h2>Projects</h2>
-      <ul>
-        <li>Project A — short description</li>
-        <li>Project B — short description</li>
-      </ul>
-    </section>
-
-    <section id="skills" class="section-card">
-      <h2>Skills</h2>
-      <p>Image Processing • Computer Vision • Deep Learning • Python • PyTorch • MATLAB</p>
-    </section>
-
-    <section id="awards" class="section-card">
-      <h2>Awards & Honours</h2>
-      <ul><li>Add awards here</li></ul>
-    </section>
-
-    <section id="talks" class="section-card"><h2>Talks</h2><p>Invited talks / seminars.</p></section>
-
-    <section id="services" class="section-card"><h2>Professional Services</h2><p>Reviewer, PC member, etc.</p></section>
-
-    <section id="blog" class="section-card"><h2>Blog</h2><p>Link to blog or articles.</p></section>
-
-    <!-- MEMORY / GALLERY -->
-    <section id="memory" class="section-card">
-      <h2>Memory (Gallery)</h2>
-
-      <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
-        <div class="year-tabs" id="year-tabs"></div>
-        <select id="year-select">
-          <option>2025</option><option>2024</option><option>2023</option><option>2022</option><option>2021</option>
-        </select>
-        <input id="image-file" type="file" accept="image/*" style="margin-left:8px;" />
-        <button class="btn" onclick="addGalleryImage()">Add to selected year</button>
-        <button onclick="clearGallery()" style="padding:8px;border-radius:8px;border:1px solid #ddd;">Clear Gallery</button>
-      </div>
-
-      <div id="gallery-grid" class="gallery-grid" style="margin-top:12px;"></div>
-    </section>
-
-    <!-- JOBS -->
-    <section id="jobs" class="section-card">
-      <h2>Job Updates</h2>
-      <div class="small">India / USA streams available. Add and filter postings below.</div>
-
-      <div style="margin-top:10px;">
-        <div style="display:flex; gap:8px; margin-bottom:8px;">
-          <button class="btn" onclick="setTab('India')">India</button>
-          <button class="btn" onclick="setTab('USA')">USA</button>
-          <input id="search-key" placeholder="Search title or company" style="flex:1; padding:8px; border-radius:8px; border:1px solid #ddd;" />
-          <button class="btn" onclick="renderJobs()">Apply</button>
-        </div>
-
-        <div id="job-list"></div>
-        <hr style="margin:12px 0;" />
-        <h3 style="margin:0 0 6px;">Add New Job</h3>
-        <input id="new-title" placeholder="Role title" style="width:100%; padding:8px; margin-top:6px" />
-        <input id="new-company" placeholder="Company / Institute" style="width:100%; padding:8px; margin-top:6px" />
-        <div style="display:flex; gap:8px; margin-top:6px;">
-          <select id="new-country"><option>India</option><option>USA</option></select>
-          <select id="new-type"><option>Intern</option><option>Full-time</option><option>Remote</option><option>Hybrid</option></select>
-          <input id="new-location" placeholder="City / Remote" style="flex:1" />
-        </div>
-        <div style="margin-top:8px;"><button class="btn" onclick="addJob()">Add Job</button> <button onclick="clearJobs()" style="padding:8px;border-radius:8px;border:1px solid #ddd;">Clear All</button></div>
-      </div>
-    </section>
-
-    <!-- map -->
-    <section class="section-card">
-      <h2>World Map</h2>
-      <div id="map"></div>
-      <div class="small" style="margin-top:8px;">Interactive map (OpenStreetMap + Leaflet). Marker: Indian Institute of Information Technology Allahabad.</div>
-    </section>
-
-    <section id="contact" class="section-card">
-      <h2>Contact</h2>
-      <form class="contact" onsubmit="return contactFormSubmit(event)">
-        <label>Name</label><input type="text" id="c_name" required />
-        <label>Email</label><input type="email" id="c_email" required />
-        <label>Message</label><textarea id="c_msg" rows="4" required></textarea>
-        <div style="margin-top:10px;"><button class="btn">Send Message</button></div>
-      </form>
-    </section>
-
-    <section id="updates" class="section-card">
-      <h2>Latest Updates</h2>
-      <ul>
-        <li>Add your latest workshop / event here</li>
-      </ul>
-    </section>
-
-  </section>
-
-  <!-- RIGHT: updates + weather -->
-  <aside class="right-col">
-    <div class="section-card">
-      <h2>Latest Events</h2>
-      <ul>
-        <li>Ph.D. positions — contact when available</li>
-        <li>Workshops & announcements</li>
-      </ul>
-    </div>
-
-    <div class="section-card" style="margin-top:16px;">
-      <h2>Quick Weather</h2>
-      <div id="mini-weather">Loading...</div>
-    </div>
-  </aside>
-
-</main>
-
-<footer>
-  <div class="wrap">© 2025 Subrata Pramanik. All Rights Reserved.</div>
-</footer>
-
-<!-- Modal for gallery -->
-<div id="modal" class="modal" onclick="closeModal(event)">
-  <div class="content" id="modal-content"><img id="modal-img" src="" alt=""/></div>
-</div>
-
-<!-- Leaflet JS -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-<script>
-/* ========== Config ========== */
-const IIIT_COORDS = { lat: 25.4878, lon: 81.8489 }; // fallback coords
-const GALLERY_KEY = 'subrata_gallery_v1';
-const JOBS_KEY = 'subrata_jobs_v1';
-const VIEW_KEY = 'subrata_view_count';
-
-/* ========== Clock ========== */
-function updateClock(){
-  const now = new Date();
-  document.getElementById('clock').innerText = now.toLocaleTimeString();
-  document.getElementById('date').innerText = now.toLocaleDateString();
-}
-setInterval(updateClock, 1000);
-updateClock();
-
-/* ========== Visitor count (local) ========== */
-function incrementViewCount(){
-  try{
-    let v = parseInt(localStorage.getItem(VIEW_KEY) || '0', 10);
-    v = v + 1;
-    localStorage.setItem(VIEW_KEY, String(v));
-    document.getElementById('view-count').innerText = v;
-  } catch(e){
-    console.warn(e);
-  }
-}
-incrementViewCount();
-
-/* ========== Weather (Open-Meteo, no API key) ========== */
-async function showWeather(lat, lon){
-  try{
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
-    const r = await fetch(url);
-    if(!r.ok) throw new Error('weather fetch failed');
-    const data = await r.json();
-    if(data && data.current_weather){
-      const t = data.current_weather.temperature;
-      const wcode = data.current_weather.weathercode;
-      document.getElementById('temperature').innerText = `${t}°C`;
-      document.getElementById('mini-weather').innerText = `Current: ${t}°C • Wind ${data.current_weather.windspeed} km/h`;
-    } else {
-      document.getElementById('temperature').innerText = 'N/A';
-      document.getElementById('mini-weather').innerText = 'No weather info';
+    /* ---------- Clock ---------- */
+    function updateClock(){
+      const now = new Date();
+      document.getElementById('clock').innerText = now.toLocaleTimeString();
+      document.getElementById('date').innerText = now.toLocaleDateString();
     }
-  } catch(e){
-    console.warn(e);
-    document.getElementById('temperature').innerText = 'Weather unavailable';
-    document.getElementById('mini-weather').innerText = 'Weather unavailable';
-  }
-}
+    setInterval(updateClock, 1000);
+    updateClock();
 
-function initWeather(){
-  if(navigator.geolocation){
-    navigator.geolocation.getCurrentPosition(pos=>{
-      showWeather(pos.coords.latitude, pos.coords.longitude);
-    }, err=>{
-      // fallback to IIIT coords
-      showWeather(IIIT_COORDS.lat, IIIT_COORDS.lon);
-    }, { timeout:7000 });
-  } else {
-    showWeather(IIIT_COORDS.lat, IIIT_COORDS.lon);
-  }
-}
+    /* ---------- Visitor count (local) ---------- */
+    function incrementViewCount(){
+      try{
+        let v = parseInt(localStorage.getItem(VIEW_KEY) || '0', 10);
+        v = v + 1;
+        localStorage.setItem(VIEW_KEY, String(v));
+        document.getElementById('view-count').innerText = v;
+      } catch(e){ console.warn(e); }
+    }
+    incrementViewCount();
 
-/* ========== Leaflet Map ========== */
-const map = L.map('map', { zoomControl:true }).setView([IIIT_COORDS.lat, IIIT_COORDS.lon], 5);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:19, attribution:'&copy; OpenStreetMap contributors' }).addTo(map);
-const marker = L.marker([IIIT_COORDS.lat, IIIT_COORDS.lon]).addTo(map);
-marker.bindPopup("<strong>Indian Institute of Information Technology Allahabad</strong>").openPopup();
-map.on('click', e => {
-  L.popup().setLatLng(e.latlng).setContent("Lat: " + e.latlng.lat.toFixed(4) + ", Lon: " + e.latlng.lng.toFixed(4)).openOn(map);
-});
-
-/* ========== Jobs (localStorage) ========== */
-function seedJobs(){
-  if(localStorage.getItem(JOBS_KEY)) return;
-  const seed = [
-    {id:Date.now()+1, title:"Research Intern - Medical Imaging", company:"Indian Institute of Information Technology Allahabad", country:"India", type:"Intern", location:"Allahabad", date:new Date().toISOString()},
-    {id:Date.now()+2, title:"Postdoc - Computer Vision", company:"University of X", country:"USA", type:"Full-time", location:"Boston, MA", date:new Date().toISOString()}
-  ];
-  localStorage.setItem(JOBS_KEY, JSON.stringify(seed));
-}
-function readJobs(){ seedJobs(); return JSON.parse(localStorage.getItem(JOBS_KEY) || '[]').sort((a,b)=> new Date(b.date) - new Date(a.date)); }
-function saveJobs(list){ localStorage.setItem(JOBS_KEY, JSON.stringify(list)); }
-let activeTab = 'India';
-function setTab(t){ activeTab = t; renderJobs(); }
-function renderJobs(){
-  const all = readJobs();
-  const searchKey = document.getElementById('search-key') ? document.getElementById('search-key').value.trim().toLowerCase() : '';
-  let filtered = all.filter(j => j.country === activeTab);
-  if(searchKey) filtered = filtered.filter(j => (j.title + ' ' + j.company + ' ' + j.location).toLowerCase().includes(searchKey));
-  const listEl = document.getElementById('job-list'); listEl.innerHTML = '';
-  if(filtered.length === 0){ listEl.innerHTML = '<div class="small">No job updates.</div>'; return; }
-  filtered.forEach(j=>{
-    const div = document.createElement('div');
-    div.className = 'job-card';
-    div.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;">
-      <div style="flex:1">
-        <div style="font-weight:700">${escapeHtml(j.title)}</div>
-        <div class="small">${escapeHtml(j.company)} • ${escapeHtml(j.location)} • <span class="small">${new Date(j.date).toLocaleDateString()}</span></div>
-        <div style="margin-top:8px;"><span class="pill">${escapeHtml(j.type)}</span></div>
-      </div>
-      <div style="margin-left:12px;"><button onclick="removeJob(${j.id})" style="padding:6px 8px;border-radius:8px;border:1px solid #eee;background:#fff;cursor:pointer">Remove</button></div>
-    </div>`;
-    listEl.appendChild(div);
-  });
-}
-function addJob(){
-  const title = document.getElementById('new-title').value.trim();
-  const company = document.getElementById('new-company').value.trim();
-  const country = document.getElementById('new-country').value;
-  const type = document.getElementById('new-type').value;
-  const location = document.getElementById('new-location').value.trim();
-  if(!title || !company){ alert('Enter title and company.'); return; }
-  const jobs = readJobs();
-  jobs.unshift({ id: Date.now(), title, company, country, type, location, date: new Date().toISOString() });
-  saveJobs(jobs);
-  document.getElementById('new-title').value=''; document.getElementById('new-company').value=''; document.getElementById('new-location').value='';
-  renderJobs();
-}
-function removeJob(id){ if(!confirm('Remove this job?')) return; const jobs = readJobs().filter(j=> j.id !== id); saveJobs(jobs); renderJobs(); }
-function clearJobs(){ if(!confirm('Clear all job postings?')) return; localStorage.removeItem(JOBS_KEY); seedJobs(); renderJobs(); }
-function escapeHtml(s){ if(!s) return ''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-
-/* ========== Gallery (Memory) - store images as data URLs in localStorage ========== */
-function loadGallery(){
-  try{
-    const raw = localStorage.getItem(GALLERY_KEY) || '[]';
-    return JSON.parse(raw);
-  }catch(e){
-    return [];
-  }
-}
-function saveGallery(list){
-  localStorage.setItem(GALLERY_KEY, JSON.stringify(list));
-}
-function renderGallery(year){
-  const grid = document.getElementById('gallery-grid'); grid.innerHTML = '';
-  const all = loadGallery();
-  const y = year || document.getElementById('year-select').value;
-  const items = all.filter(it => it.year === String(y));
-  if(items.length === 0){ grid.innerHTML = '<div class="small">No images for ' + y + '.</div>'; return; }
-  items.forEach((it, idx)=>{
-    const div = document.createElement('div');
-    div.className = 'gallery-item';
-    div.innerHTML = `<img src="${it.data}" alt="img-${idx}" onclick="openModal('${it.data}')" />`;
-    grid.appendChild(div);
-  });
-}
-function addGalleryImage(){
-  const sel = document.getElementById('year-select').value;
-  const fileInput = document.getElementById('image-file');
-  const f = fileInput.files[0];
-  if(!f){ alert('Select an image file.'); return; }
-  const reader = new FileReader();
-  reader.onload = function(e){
-    const data = e.target.result;
-    const gallery = loadGallery();
-    gallery.unshift({ year: String(sel), data, added: new Date().toISOString() });
-    saveGallery(gallery);
-    fileInput.value = '';
-    renderGallery(sel);
-    buildYearTabs();
-  };
-  reader.readAsDataURL(f);
-}
-function clearGallery(){ if(!confirm('Clear gallery?')) return; localStorage.removeItem(GALLERY_KEY); renderGallery(document.getElementById('year-select').value); buildYearTabs(); }
-function buildYearTabs(){
-  const tabs = document.getElementById('year-tabs'); tabs.innerHTML = '';
-  const years = ['2025','2024','2023','2022','2021'];
-  years.forEach(y=>{
-    const btn = document.createElement('button');
-    btn.className = 'btn';
-    btn.style.background = 'transparent';
-    btn.style.color = 'var(--accent2)';
-    btn.style.border = '1px solid rgba(0,0,0,0.06)';
-    btn.style.padding = '6px 10px';
-    btn.style.borderRadius = '8px';
-    btn.textContent = y;
-    btn.onclick = ()=> { document.getElementById('year-select').value = y; renderGallery(y); };
-    tabs.appendChild(btn);
-  });
-}
-function openModal(src){
-  document.getElementById('modal-img').src = src;
-  document.getElementById('modal').style.display = 'flex';
-}
-function closeModal(e){
-  if(e.target.id === 'modal' || e.target.id === 'modal-content'){ document.getElementById('modal').style.display = 'none'; }
-}
-
-/* ========== Contact placeholder ========== */
-function contactFormSubmit(e){
-  e.preventDefault();
-  alert("Thanks! Message saved locally (demo). Replace with a server-side mail handler if you want real emails.");
-  document.getElementById('c_name').value=''; document.getElementById('c_email').value=''; document.getElementById('c_msg').value='';
-  return false;
-}
-
-/* ========== Init on load ========== */
-document.addEventListener('DOMContentLoaded', function(){
-  initWeather();
-  seedJobs();
-  renderJobs();
-  buildYearTabs();
-  renderGallery(document.getElementById('year-select').value);
-});
-
-/* ========== Helper: smooth scroll offset fix for anchors (extra) ========== */
-document.querySelectorAll('nav.global a').forEach(a=>{
-  a.addEventListener('click', function(e){
-    // allow native anchor but ensure smooth offset if needed
-    const href = a.getAttribute('href');
-    if(href && href.startsWith('#')){
-      e.preventDefault();
-      const target = document.querySelector(href);
-      if(target){
-        const headerOffset = 96; // approximate header height
-        const elementPosition = target.getBoundingClientRect().top + window.pageYOffset;
-        const offsetPosition = elementPosition - headerOffset;
-        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+    /* ---------- Weather (Open-Meteo, no key) ---------- */
+    async function showWeather(lat, lon){
+      try{
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+        const r = await fetch(url);
+        if(!r.ok) throw new Error('weather fetch failed');
+        const data = await r.json();
+        if(data && data.current_weather){
+          const t = data.current_weather.temperature;
+          document.getElementById('temperature').innerText = `${t}°C`;
+          document.getElementById('mini-weather').innerText = `Current: ${t}°C • Wind ${data.current_weather.windspeed} km/h`;
+        } else {
+          document.getElementById('temperature').innerText = 'N/A';
+          document.getElementById('mini-weather').innerText = 'No weather info';
+        }
+      } catch(e){
+        console.warn(e);
+        document.getElementById('temperature').innerText = 'Weather unavailable';
+        document.getElementById('mini-weather').innerText = 'Weather unavailable';
       }
     }
-  });
-});
-</script>
+
+    function initWeather(){
+      if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(pos=>{
+          showWeather(pos.coords.latitude, pos.coords.longitude);
+        }, err=>{
+          showWeather(IIIT_COORDS.lat, IIIT_COORDS.lon);
+        }, { timeout:7000 });
+      } else {
+        showWeather(IIIT_COORDS.lat, IIIT_COORDS.lon);
+      }
+    }
+
+    /* ---------- Leaflet map init ---------- */
+    const map = L.map('map', { zoomControl:true }).setView([IIIT_COORDS.lat, IIIT_COORDS.lon], 5);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:19, attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
+    const marker = L.marker([IIIT_COORDS.lat, IIIT_COORDS.lon]).addTo(map);
+    marker.bindPopup("<strong>Indian Institute of Information Technology Allahabad</strong>").openPopup();
+    map.on('click', e => {
+      L.popup().setLatLng(e.latlng).setContent("Lat: " + e.latlng.lat.toFixed(4) + ", Lon: " + e.latlng.lng.toFixed(4)).openOn(map);
+    });
+
+    /* ---------- Jobs (localStorage) ---------- */
+    function seedJobs(){
+      if(localStorage.getItem(JOBS_KEY)) return;
+      const seed = [
+        {id: Date.now()+1, title:"Research Intern - Medical Imaging", company:"Indian Institute of Information Technology Allahabad", country:"India", type:"Intern", location:"Allahabad", date: new Date().toISOString()},
+        {id: Date.now()+2, title:"Postdoc - Computer Vision", company:"University of X", country:"USA", type:"Full-time", location:"Boston, MA", date: new Date().toISOString()}
+      ];
+      localStorage.setItem(JOBS_KEY, JSON.stringify(seed));
+    }
+    function readJobs(){ seedJobs(); return JSON.parse(localStorage.getItem(JOBS_KEY) || "[]").sort((a,b)=> new Date(b.date) - new Date(a.date)); }
+    function saveJobs(list){ localStorage.setItem(JOBS_KEY, JSON.stringify(list)); }
+    let activeTab = "India";
+    function setTab(t){ activeTab = t; renderJobs(); }
+    function renderJobs(){
+      const all = readJobs();
+      const searchKey = document.getElementById('search-key') ? document.getElementById('search-key').value.trim().toLowerCase() : '';
+      let filtered = all.filter(j => j.country === activeTab);
+      if(searchKey) filtered = filtered.filter(j => (j.title + ' ' + j.company + ' ' + j.location).toLowerCase().includes(searchKey));
+      const listEl = document.getElementById('job-list'); listEl.innerHTML = "";
+      if(filtered.length === 0){ listEl.innerHTML = "<div class='small'>No job updates.</div>"; return; }
+      filtered.forEach(j=>{
+        const div = document.createElement('div');
+        div.className = "job-card";
+        div.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;">
+            <div style="flex:1">
+              <div style="font-weight:700">${escapeHtml(j.title)}</div>
+              <div class="small">${escapeHtml(j.company)} • ${escapeHtml(j.location)} • <span class="small">${new Date(j.date).toLocaleDateString()}</span></div>
+              <div style="margin-top:8px;"><span class="pill">${escapeHtml(j.type)}</span></div>
+            </div>
+            <div style="margin-left:12px;"><button onclick="removeJob(${j.id})" style="padding:6px 8px;border-radius:8px;border:1px solid #eee;background:#fff;cursor:pointer">Remove</button></div>
+          </div>`;
+        listEl.appendChild(div);
+      });
+    }
+    function addJob(){
+      const title = document.getElementById('new-title').value.trim();
+      const company = document.getElementById('new-company').value.trim();
+      const country = document.getElementById('new-country').value;
+      const type = document.getElementById('new-type').value;
+      const location = document.getElementById('new-location').value.trim();
+      if(!title || !company){ alert("Enter title and company."); return; }
+      const jobs = readJobs();
+      jobs.unshift({ id: Date.now(), title, company, country, type, location, date:new Date().toISOString()});
+      saveJobs(jobs);
+      document.getElementById('new-title').value=""; document.getElementById('new-company').value=""; document.getElementById('new-location').value="";
+      renderJobs();
+    }
+    function removeJob(id){ if(!confirm('Remove this job?')) return; const jobs = readJobs().filter(j=> j.id !== id); saveJobs(jobs); renderJobs(); }
+    function clearJobs(){ if(!confirm('Clear all job postings?')) return; localStorage.removeItem(JOBS_KEY); seedJobs(); renderJobs(); }
+    function escapeHtml(s){ if(!s) return ''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+    /* ---------- Gallery (Memory) ---------- */
+    function loadGallery(){ try{ return JSON.parse(localStorage.getItem(GALLERY_KEY) || "[]"); } catch(e){ return []; } }
+    function saveGallery(list){ localStorage.setItem(GALLERY_KEY, JSON.stringify(list)); }
+    function renderGallery(year){
+      const grid = document.getElementById('gallery-grid'); grid.innerHTML = "";
+      const all = loadGallery();
+      const y = year || document.getElementById('year-select').value;
+      const items = all.filter(it => it.year === String(y));
+      if(items.length === 0){ grid.innerHTML = "<div class='small'>No images for " + y + ".</div>"; return; }
+      items.forEach((it, idx) => {
+        const div = document.createElement('div');
+        div.className = 'gallery-item';
+        div.innerHTML = `<img src="${it.data}" alt="img-${idx}" onclick="openModal('${it.data}')" />`;
+        grid.appendChild(div);
+      });
+    }
+    function addGalleryImage(){
+      const sel = document.getElementById('year-select').value;
+      const fileInput = document.getElementById('image-file');
+      const f = fileInput.files[0];
+      if(!f){ alert("Select an image file."); return; }
+      const reader = new FileReader();
+      reader.onload = function(e){
+        const data = e.target.result;
+        const gallery = loadGallery();
+        gallery.unshift({ year: String(sel), data, added: new Date().toISOString() });
+        saveGallery(gallery);
+        fileInput.value = '';
+        renderGallery(sel);
+        buildYearTabs();
+      };
+      reader.readAsDataURL(f);
+    }
+    function clearGallery(){ if(!confirm('Clear gallery?')) return; localStorage.removeItem(GALLERY_KEY); renderGallery(document.getElementById('year-select').value); buildYearTabs(); }
+    function buildYearTabs(){
+      const tabs = document.getElementById('year-tabs'); tabs.innerHTML = '';
+      const years = ['2025','2024','2023','2022','2021'];
+      years.forEach(y=>{
+        const btn = document.createElement('button');
+        btn.className = 'btn';
+        btn.style.background = 'transparent';
+        btn.style.color = 'var(--accent2)';
+        btn.style.border = '1px solid rgba(0,0,0,0.06)';
+        btn.style.padding = '6px 10px';
+        btn.style.borderRadius = '8px';
+        btn.textContent = y;
+        btn.onclick = ()=> { document.getElementById('year-select').value = y; renderGallery(y); };
+        tabs.appendChild(btn);
+      });
+    }
+    function openModal(src){
+      document.getElementById('modal-img').src = src;
+      document.getElementById('modal').style.display = 'flex';
+    }
+    function closeModal(e){
+      if(e.target.id === 'modal' || e.target.id === 'modal-content'){ document.getElementById('modal').style.display = 'none'; }
+    }
+
+    /* ---------- Contact placeholder ---------- */
+    function contactFormSubmit(e){
+      e.preventDefault();
+      alert("Thanks! Message saved locally (demo). Replace with a server-side mail handler if you want real emails.");
+      document.getElementById('c_name').value=''; document.getElementById('c_email').value=''; document.getElementById('c_msg').value='';
+      return false;
+    }
+
+    /* ---------- Initialization ---------- */
+    document.addEventListener('DOMContentLoaded', function(){
+      initWeather();
+      seedJobs();
+      renderJobs();
+      buildYearTabs();
+      renderGallery(document.getElementById('year-select').value);
+    });
+
+    /* ---------- Smooth anchor scroll offset fix ---------- */
+    document.querySelectorAll('nav.global a').forEach(a=>{
+      a.addEventListener('click', function(e){
+        const href = a.getAttribute('href');
+        if(href && href.startsWith('#')){
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if(target){
+            const headerOffset = 96; // adjust if header height changes
+            const elementPosition = target.getBoundingClientRect().top + window.pageYOffset;
+            const offsetPosition = elementPosition - headerOffset;
+            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+          }
+        }
+      });
+    });
+  </script>
 </body>
 </html>
