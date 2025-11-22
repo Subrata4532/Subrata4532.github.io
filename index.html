@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title> Subrata Pramanik</title>
+  <title>Subrata Pramanik</title>
 
   <link rel="stylesheet" href="style.css" />
-  <!-- Leaflet CSS (map) -->
+  <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
 
-  <!-- TRICOLOR TOP RIBBON -->
+  <!-- TRICOLOR RIBBON -->
   <div class="tricolor-ribbon" aria-hidden="true">
     <span class="saffron"></span><span class="white"></span><span class="green"></span>
   </div>
@@ -20,7 +20,7 @@
   <div id="loading-screen" aria-hidden="false">
     <div class="welcome-text" id="loading-welcome">🙏 Namaskar 🙏</div>
     <div class="loader" role="progressbar" aria-label="Loading"></div>
-    <div class="loading-text" id="loading-sub">…loading …</div>
+    <div class="loading-text" id="loading-sub">…loading…</div>
   </div>
 
   <!-- TOP LEFT TIME/DATE/DAY -->
@@ -33,7 +33,7 @@
   <!-- HEADER -->
   <header class="topbar" id="site-header" role="banner">
     <div class="wrap">
-      <div class="title" id="site-title" data-i18n="title"> Subrata Pramanik</div>
+      <div class="title" id="site-title">Subrata Pramanik </div>
 
       <div class="header-controls" role="toolbar" aria-label="Header controls">
         <select id="language-switcher" title="Choose Language" aria-label="Choose language">
@@ -71,14 +71,16 @@
     </nav>
   </header>
 
-  <!-- MAIN LAYOUT -->
+  <!-- MAIN -->
   <main class="container" id="page-main" role="main">
     <!-- LEFT -->
     <aside class="left-col" role="complementary">
       <div class="section-card profile" id="card-profile">
         <div class="img">
-          <!-- Place your profile image at images/subrata_profile_circle_HD_new.png -->
-          <img id="profile-img" src="images/subrata_profile_circle_HD_new.png" alt="Profile photo of Subrata Pramanik">
+          <!-- Preferred runtime path (uploaded) -->
+          <!-- sandbox path (uploaded): /mnt/data/subrata_profile_circle_HD_new.png -->
+          <!-- In repo you can copy this file to images/subrata_profile_circle_HD_new.png -->
+          <img id="profile-img" src="sandbox:/mnt/data/subrata_profile_circle_HD_new.png" alt="Profile photo of Subrata Pramanik">
         </div>
         <h3 id="profile-name">Subrata Pramanik</h3>
         <p class="meta" id="profile-meta">Junior Research Fellow<br>Indian Institute Of Information Technology,Allahabad</p>
@@ -111,16 +113,16 @@
     <!-- CENTER -->
     <section class="center-col">
       <section id="home" class="section-card"><h2 data-i18n="home.title">Home</h2>
-        <p data-i18n="home.p"> Hellow — I am <strong id="intro-name">Subrata Pramanik</strong>. This page shows my profile,  projects, gallery (memory) and more.</p>
+        <p data-i18n="home.p">Hellow — I am <strong id="intro-name">Subrata Pramanik</strong>. This page shows my profile,  projects, gallery (memory), job updates and more.</p>
       </section>
 
       <section id="about" class="section-card"><h2 data-i18n="about.title">About</h2>
-        <p data-i18n="about.p">.</p>
+        <p data-i18n="about.p"> interests, current work, and contact details.</p>
       </section>
 
       <section id="education" class="section-card"><h2 data-i18n="education.title">Education</h2>
         <ul data-i18n="education.list">
-          <li>M.TECH+Ph.D — Indian Institute Of Information Technology,Allahabad — (2024-2028)</li>
+          <li>M.Tech+Ph.D — Indian Institute Of Information Technology,Allahabad — (2024-2028)</li>
         </ul>
       </section>
 
@@ -128,7 +130,7 @@
         <ul class="small"><li>Junior Research Fellow — (current)</li></ul>
       </section>
 
-      <section id="teaching" class="section-card"><h2 data-i18n="teaching.title">Teaching</h2><p data-i18n="teaching.p">..</p></section>
+      <section id="teaching" class="section-card"><h2 data-i18n="teaching.title">Teaching</h2><p data-i18n="teaching.p">. .</p></section>
       <section id="courses" class="section-card"><h2 data-i18n="courses.title">Courses</h2><p data-i18n="courses.p">..</p></section>
 
       <section id="resume" class="section-card">
@@ -139,20 +141,20 @@
       <section id="publications" class="section-card"><h2 data-i18n="publications.title">Publications</h2>
         <ol data-i18n="publications.list">
           <li>..</li>
-          <li>..</li>
+          <li>...</li>
         </ol>
       </section>
 
       <section id="projects" class="section-card"><h2 data-i18n="projects.title">Projects</h2>
-        <ul data-i18n="projects.list"><li>..</li></ul>
+        <ul data-i18n="projects.list"><li>Project A — short description</li></ul>
       </section>
 
-      <section id="skills" class="section-card"><h2 data-i18n="skills.title">Skills</h2><p data-i18n="skills.p"> Python</p></section>
+      <section id="skills" class="section-card"><h2 data-i18n="skills.title">Skills</h2><p data-i18n="skills.p">Image Processing • Computer Vision • Deep Learning • Python</p></section>
 
-      <section id="awards" class="section-card"><h2 data-i18n="awards.title">Awards & Honours</h2><p>..</p></section>
-      <section id="talks" class="section-card"><h2 data-i18n="talks.title">Talks</h2><p>.</p></section>
-      <section id="services" class="section-card"><h2 data-i18n="services.title">Services</h2><p>.</p></section>
-      <section id="blog" class="section-card"><h2 data-i18n="blog.title">Blog</h2><p>.</p></section>
+      <section id="awards" class="section-card"><h2 data-i18n="awards.title">Awards & Honours</h2><p>Add awards here</p></section>
+      <section id="talks" class="section-card"><h2 data-i18n="talks.title">Talks</h2><p>Add invited talks.</p></section>
+      <section id="services" class="section-card"><h2 data-i18n="services.title">Services</h2><p>Reviewer, PC member, etc.</p></section>
+      <section id="blog" class="section-card"><h2 data-i18n="blog.title">Blog</h2><p>Link to articles.</p></section>
 
       <!-- MEMORY / GALLERY -->
       <section id="memory" class="section-card">
@@ -194,12 +196,12 @@
         </div>
       </section>
 
-      <!-- Meeting & rolling research contact -->
+      <!-- MEETING -->
       <section id="meeting" class="section-card">
         <h2>Schedule a Meeting</h2>
         <p>Click to schedule a 30-minute meeting:</p>
         <a class="btn" href="https://calendly.com/subrata-official111/30min" target="_blank" rel="noopener">Book 30min with Subrata</a>
-        <div class="marquee" id="research-marquee" aria-hidden="false"><span id="marquee-text">For collaborations -contact: email@example.com  & call +91-XXXXXXXXXX</span></div>
+        <div class="marquee" id="research-marquee" aria-hidden="false"><span id="marquee-text">For research contact: email@example.com — For collaborations call +91-XXXXXXXXXX</span></div>
       </section>
 
       <!-- MAP -->
@@ -219,12 +221,12 @@
         </form>
       </section>
 
-      <section id="updates" class="section-card"><h2>Latest Updates</h2><ul><li>..</li></ul></section>
+      <section id="updates" class="section-card"><h2>Latest Updates</h2><ul><li>..e</li></ul></section>
     </section>
 
     <!-- RIGHT -->
     <aside class="right-col" role="complementary">
-      <div class="section-card"><h2>Latest Events</h2><ul><li>Coming soon</li></ul></div>
+      <div class="section-card"><h2>Latest Events</h2><ul><li>...</li></ul></div>
 
       <div class="section-card"><h2>7-day Weather</h2><div id="daily-weather">Loading…</div></div>
     </aside>
@@ -255,4 +257,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-
