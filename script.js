@@ -1,20 +1,11 @@
 /* Final script.js
-   - weather (7-day)
-   - map (Leaflet)
-   - gallery 2000-3000
-   - jobs localStorage
-   - smooth nav + active highlight
-   - day/night toggle
-   - language basic mapping
-   - auto CV generator (prints)
-   - loading screen
-   - comments reference uploaded file path
+   - Adds: fixed issues, themes, full clock, ticker, gallery (2000-3000), 7-day weather,
+           map, CV generator, jobs, smooth nav + active highlight, chat, visitor counter.
 */
 
-/* ---------------------------
-   Developer note: uploaded file path
-   (kept as comment for tooling: /mnt/data/Assignment_11.pdf)
-----------------------------*/
+/* Developer note: uploaded file path (kept as comment per tooling)
+/mnt/data/Assignment_11.pdf
+*/
 
 /* ---------------------------
    Config
@@ -37,13 +28,22 @@ window.addEventListener('load', () => {
 });
 
 /* ---------------------------
-   Clock, date, day
+   Clock, date, day (full format for top-right)
 ----------------------------*/
 function updateClock(){
   const now = new Date();
   document.getElementById('clock').innerText = now.toLocaleTimeString();
   document.getElementById('date').innerText = now.toLocaleDateString();
   document.getElementById('dayname').innerText = now.toLocaleDateString(undefined, { weekday: 'long' });
+
+  // Top-right full format: Saturday | 23 Nov 2025 | 10:42:11 PM
+  const optsDay = { weekday:'long' };
+  const optsDate = { day:'2-digit', month:'short', year:'numeric' };
+  const day = now.toLocaleDateString(undefined, optsDay);
+  const date = now.toLocaleDateString(undefined, optsDate);
+  const time = now.toLocaleTimeString();
+  const top = document.getElementById('top-right-clock');
+  if(top) top.innerText = `${day} | ${date} | ${time}`;
 }
 setInterval(updateClock, 1000);
 updateClock();
@@ -63,7 +63,7 @@ function incrementView(){
 incrementView();
 
 /* ---------------------------
-   Weather: Open-Meteo (7-day)
+   Weather: Open-Meteo 7-day
 ----------------------------*/
 async function fetchWeather(lat, lon){
   try{
@@ -91,7 +91,6 @@ async function fetchWeather(lat, lon){
         html += '</ul>';
         dailyEl.innerHTML = html;
       }
-      // show small forecast in profile
       const pf = document.getElementById('daily-forecast');
       if(pf) pf.innerText = `${Math.round(mins[0])}° / ${Math.round(maxs[0])}°C (today)`;
     }
@@ -122,7 +121,7 @@ marker.bindPopup("<strong>Indian Institute Of Information Technology</strong>").
 marker.bindTooltip("Indian Institute Of Information Technology", {direction:"top", offset:[0,-8]});
 
 /* ---------------------------
-   Jobs (localStorage)
+   Jobs localStorage
 ----------------------------*/
 function seedJobs(){
   if(localStorage.getItem(JOBS_KEY)) return;
@@ -246,6 +245,7 @@ document.querySelectorAll('nav.global a').forEach(a=>{
     }
   });
 });
+
 window.addEventListener('scroll', ()=>{
   const headerOffset = document.getElementById('site-header')?.getBoundingClientRect().height || 96;
   let current = null;
@@ -303,7 +303,7 @@ function sendMessage(){
 }
 
 /* ---------------------------
-   Language mapping (simple)
+   Language mapping (basic)
 ----------------------------*/
 const TRANSLATIONS = {
   en: {},
@@ -329,7 +329,7 @@ document.getElementById('language-switcher').addEventListener('change', function
 });
 
 /* ---------------------------
-   Auto CV generator (constructs printable HTML and opens print dialog)
+   Auto CV generator (HTML -> print dialog)
 ----------------------------*/
 function buildCVHtml(){
   const name = document.getElementById('profile-name')?.innerText || 'Subrata Pramanik';
