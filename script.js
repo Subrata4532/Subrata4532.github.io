@@ -9,7 +9,7 @@ const VIEW_KEY = 'subrata_view_count_final';
 /* ---------------------------
    Loading and page title
 ----------------------------*/
-document.title = "Namaskar — Subrata Pramanik";
+document.title = " Subrata Pramanik";
 window.addEventListener('load', () => {
   setTimeout(()=> {
     const el = document.getElementById('loading-screen');
@@ -107,7 +107,7 @@ initWeather();
 const map = L.map('map', { zoomControl:true }).setView([IIIT_COORDS.lat, IIIT_COORDS.lon], 11);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{ maxZoom:19, attribution:'&copy; OpenStreetMap contributors' }).addTo(map);
 const marker = L.marker([IIIT_COORDS.lat, IIIT_COORDS.lon]).addTo(map);
-marker.bindPopup("<strong>Indian Institute Of Information Technology</strong>").openPopup();
+marker.bindPopup("<strong> Indian Institute of Information Technology, Allahabad.Priya Shringar Kendra, 4, Jhalwa, Prayagraj, Saha Urf Pipalgaon, Uttar Pradesh 211015</strong>").openPopup();
 
 /* ---------------------------
    Jobs (localStorage)
@@ -292,13 +292,13 @@ function sendMessage(){
    Simple translations - EN + HI (expandable)
 ----------------------------*/
 const TRANSLATIONS = {
-  en: { "title":"Namaskar — Subrata Pramanik", "nav.home":"Home", "nav.about":"About", "home.title":"Home",
+  en: { "title":"Subrata Pramanik", "nav.home":"Home", "nav.about":"About", "home.title":"Home",
     "home.p":"Namaskar — I am <strong>Subrata Pramanik</strong>. This page shows my profile, publications, projects, gallery (memory), job updates and more.",
     "quicklinks":"Quick Links", "resume.title":"Resume", "publications.title":"Publications",
     "projects.title":"Projects", "skills.title":"Skills", "memory.title":"Memory (Gallery)", "jobs.title":"Job Updates",
     "map.title":"World Map", "contact.title":"Contact"
   },
-  hi: { "title":"नमस्कार — सुब्रत प्रामाणिक", "nav.home":"होम", "nav.about":"परिचय", "home.title":"होम",
+  hi: { "title":"सुब्रत प्रामाणिक", "nav.home":"होम", "nav.about":"परिचय", "home.title":"होम",
     "home.p":"नमस्कार — मैं <strong>सुब्रत प्रामाणिक</strong> हूँ। यह पृष्ठ मेरा प्रोफ़ाइल, प्रकाशन, परियोजनाएँ और अधिक दिखाता है।",
     "quicklinks":"त्वरित लिंक", "resume.title":"रिज़्यूमे", "publications.title":"प्रकाशन",
     "projects.title":"प्रोजेक्ट्स", "skills.title":"कौशल", "memory.title":"गैलरी", "jobs.title":"नौकरी अपडेट्स",
