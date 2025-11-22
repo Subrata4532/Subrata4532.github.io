@@ -6,20 +6,26 @@
   <title>Namaskar | Subrata’s Website</title>
 
   <link rel="stylesheet" href="style.css" />
-
-  <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
 
-  <!-- Loading overlay -->
+  <!-- LOADING -->
   <div id="loading-screen" aria-hidden="true">
     <div class="welcome-text">Namaskar — Welcome to Subrata’s Website</div>
     <div class="loader" role="status" aria-label="Loading"></div>
     <div class="loading-text">Preparing your experience…</div>
   </div>
 
-  <!-- Header -->
+  <!-- TOP RIGHT time/day display -->
+  <div id="top-right-clock" aria-hidden="false"></div>
+
+  <!-- TICKER -->
+  <div id="ticker-wrap" aria-hidden="false">
+    <div id="ticker">For research contact me: +91-XXXXXXXXXX • your-email@example.com</div>
+  </div>
+
+  <!-- HEADER -->
   <header class="topbar" id="site-header" role="banner">
     <div class="wrap">
       <div class="title">Namaskar — Subrata Pramanik</div>
@@ -68,9 +74,9 @@
     </nav>
   </header>
 
-  <!-- Main content grid -->
+  <!-- MAIN -->
   <main class="container" id="page-main" role="main">
-    <!-- Left: profile + info -->
+    <!-- LEFT -->
     <aside class="left-col" aria-label="Profile">
       <div class="section-card profile" id="card-profile">
         <div class="img" aria-hidden="true">
@@ -104,7 +110,7 @@
       </div>
     </aside>
 
-    <!-- Center: main sections -->
+    <!-- CENTER -->
     <section class="center-col" aria-live="polite">
       <section id="home" class="section-card">
         <h2 data-i18n="home.title">Home</h2>
@@ -129,8 +135,8 @@
         <ul id="experience-list"><li>Junior Research Fellow — (current)</li></ul>
       </section>
 
-      <section id="teaching" class="section-card"><h2>Teaching</h2><p>Add courses taught.</p></section>
-      <section id="courses" class="section-card"><h2>Courses</h2><p>List of courses.</p></section>
+      <section id="teaching" class="section-card"><h2>Teaching</h2></section>
+      <section id="courses" class="section-card"><h2>Courses</h2></section>
 
       <section id="resume" class="section-card"><h2>Resume</h2>
         <p>Click the header button "Download CV" to generate a printable CV automatically from this page.</p>
@@ -150,11 +156,16 @@
 
       <section id="awards" class="section-card"><h2>Awards & Honours</h2><ul id="awards-list"><li>Add awards here</li></ul></section>
 
+      <!-- EMPTY sections (user requested no sample text) -->
+      <section id="talks" class="section-card"><h2>Talks</h2></section>
+      <section id="services" class="section-card"><h2>Professional Services</h2></section>
+      <section id="blog" class="section-card"><h2>Blog</h2></section>
+
       <!-- Memory / Gallery -->
       <section id="memory" class="section-card">
         <h2>Memory (Gallery)</h2>
         <div class="gallery-controls">
-          <select id="year-select" aria-label="Choose gallery year"></select>
+          <select id="year-select" aria-label="Choose year"></select>
           <input id="image-file" type="file" accept="image/*" />
           <button class="btn" onclick="addGalleryImage()">Add</button>
           <button class="btn" onclick="clearGallery()">Clear</button>
@@ -218,7 +229,7 @@
       <section id="updates" class="section-card"><h2>Latest Updates</h2><ul><li>Add your latest event here</li></ul></section>
     </section>
 
-    <!-- Right column -->
+    <!-- RIGHT -->
     <aside class="right-col">
       <div class="section-card"><h2>Latest Events</h2><ul><li>Ph.D. positions — contact when available</li></ul></div>
 
@@ -226,7 +237,7 @@
     </aside>
   </main>
 
-  <!-- Footer -->
+  <!-- FOOTER -->
   <footer>
     <div class="footer-line" role="contentinfo">
       <div class="footer-inner">
@@ -237,12 +248,12 @@
     </div>
   </footer>
 
-  <!-- Gallery Modal -->
+  <!-- GALLERY MODAL -->
   <div id="modal" class="modal" onclick="closeModal(event)" role="dialog" aria-hidden="true">
     <div class="content" id="modal-content"><img id="modal-img" src="" alt=""/></div>
   </div>
 
-  <!-- Chatbot -->
+  <!-- CHATBOT -->
   <div id="chatbot-bubble" role="button" aria-label="Open chat">💬</div>
   <div id="chatbot-box" aria-hidden="true">
     <div id="chatbot-header">Assistant</div>
@@ -253,10 +264,10 @@
     </div>
   </div>
 
-  <!-- Leaflet JS -->
+  <!-- LEAFLET -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-  <!-- Main JS -->
+  <!-- MAIN SCRIPT -->
   <script src="script.js"></script>
 </body>
 </html>
