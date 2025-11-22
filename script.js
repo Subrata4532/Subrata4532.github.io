@@ -28,12 +28,12 @@ function updateClock(){
   const time = now.toLocaleTimeString();
   const date = now.toLocaleDateString();
   const dayName = now.toLocaleDateString(undefined,{ weekday:'long' });
-  document.getElementById('clock').innerText = time;
-  document.getElementById('date').innerText = date;
-  document.getElementById('dayname').innerText = dayName;
-  document.getElementById('top-time').innerText = time;
-  document.getElementById('top-date').innerText = date;
-  document.getElementById('top-day').innerText = dayName;
+  if(document.getElementById('clock')) document.getElementById('clock').innerText = time;
+  if(document.getElementById('date')) document.getElementById('date').innerText = date;
+  if(document.getElementById('dayname')) document.getElementById('dayname').innerText = dayName;
+  if(document.getElementById('top-time')) document.getElementById('top-time').innerText = time;
+  if(document.getElementById('top-date')) document.getElementById('top-date').innerText = date;
+  if(document.getElementById('top-day')) document.getElementById('top-day').innerText = dayName;
 }
 setInterval(updateClock, 1000);
 updateClock();
@@ -46,7 +46,7 @@ function incrementView(){
     let v = parseInt(localStorage.getItem(VIEW_KEY) || '0',10);
     v++;
     localStorage.setItem(VIEW_KEY, String(v));
-    document.getElementById('view-count-footer').innerText = v;
+    if(document.getElementById('view-count-footer')) document.getElementById('view-count-footer').innerText = v;
   }catch(e){ console.warn(e); }
 }
 incrementView();
@@ -61,13 +61,13 @@ async function fetchWeather(lat, lon){
     if(!res.ok) throw new Error('weather fetch failed');
     const data = await res.json();
 
-    if(data.current_weather){
+    if(data.current_weather && document.getElementById('temperature')){
       document.getElementById('temperature').innerText = `${Math.round(data.current_weather.temperature)}°C`;
-    } else {
+    } else if(document.getElementById('temperature')){
       document.getElementById('temperature').innerText = 'N/A';
     }
 
-    if(data.daily && data.daily.time){
+    if(data.daily && data.daily.time && document.getElementById('daily-weather')){
       const times = data.daily.time;
       const maxs = data.daily.temperature_2m_max;
       const mins = data.daily.temperature_2m_min;
@@ -79,13 +79,13 @@ async function fetchWeather(lat, lon){
       }
       html += '</ul>';
       document.getElementById('daily-weather').innerHTML = html;
-    } else {
+    } else if(document.getElementById('daily-weather')){
       document.getElementById('daily-weather').innerText = 'Daily forecast unavailable';
     }
   }catch(e){
     console.warn(e);
-    document.getElementById('temperature').innerText = 'Weather unavailable';
-    document.getElementById('daily-weather').innerText = 'Weather unavailable';
+    if(document.getElementById('temperature')) document.getElementById('temperature').innerText = 'Weather unavailable';
+    if(document.getElementById('daily-weather')) document.getElementById('daily-weather').innerText = 'Weather unavailable';
   }
 }
 function initWeather(){
@@ -360,5 +360,5 @@ document.addEventListener('DOMContentLoaded', ()=>{
   renderJobs();
   applyTranslations('en'); // default
   const stored = parseInt(localStorage.getItem(VIEW_KEY) || '0',10);
-  if(!isNaN(stored)) document.getElementById('view-count-footer').innerText = stored;
+  if(!isNaN(stored) && document.getElementById('view-count-footer')) document.getElementById('view-count-footer').innerText = stored;
 });
