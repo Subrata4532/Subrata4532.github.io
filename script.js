@@ -9,7 +9,7 @@ const VIEW_KEY = 'subrata_view_count_final';
 /* ---------------------------
    Loading and page title
 ----------------------------*/
-document.title = "Namaskar — Subrata Pramanik";
+document.title = "Subrata Pramanik";
 window.addEventListener('load', () => {
   setTimeout(()=> {
     const el = document.getElementById('loading-screen');
@@ -107,7 +107,7 @@ initWeather();
 const map = L.map('map', { zoomControl:true }).setView([IIIT_COORDS.lat, IIIT_COORDS.lon], 11);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{ maxZoom:19, attribution:'&copy; OpenStreetMap contributors' }).addTo(map);
 const marker = L.marker([IIIT_COORDS.lat, IIIT_COORDS.lon]).addTo(map);
-marker.bindPopup("<strong>Indian Institute Of Information Technology</strong>").openPopup();
+marker.bindPopup("<strong>Indian Institute Of Information Technology,Allahabad</strong>").openPopup();
 
 /* ---------------------------
    Jobs (localStorage)
