@@ -1,0 +1,11 @@
+:root{
+  --flower-img: url("images/flower_hd.png");
+}
+
+body::before, body::after{
+  content:"";
+  position:fixed;
+  top:0; bottom:0;
+  width:220px;
+  background-image: var(--flower-img);
+}
