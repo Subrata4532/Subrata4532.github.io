@@ -11,14 +11,19 @@
 
 <body>
 
-  <div class="tricolor-ribbon" aria-hidden="true"><span class="saffron"></span><span class="white"></span><span class="green"></span></div>
-
-  <div id="loading-screen" aria-hidden="false">
-    <div class="welcome-text">🙏 Namaskar 🙏</div>
-    <div class="loader" role="progressbar" aria-label="Loading"></div>
-    <div class="loading-text">…loading…</div>
+  <!-- ⭐ NEW PRELOADER (OPTION B) ⭐ -->
+  <div id="preloader">
+      <div class="loader-text">🙏 Namaskar 🙏</div>
+      <div class="loader-bar"></div>
+      <div class="loader-sub">loading...</div>
   </div>
 
+  <!-- INDIA FLAG RIBBON -->
+  <div class="tricolor-ribbon" aria-hidden="true">
+    <span class="saffron"></span><span class="white"></span><span class="green"></span>
+  </div>
+
+  <!-- TOP INFO -->
   <div id="top-info" aria-live="polite">
     <span id="top-day">—</span> |
     <span id="top-date">—</span> |
@@ -26,22 +31,24 @@
     📍 <span id="top-location">Detecting…</span>
   </div>
 
-  <!-- mini-map DOM (kept but hidden via CSS) -->
+  <!-- Hidden mini-map -->
   <div id="user-map" aria-hidden="true"></div>
 
+  <!-- HEADER -->
   <header class="topbar" id="site-header" role="banner">
     <div class="wrap">
       <div class="title" id="site-title">Subrata Pramanik</div>
-      <div class="header-controls" role="toolbar" aria-label="Header controls">
-        <select id="language-switcher" title="Choose Language" aria-label="Choose language">
+
+      <div class="header-controls" role="toolbar">
+        <select id="language-switcher">
           <option value="en">EN</option><option value="hi">HI</option><option value="bn">BN</option>
         </select>
-        <button id="theme-toggle" title="Toggle theme" aria-pressed="false">🌙</button>
-        <button id="download-cv" class="btn cv-btn" title="Download CV">Download CV</button>
+        <button id="theme-toggle">🌙</button>
+        <button id="download-cv" class="btn cv-btn">Download CV</button>
       </div>
     </div>
 
-    <nav class="global" aria-label="Main navigation">
+    <nav class="global">
       <a href="#home">Home</a>
       <a href="#about">About</a>
       <a href="#education">Education</a>
@@ -59,15 +66,16 @@
     </nav>
   </header>
 
-  <main class="container" id="page-main" role="main">
+  <main class="container" id="page-main">
 
-    <aside class="left-col" role="complementary">
-      <div class="section-card profile" id="card-profile">
-        <div class="img"><img id="profile-img" src="images/subrata_profile_circle_HD_new.png" alt="Profile photo"></div>
-        <h3 id="profile-name">Subrata Pramanik</h3>
+    <!-- LEFT SIDEBAR -->
+    <aside class="left-col">
+      <div class="section-card profile">
+        <div class="img"><img id="profile-img" src="images/subrata_profile_circle_HD_new.png"></div>
+        <h3>Subrata Pramanik</h3>
         <p class="meta">Junior Research Fellow<br>Indian Institute Of Information Technology, Allahabad</p>
 
-        <div class="info-block" aria-live="polite">
+        <div class="info-block">
           <div class="small">Now</div>
           <div id="clock" class="big">--:--:--</div>
           <div id="date" class="small">--</div>
@@ -91,81 +99,56 @@
       </div>
     </aside>
 
+    <!-- CENTER COLUMN -->
     <section class="center-col">
 
-      <section id="home" class="section-card"><h2>Home</h2>
-        <p>Hello — I am <strong id="intro-name">Subrata Pramanik</strong>. This page shows my profile, projects, gallery (memory) and more.</p>
+      <section id="home" class="section-card">
+        <h2>Home</h2>
+        <p>Hello — I am <strong id="intro-name">Subrata Pramanik</strong>.</p>
       </section>
 
       <section id="about" class="section-card"><h2>About</h2><p>...</p></section>
       <section id="education" class="section-card"><h2>Education</h2><ul><li>M.TECH + Ph.D — IIIT Allahabad — (2024-2028)</li></ul></section>
       <section id="experience" class="section-card"><h2>Experience</h2><ul><li>Junior Research Fellow — (current)</li></ul></section>
 
+      <!-- MEMORY (GALLERY) -->
       <section id="memory" class="section-card">
         <h2>Memory (Gallery)</h2>
         <div class="gallery-controls">
-          <select id="year-select" aria-label="Choose year"></select>
-          <input id="image-file" type="file" accept="image/*" aria-label="Upload image" />
+          <select id="year-select"></select>
+          <input id="image-file" type="file" accept="image/*">
           <button class="btn" onclick="addGalleryImage()">Add</button>
           <button class="btn" onclick="clearGallery()">Clear</button>
         </div>
-        <div id="gallery-grid" class="gallery-grid" aria-live="polite"></div>
+        <div id="gallery-grid" class="gallery-grid"></div>
       </section>
 
+      <!-- JOB UPDATES -->
       <section id="jobs" class="section-card">
         <h2>Job Updates</h2>
 
         <!-- Filters -->
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center;">
-          <select id="filter-worktype" aria-label="Filter by work type">
-            <option value="">All Work Types</option>
-            <option value="Remote">Remote</option>
-            <option value="Hybrid">Hybrid</option>
-            <option value="On-site">On-site</option>
-          </select>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+          <select id="filter-worktype"><option value="">All Work Types</option><option>Remote</option><option>Hybrid</option><option>On-site</option></select>
+          <select id="filter-experience"><option value="">All Experience</option><option>Fresher</option><option>Early</option><option>Mid</option><option>Experienced</option></select>
+          <select id="filter-country"><option value="">All Countries</option><option>India</option><option>USA</option><option>Other</option></select>
 
-          <select id="filter-experience" aria-label="Filter by experience">
-            <option value="">All Experience Levels</option>
-            <option value="Fresher">Fresher</option>
-            <option value="Early">Early</option>
-            <option value="Mid">Mid</option>
-            <option value="Experienced">Experienced</option>
-          </select>
-
-          <select id="filter-country" aria-label="Filter by country">
-            <option value="">All Countries</option>
-            <option value="India">India</option>
-            <option value="USA">USA</option>
-            <option value="Other">Other</option>
-          </select>
-
-          <input id="job-search" placeholder="Search title or company" style="flex:1;padding:8px;border-radius:8px;border:1px solid #ddd;" />
+          <input id="job-search" placeholder="Search title or company" style="flex:1;padding:8px;border-radius:8px;border:1px solid #ddd;">
           <button class="btn" onclick="renderJobs()">Filter</button>
         </div>
 
-        <!-- Add New Job (you will fill these fields) -->
-        <div style="margin-top:12px;border-top:1px dashed rgba(0,0,0,0.06);padding-top:12px;">
-          <h3 style="margin:0 0 8px;">Add New Job</h3>
-          <input id="new-title" placeholder="Role title" style="width:100%;padding:8px;margin-top:6px" />
-          <input id="new-company" placeholder="Company / Institute" style="width:100%;padding:8px;margin-top:6px" />
+        <!-- Add new job -->
+        <div style="margin-top:12px;border-top:1px dashed #ccc;padding-top:12px;">
+          <h3>Add New Job</h3>
+          <input id="new-title" placeholder="Role title" style="width:100%;padding:8px;margin-top:6px">
+          <input id="new-company" placeholder="Company / institute" style="width:100%;padding:8px;margin-top:6px">
+
           <div style="display:flex;gap:8px;margin-top:6px;">
-            <select id="new-country" style="padding:8px;border-radius:6px;">
-              <option>India</option><option>USA</option><option>Other</option>
-            </select>
-
-            <select id="new-employmenttype" style="padding:8px;border-radius:6px;">
-              <option>Intern</option><option>Full-time</option><option>Part-time</option><option>Contract</option>
-            </select>
-
-            <select id="new-worktype" style="padding:8px;border-radius:6px;">
-              <option>Remote</option><option>Hybrid</option><option>On-site</option>
-            </select>
-
-            <select id="new-explevel" style="padding:8px;border-radius:6px;">
-              <option>Fresher</option><option>Early</option><option>Mid</option><option>Experienced</option>
-            </select>
-
-            <input id="new-location" placeholder="City / Remote" style="flex:1;padding:8px;border-radius:6px;border:1px solid #ddd;" />
+            <select id="new-country"><option>India</option><option>USA</option><option>Other</option></select>
+            <select id="new-employmenttype"><option>Intern</option><option>Full-time</option><option>Part-time</option><option>Contract</option></select>
+            <select id="new-worktype"><option>Remote</option><option>Hybrid</option><option>On-site</option></select>
+            <select id="new-explevel"><option>Fresher</option><option>Early</option><option>Mid</option><option>Experienced</option></select>
+            <input id="new-location" placeholder="City / Remote" style="flex:1;padding:8px;border-radius:6px;">
           </div>
 
           <div style="margin-top:8px;">
@@ -179,7 +162,7 @@
 
       <section id="meeting" class="section-card">
         <h2>Schedule a Meeting</h2>
-        <a class="btn" href="https://calendly.com/subrata-official111/30min" target="_blank" rel="noopener">Book 30min</a>
+        <a class="btn" href="https://calendly.com/subrata-official111/30min" target="_blank">Book 30min</a>
       </section>
 
       <section class="section-card">
@@ -190,16 +173,17 @@
       <section id="contact" class="section-card">
         <h2>Contact</h2>
         <form id="contact-form" onsubmit="return contactFormSubmit(event)">
-          <label>Name</label><input type="text" id="c_name" required />
-          <label>Email</label><input type="email" id="c_email" required />
+          <label>Name</label><input type="text" id="c_name" required>
+          <label>Email</label><input type="email" id="c_email" required>
           <label>Message</label><textarea id="c_msg" rows="4" required></textarea>
-          <div style="margin-top:10px;"><button class="btn" type="submit">Send Message</button></div>
+          <div style="margin-top:10px;"><button class="btn">Send Message</button></div>
         </form>
       </section>
 
     </section>
 
-    <aside class="right-col" role="complementary">
+    <!-- RIGHT SIDEBAR -->
+    <aside class="right-col">
       <div class="section-card"><h2>Latest Events</h2><ul><li>Coming soon</li></ul></div>
       <div class="section-card"><h2>7-day Weather</h2><div id="daily-weather">Loading…</div></div>
     </aside>
@@ -211,21 +195,41 @@
       <div class="footer-inner">
         <span id="footer-text">© 2025 Subrata Pramanik. All Rights Reserved.</span>
         <span class="sep">|</span>
-        <span>Profile views on this browser: <strong id="view-count-footer">0</strong></span>
+        <span>Profile views: <strong id="view-count-footer">0</strong></span>
       </div>
     </div>
   </footer>
 
-  <div id="modal" class="modal" onclick="closeModal(event)"><div class="content" id="modal-content"><img id="modal-img" src="" alt=""></div></div>
+  <div id="modal" class="modal" onclick="closeModal(event)">
+    <div class="content" id="modal-content"><img id="modal-img"></div>
+  </div>
 
-  <div id="chatbot-bubble" title="Open chat">💬</div>
-  <div id="chatbot-box" aria-hidden="true"><div id="chatbot-header">Assistant</div><div id="chatbot-messages"><div class="chatbot-msg bot">Hello! I’m your assistant. How can I help you?</div></div><div id="chatbot-input-area"><input type="text" id="chatbot-input" placeholder="Type a message..." /><button id="chatbot-send">Send</button></div></div>
+  <div id="chatbot-bubble">💬</div>
+  <div id="chatbot-box" aria-hidden="true">
+    <div id="chatbot-header">Assistant</div>
+    <div id="chatbot-messages">
+      <div class="chatbot-msg bot">Hello! I’m your assistant. How can I help you?</div>
+    </div>
+    <div id="chatbot-input-area">
+      <input type="text" id="chatbot-input" placeholder="Type a message...">
+      <button id="chatbot-send">Send</button>
+    </div>
+  </div>
 
+  <!-- Leaflet -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="script.js"></script>
 
-  <!-- uploaded screenshot (local path) -->
-  <!-- /mnt/data/7df24386-c687-496b-9a21-238a360a66f3.png -->
+  <!-- ⭐ NEW PRELOADER SCRIPT ⭐ -->
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+      setTimeout(() => {
+          const pre = document.getElementById("preloader");
+          pre.style.opacity = "0";
+          setTimeout(() => pre.style.display = "none", 300);
+      }, 1500);
+  });
+  </script>
 
 </body>
 </html>
