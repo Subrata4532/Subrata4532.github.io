@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Welcome to My Webpage</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<!-- Leaflet CSS (for world map) -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", sans-serif;
+    background: #f2f7ff;
+}
+
+/* ---------- FLOWER SIDE BACKGROUND ---------- */
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    width: 230px;
+    height: 100%;
+    background: url("images/flower.jpg") no-repeat center center;
+    background-size: cover;
+    opacity: 0.35;
+    z-index: -1;
+}
+
+body::before { left: 0; }
+body::after { right: 0; }
+
+/* ---------- TOP HEADER ---------- */
+.header {
+    background: linear-gradient(90deg, #300048, #62006c);
+    padding: 25px;
+    text-align: center;
+    color: white;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* ---------- NAVBAR ---------- */
+.nav {
+    background: #4c004f;
+    padding: 10px;
+    text-align: center;
+}
+
+.nav a {
+    margin: 0 12px;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.nav a:hover {
+    color: #ffd4ff;
+}
+
+/* ---------- MAIN GRID ---------- */
+.container {
+    display: grid;
+    grid-template-columns: 320px auto;
+    gap: 30px;
+    padding: 30px 250px;
+}
+
+/* ---------- SIDE PROFILE CARD ---------- */
+.profile-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.15);
+    text-align: center;
+}
+
+.profile-card img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 10px;
+    box-shadow: 0px 2px 10px rgba(0,0,0,0.25);
+}
+
+/* ---------- SECTION CARDS ---------- */
+.section {
+    background: white;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.08);
+}
+
+.section h2 {
+    margin-top: 0;
+    color: #4a005b;
+}
+
+/* ---------- MAP BOX ---------- */
+#map {
+    height: 260px;
+    width: 100%;
+    border-radius: 12px;
+    margin-top: 10px;
+}
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">Welcome to My Webpage</div>
+
+<!-- NAVBAR -->
+<div class="nav">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#education">Education</a>
+    <a href="#experience">Experience</a>
+    <a href="#teaching">Teaching</a>
+    <a href="#courses">Courses</a>
+    <a href="#resume">Resume</a>
+    <a href="#publications">Publications</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#awards">Awards</a>
+    <a href="#talks">Talks</a>
+    <a href="#services">Services</a>
+    <a href="#blog">Blog</a>
+    <a href="#memory">Memory</a>
+    <a href="#contact">Contact</a>
+    <a href="#updates">Updates</a>
+    <a href="#jobs">Job Updates</a>
+</div>
+
+<!-- MAIN GRID -->
+<div class="container">
+
+    <!-- LEFT PROFILE -->
+    <div class="profile-card">
+        <img src="images/subrata_profile_circle_HD.png" alt="Profile Photo">
+
+        <h3>Subrata Pramanik</h3>
+        <p>Junior Research Fellow</p>
+        <p>M.Tech – Ph.D., Indian Institute of Information Technology Allahabad</p>
+
+        <p><b>Current Time:</b> <span id="time"></span></p>
+        <p><b>Local Temperature:</b> <span id="temp">Loading...</span></p>
+        <p><b>Visits (this browser):</b> <span id="visitCount"></span></p>
+    </div>
+
+    <!-- RIGHT SIDE MAIN CONTENT -->
+    <div>
+
+        <!-- Home -->
+        <div class="section" id="home">
+            <h2>Home</h2>
+            <p>Welcome — I am <b>Subrata Pramanik</b>, Junior Research Fellow…</p>
+        </div>
+
+        <!-- About -->
+        <div class="section" id="about">
+            <h2>About</h2>
+            <p>Write your biography here…</p>
+        </div>
+
+        <!-- Education -->
+        <div class="section" id="education">
+            <h2>Education</h2>
+            <ul>
+                <li>M.Tech — Indian Institute of Information Technology Allahabad</li>
+                <li>Ph.D — Indian Institute of Information Technology Allahabad</li>
+            </ul>
+        </div>
+
+        <!-- Experience -->
+        <div class="section" id="experience">
+            <h2>Experience</h2>
+            <p>Junior Research Fellow (Current)</p>
+        </div>
+
+        <!-- Teaching -->
+        <div class="section" id="teaching">
+            <h2>Teaching</h2>
+        </div>
+
+        <!-- Courses -->
+        <div class="section" id="courses">
+            <h2>Courses</h2>
+        </div>
+
+        <!-- Resume -->
+        <div class="section" id="resume">
+            <h2>Resume</h2>
+        </div>
+
+        <!-- Publications -->
+        <div class="section" id="publications">
+            <h2>Publications</h2>
+        </div>
+
+        <!-- Projects -->
+        <div class="section" id="projects">
+            <h2>Projects</h2>
+        </div>
+
+        <!-- Skills -->
+        <div class="section" id="skills">
+            <h2>Skills</h2>
+        </div>
+
+        <!-- Awards -->
+        <div class="section" id="awards">
+            <h2>Awards</h2>
+        </div>
+
+        <!-- Talks -->
+        <div class="section" id="talks">
+            <h2>Talks</h2>
+        </div>
+
+        <!-- Services -->
+        <div class="section" id="services">
+            <h2>Professional Services</h2>
+        </div>
+
+        <!-- Blog -->
+        <div class="section" id="blog">
+            <h2>Blog</h2>
+        </div>
+
+        <!-- Memory / Gallery -->
+        <div class="section" id="memory">
+            <h2>Memory / Gallery (Year-wise)</h2>
+        </div>
+
+        <!-- Contact -->
+        <div class="section" id="contact">
+            <h2>Contact</h2>
+        </div>
+
+        <!-- Updates -->
+        <div class="section" id="updates">
+            <h2>Updates</h2>
+        </div>
+
+        <!-- Jobs -->
+        <div class="section" id="jobs">
+            <h2>Job Updates (India & USA)</h2>
+        </div>
+
+        <!-- MAP -->
+        <div class="section">
+            <h2>My Institute Location</h2>
+            <div id="map"></div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+
+<script>
+// Time Update
+function updateTime() {
+    document.getElementById("time").innerHTML = new Date().toLocaleString();
+}
+setInterval(updateTime, 1000);
+
+// Visit Counter
+let count = localStorage.getItem("visits") || 0;
+count++;
+localStorage.setItem("visits", count);
+document.getElementById("visitCount").innerText = count;
+
+// Weather (Open-Meteo API)
+fetch("https://api.open-meteo.com/v1/forecast?latitude=25.43&longitude=81.77&current_weather=true")
+.then(r => r.json())
+.then(d => {
+    document.getElementById("temp").innerText =
+        d.current_weather.temperature + "°C";
+});
+
+// Leaflet Map
+var map = L.map("map").setView([25.4300, 81.7700], 14);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
+L.marker([25.4300, 81.7700]).addTo(map).bindPopup("Indian Institute of Information Technology Allahabad");
+
+</script>
+
+</body>
+</html>
