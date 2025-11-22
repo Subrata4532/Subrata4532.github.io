@@ -1,5 +1,5 @@
 /* ---------------------------
-   Config
+   CONFIG
 ----------------------------*/
 const IIIT_COORDS = { lat: 25.4878, lon: 81.8489 };
 const GALLERY_KEY = 'subrata_gallery_final';
@@ -7,358 +7,416 @@ const JOBS_KEY = 'subrata_jobs_final';
 const VIEW_KEY = 'subrata_view_count_final';
 
 /* ---------------------------
-   Loading and page title
+   PAGE TITLE
 ----------------------------*/
-document.title = " Subrata Pramanik";
-window.addEventListener('load', () => {
-  setTimeout(()=> {
-    const el = document.getElementById('loading-screen');
-    if(!el) return;
-    el.style.opacity = 0;
-    el.setAttribute('aria-hidden','true');
-    setTimeout(()=> el.style.display = 'none', 600);
-  }, 700);
+document.title = "Subrata Pramanik";
+
+/* ---------------------------
+   LOADING SCREEN
+----------------------------*/
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    const load = document.getElementById("loading-screen");
+    load.style.opacity = 0;
+    setTimeout(() => (load.style.display = "none"), 600);
+  }, 500);
 });
 
 /* ---------------------------
-   Clock, Date & Day (top-left & left-column)
+   CLOCK + DATE
 ----------------------------*/
-function updateClock(){
+function updateClock() {
   const now = new Date();
   const time = now.toLocaleTimeString();
   const date = now.toLocaleDateString();
-  const dayName = now.toLocaleDateString(undefined,{ weekday:'long' });
-  document.getElementById('clock').innerText = time;
-  document.getElementById('date').innerText = date;
-  document.getElementById('dayname').innerText = dayName;
-  document.getElementById('top-time').innerText = time;
-  document.getElementById('top-date').innerText = date;
-  document.getElementById('top-day').innerText = dayName;
+  const day = now.toLocaleDateString(undefined, { weekday: "long" });
+
+  document.getElementById("clock").innerText = time;
+  document.getElementById("date").innerText = date;
+  document.getElementById("dayname").innerText = day;
+
+  document.getElementById("top-time").innerText = time;
+  document.getElementById("top-date").innerText = date;
+  document.getElementById("top-day").innerText = day;
 }
 setInterval(updateClock, 1000);
 updateClock();
 
 /* ---------------------------
-   Visitor counter (local)
+   VISITOR COUNTER (LOCAL)
 ----------------------------*/
-function incrementView(){
-  try{
-    let v = parseInt(localStorage.getItem(VIEW_KEY) || '0',10);
-    v++;
-    localStorage.setItem(VIEW_KEY, String(v));
-    document.getElementById('view-count-footer').innerText = v;
-  }catch(e){ console.warn(e); }
+function incrementView() {
+  let v = parseInt(localStorage.getItem(VIEW_KEY) || "0", 10);
+  v++;
+  localStorage.setItem(VIEW_KEY, String(v));
+  document.getElementById("view-count-footer").innerText = v;
 }
 incrementView();
 
-/* ---------------------------
-   Weather (Open-Meteo) - current + 7-day
-----------------------------*/
-async function fetchWeather(lat, lon){
-  try{
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&daily=temperature_2m_max,temperature_2m_min&timezone=auto`;
+/* ============================================================
+      USER LOCATION + WEATHER + MINI MAP
+============================================================ */
+
+async function getReverseLocation(lat, lon) {
+  try {
+    const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`;
     const res = await fetch(url);
-    if(!res.ok) throw new Error('weather fetch failed');
     const data = await res.json();
 
-    if(data.current_weather){
-      document.getElementById('temperature').innerText = `${Math.round(data.current_weather.temperature)}°C`;
-    } else {
-      document.getElementById('temperature').innerText = 'N/A';
-    }
+    const address = data.address;
+    const city =
+      address.city ||
+      address.town ||
+      address.village ||
+      address.suburb ||
+      "Unknown";
 
-    if(data.daily && data.daily.time){
-      const times = data.daily.time;
-      const maxs = data.daily.temperature_2m_max;
-      const mins = data.daily.temperature_2m_min;
-      let html = '<ul style="list-style:none;padding:0;margin:0;">';
-      for(let i=0;i<Math.min(7,times.length);i++){
-        const d = new Date(times[i]);
-        const opts = { weekday:'short', month:'short', day:'numeric' };
-        html += `<li style="margin-bottom:6px;">${d.toLocaleDateString(undefined,opts)}: ${Math.round(mins[i])}° / ${Math.round(maxs[i])}°C</li>`;
-      }
-      html += '</ul>';
-      document.getElementById('daily-weather').innerHTML = html;
-    } else {
-      document.getElementById('daily-weather').innerText = 'Daily forecast unavailable';
+    const state = address.state || "";
+    const country = address.country || "";
+
+    document.getElementById("top-location").innerText =
+      `${city}, ${state}, ${country}`;
+  } catch (e) {
+    console.warn("Location error:", e);
+    document.getElementById("top-location").innerText = "Location unavailable";
+  }
+}
+
+function loadUserMiniMap(lat, lon) {
+  const mapBox = document.getElementById("user-map");
+  mapBox.style.display = "block";
+
+  const mapUser = L.map("user-map", {
+    zoomControl: false,
+    attributionControl: false,
+  }).setView([lat, lon], 13);
+
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(
+    mapUser
+  );
+
+  L.marker([lat, lon]).addTo(mapUser);
+}
+
+async function fetchWeatherUser(lat, lon) {
+  try {
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&timezone=auto`;
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if (data.current_weather) {
+      document.getElementById("temperature").innerText =
+        Math.round(data.current_weather.temperature) + "°C";
     }
-  }catch(e){
+  } catch (e) {
+    console.warn("Weather error:", e);
+  }
+}
+
+function initFullUserLocation() {
+  if (!navigator.geolocation) {
+    document.getElementById("top-location").innerText =
+      "Geolocation not supported";
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    async (pos) => {
+      const lat = pos.coords.latitude;
+      const lon = pos.coords.longitude;
+
+      // Location
+      await getReverseLocation(lat, lon);
+
+      // Weather
+      fetchWeatherUser(lat, lon);
+
+      // Map
+      loadUserMiniMap(lat, lon);
+    },
+    () => {
+      document.getElementById("top-location").innerText = "Location blocked";
+    }
+  );
+}
+
+initFullUserLocation();
+
+/* ============================================================
+      WEEKLY WEATHER
+============================================================ */
+
+async function fetchWeather(lat, lon) {
+  try {
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min&timezone=auto`;
+    const res = await fetch(url);
+    const d = await res.json();
+
+    const times = d.daily.time;
+    const maxs = d.daily.temperature_2m_max;
+    const mins = d.daily.temperature_2m_min;
+
+    let html = "<ul style='list-style:none;padding:0'>";
+    for (let i = 0; i < times.length; i++) {
+      const dt = new Date(times[i]);
+      html += `<li>${dt.toLocaleDateString(undefined, {
+        weekday: "short",
+        month: "short",
+        day: "numeric",
+      })}: ${mins[i]}° / ${maxs[i]}°C</li>`;
+    }
+    html += "</ul>";
+
+    document.getElementById("daily-weather").innerHTML = html;
+  } catch (e) {
     console.warn(e);
-    document.getElementById('temperature').innerText = 'Weather unavailable';
-    document.getElementById('daily-weather').innerText = 'Weather unavailable';
+    document.getElementById("daily-weather").innerText =
+      "Weather unavailable";
   }
 }
-function initWeather(){
-  if(navigator.geolocation){
-    navigator.geolocation.getCurrentPosition(pos => {
-      fetchWeather(pos.coords.latitude, pos.coords.longitude);
-    }, err => {
-      fetchWeather(IIIT_COORDS.lat, IIIT_COORDS.lon);
-    }, { timeout:7000 });
-  } else {
-    fetchWeather(IIIT_COORDS.lat, IIIT_COORDS.lon);
+
+fetchWeather(IIIT_COORDS.lat, IIIT_COORDS.lon);
+
+/* ============================================================
+      IIIT ALLAHABAD MAP
+============================================================ */
+
+const map = L.map("map").setView([IIIT_COORDS.lat, IIIT_COORDS.lon], 12);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
+
+L.marker([IIIT_COORDS.lat, IIIT_COORDS.lon])
+  .addTo(map)
+  .bindPopup("<b>IIIT Allahabad</b>");
+
+/* ============================================================
+      JOBS SYSTEM
+============================================================ */
+
+function seedJobs() {
+  if (!localStorage.getItem(JOBS_KEY)) {
+    const seed = [
+      {
+        id: Date.now()+1,
+        title: "Research Intern - Medical Imaging",
+        company: "IIIT Allahabad",
+        country: "India",
+        type: "Intern",
+        location: "Allahabad",
+        date: new Date().toISOString(),
+      },
+      {
+        id: Date.now()+2,
+        title: "Postdoc - Computer Vision",
+        company: "University of X",
+        country: "USA",
+        type: "Full-time",
+        location: "Boston",
+        date: new Date().toISOString(),
+      },
+    ];
+    localStorage.setItem(JOBS_KEY, JSON.stringify(seed));
   }
 }
-initWeather();
 
-/* ---------------------------
-   Leaflet map (IIIT)
-----------------------------*/
-const map = L.map('map', { zoomControl:true }).setView([IIIT_COORDS.lat, IIIT_COORDS.lon], 11);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{ maxZoom:19, attribution:'&copy; OpenStreetMap contributors' }).addTo(map);
-const marker = L.marker([IIIT_COORDS.lat, IIIT_COORDS.lon]).addTo(map);
-marker.bindPopup("<strong> Indian Institute of Information Technology, Allahabad.Priya Shringar Kendra, 4, Jhalwa, Prayagraj, Saha Urf Pipalgaon, Uttar Pradesh 211015</strong>").openPopup();
-
-/* ---------------------------
-   Jobs (localStorage)
-----------------------------*/
-function seedJobs(){
-  if(localStorage.getItem(JOBS_KEY)) return;
-  const seed = [
-    { id: Date.now()+1, title:"Research Intern - Medical Imaging", company:"Indian Institute Of Information Technology", country:"India", type:"Intern", location:"Allahabad", date:new Date().toISOString() },
-    { id: Date.now()+2, title:"Postdoc - Computer Vision", company:"University of X", country:"USA", type:"Full-time", location:"Boston, MA", date:new Date().toISOString() }
-  ];
-  localStorage.setItem(JOBS_KEY, JSON.stringify(seed));
+function getJobs() {
+  seedJobs();
+  return JSON.parse(localStorage.getItem(JOBS_KEY) || "[]").sort(
+    (a, b) => new Date(b.date) - new Date(a.date)
+  );
 }
-function readJobs(){ seedJobs(); return JSON.parse(localStorage.getItem(JOBS_KEY) || "[]").sort((a,b)=> new Date(b.date) - new Date(a.date)); }
-function saveJobs(list){ localStorage.setItem(JOBS_KEY, JSON.stringify(list)); }
 
-let activeTab = "India";
-function setTab(t){ activeTab = t; renderJobs(); }
-function renderJobs(){
-  const all = readJobs();
-  const search = (document.getElementById('search-key')?.value || '').toLowerCase();
-  let filtered = all.filter(j=> j.country === activeTab);
-  if(search) filtered = filtered.filter(j => (j.title + j.company + j.location).toLowerCase().includes(search));
-  const listEl = document.getElementById('job-list'); listEl.innerHTML = '';
-  if(filtered.length === 0){ listEl.innerHTML = "<div class='small'>No job updates.</div>"; return; }
-  filtered.forEach(j=>{
-    const div = document.createElement('div');
-    div.className = 'job-card';
-    div.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;">
-      <div style="flex:1">
-        <div style="font-weight:700">${escapeHtml(j.title)}</div>
-        <div class="small">${escapeHtml(j.company)} • ${escapeHtml(j.location)} • <span class="small">${new Date(j.date).toLocaleDateString()}</span></div>
-        <div style="margin-top:8px;"><span class="pill">${escapeHtml(j.type)}</span></div>
-      </div>
-      <div style="margin-left:12px;"><button onclick="removeJob(${j.id})" style="padding:6px 8px;border-radius:8px;border:1px solid #eee;background:#fff;cursor:pointer">Remove</button></div>
-    </div>`;
-    listEl.appendChild(div);
+function renderJobs() {
+  const jobs = getJobs();
+  const box = document.getElementById("job-list");
+  box.innerHTML = "";
+
+  jobs.forEach((j) => {
+    const div = document.createElement("div");
+    div.className = "job-card";
+    div.innerHTML = `
+      <b>${j.title}</b><br>
+      <span class="small">${j.company} • ${j.location}</span>
+    `;
+    box.appendChild(div);
   });
 }
-function addJob(){
-  const title = document.getElementById('new-title').value.trim();
-  const company = document.getElementById('new-company').value.trim();
-  const country = document.getElementById('new-country').value;
-  const type = document.getElementById('new-type').value;
-  const location = document.getElementById('new-location').value.trim();
-  if(!title || !company){ alert('Enter title and company'); return; }
-  const jobs = readJobs();
-  jobs.unshift({ id:Date.now(), title, company, country, type, location, date:new Date().toISOString() });
-  saveJobs(jobs); renderJobs();
-  document.getElementById('new-title').value=''; document.getElementById('new-company').value=''; document.getElementById('new-location').value='';
-}
-function removeJob(id){ if(!confirm('Remove this job?')) return; saveJobs(readJobs().filter(j=> j.id !== id)); renderJobs(); }
-function clearJobs(){ if(!confirm('Clear all job postings?')) return; localStorage.removeItem(JOBS_KEY); seedJobs(); renderJobs(); }
 
-/* ---------------------------
-   Gallery (years 2000-3000)
-----------------------------*/
-function buildYearOptions(){
-  const sel = document.getElementById('year-select');
-  sel.innerHTML = '';
-  for(let y=2000;y<=3000;y++){
-    const o = document.createElement('option'); o.value = String(y); o.textContent = String(y);
+renderJobs();
+
+/* ============================================================
+      GALLERY
+============================================================ */
+
+function buildYearOptions() {
+  const sel = document.getElementById("year-select");
+  for (let y = 2000; y <= 2050; y++) {
+    const o = document.createElement("option");
+    o.value = y;
+    o.innerText = y;
     sel.appendChild(o);
   }
-  const cy = (new Date()).getFullYear();
-  if(cy>=2000 && cy<=3000) sel.value = String(cy);
+  sel.value = new Date().getFullYear();
 }
-function loadGallery(){ try{ return JSON.parse(localStorage.getItem(GALLERY_KEY) || "[]"); } catch(e){ return []; } }
-function saveGallery(list){ localStorage.setItem(GALLERY_KEY, JSON.stringify(list)); }
-function renderGallery(){
-  const year = document.getElementById('year-select').value;
-  const grid = document.getElementById('gallery-grid'); grid.innerHTML = '';
-  const items = loadGallery().filter(it => it.year === String(year));
-  if(items.length === 0){ grid.innerHTML = "<div class='small'>No images for " + year + ".</div>"; return; }
-  items.forEach((it, idx) => {
-    const div = document.createElement('div'); div.className = 'gallery-item';
-    div.innerHTML = `<img src="${it.data}" alt="img-${idx}" onclick="openModal('${it.data}')" /><div class="small" style="padding:6px;">Added: ${new Date(it.added).toLocaleString()}</div>`;
+buildYearOptions();
+
+function loadGallery() {
+  return JSON.parse(localStorage.getItem(GALLERY_KEY) || "[]");
+}
+function saveGallery(list) {
+  localStorage.setItem(GALLERY_KEY, JSON.stringify(list));
+}
+
+function renderGallery() {
+  const year = document.getElementById("year-select").value;
+  const items = loadGallery().filter((g) => g.year === year);
+
+  const grid = document.getElementById("gallery-grid");
+  grid.innerHTML = "";
+
+  if (items.length === 0) {
+    grid.innerHTML = "<div>No images</div>";
+    return;
+  }
+
+  items.forEach((it) => {
+    const div = document.createElement("div");
+    div.className = "gallery-item";
+    div.innerHTML = `<img src="${it.data}" onclick="openModal('${it.data}')">`;
     grid.appendChild(div);
   });
 }
-function addGalleryImage(){
-  const f = document.getElementById('image-file').files[0];
-  const year = document.getElementById('year-select').value;
-  if(!f){ alert('Select an image'); return; }
+renderGallery();
+
+function addGalleryImage() {
+  const file = document.getElementById("image-file").files[0];
+  if (!file) return alert("Choose an image");
+
+  const year = document.getElementById("year-select").value;
   const reader = new FileReader();
-  reader.onload = e => {
-    const arr = loadGallery(); arr.unshift({ year:String(year), data:e.target.result, added:new Date().toISOString() });
-    saveGallery(arr); renderGallery();
+
+  reader.onload = (e) => {
+    const arr = loadGallery();
+    arr.unshift({
+      year,
+      data: e.target.result,
+      added: new Date().toISOString(),
+    });
+    saveGallery(arr);
+    renderGallery();
   };
-  reader.readAsDataURL(f);
-}
-function clearGallery(){ if(!confirm('Clear gallery?')) return; localStorage.removeItem(GALLERY_KEY); renderGallery(); }
 
-/* ---------------------------
-   Modal
-----------------------------*/
-function openModal(src){ document.getElementById('modal-img').src = src; const m = document.getElementById('modal'); m.style.display = 'flex'; }
-function closeModal(e){ if(!e || e.target.id === 'modal' || e.target.id === 'modal-content') document.getElementById('modal').style.display = 'none'; }
-
-/* ---------------------------
-   Contact demo
-----------------------------*/
-function contactFormSubmit(e){
-  e.preventDefault();
-  alert('Thanks! Message saved locally (demo).');
-  document.getElementById('c_name').value=''; document.getElementById('c_email').value=''; document.getElementById('c_msg').value='';
-  return false;
+  reader.readAsDataURL(file);
 }
 
-/* ---------------------------
-   Smooth anchor scroll + active nav highlight
-----------------------------*/
-document.querySelectorAll('nav.global a').forEach(a=>{
-  a.addEventListener('click', function(e){
-    const href = this.getAttribute('href');
-    if(href && href.startsWith('#')){
-      e.preventDefault();
-      const target = document.querySelector(href);
-      if(target){
-        const headerOffset = document.getElementById('site-header')?.getBoundingClientRect().height || 96;
-        const pos = target.getBoundingClientRect().top + window.pageYOffset - headerOffset - 12;
-        window.scrollTo({ top: pos, behavior:'smooth' });
-      }
-    }
-  });
-});
-window.addEventListener('scroll', ()=>{
-  const headerOffset = document.getElementById('site-header')?.getBoundingClientRect().height || 96;
-  let current = null;
-  document.querySelectorAll('section[id]').forEach(s=>{
-    if(window.pageYOffset >= s.offsetTop - headerOffset - 20) current = s.id;
-  });
-  document.querySelectorAll('nav.global a').forEach(a=> a.classList.remove('active'));
-  if(current){
-    const link = document.querySelector(`nav.global a[href="#${current}"]`);
-    if(link) link.classList.add('active');
+function clearGallery() {
+  if (confirm("Clear gallery?")) {
+    localStorage.removeItem(GALLERY_KEY);
+    renderGallery();
   }
-});
+}
 
-/* ---------------------------
-   Theme toggle (day/night)
-----------------------------*/
-const themeToggle = document.getElementById('theme-toggle');
-themeToggle.addEventListener('click', ()=>{
-  document.body.classList.toggle('dark-mode');
-  const isDark = document.body.classList.contains('dark-mode');
-  themeToggle.textContent = isDark ? '☀️' : '🌙';
-  themeToggle.setAttribute('aria-pressed', String(isDark));
-});
+/* ============================================================
+      MODAL
+============================================================ */
+function openModal(src) {
+  document.getElementById("modal-img").src = src;
+  document.getElementById("modal").style.display = "flex";
+}
+document.getElementById("modal").onclick = () =>
+  (document.getElementById("modal").style.display = "none");
 
-/* ---------------------------
-   Chatbot (simple)
-----------------------------*/
-const chatbotBubble = document.getElementById('chatbot-bubble');
-const chatbotBox = document.getElementById('chatbot-box');
-const chatbotSend = document.getElementById('chatbot-send');
-const chatbotInput = document.getElementById('chatbot-input');
-const msgArea = document.getElementById('chatbot-messages');
+/* ============================================================
+      CONTACT FORM
+============================================================ */
+function contactFormSubmit(e) {
+  e.preventDefault();
+  alert("Message stored locally (demo).");
+  document.getElementById("c_name").value = "";
+  document.getElementById("c_email").value = "";
+  document.getElementById("c_msg").value = "";
+}
 
-if(chatbotBubble){
-  chatbotBubble.addEventListener('click', ()=> {
-    const visible = chatbotBox.style.display === 'block';
-    chatbotBox.style.display = visible ? 'none' : 'block';
-    chatbotBox.setAttribute('aria-hidden', visible ? 'true' : 'false');
+/* ============================================================
+      SMOOTH SCROLL + NAV HIGHLIGHT
+============================================================ */
+
+document.querySelectorAll("nav.global a").forEach((a) => {
+  a.addEventListener("click", function (e) {
+    e.preventDefault();
+    const href = this.getAttribute("href");
+    const target = document.querySelector(href);
+    const top = target.offsetTop - 80;
+    window.scrollTo({ top, behavior: "smooth" });
   });
-}
-if(chatbotSend){
-  chatbotSend.addEventListener('click', sendMessage);
-  chatbotInput.addEventListener('keypress', e => { if(e.key === 'Enter') sendMessage(); });
-}
-function sendMessage(){
-  const text = chatbotInput.value.trim();
-  if(!text) return;
-  msgArea.innerHTML += `<div class="chatbot-msg user">${escapeHtml(text)}</div>`;
-  chatbotInput.value = '';
-  setTimeout(()=> {
-    msgArea.innerHTML += `<div class="chatbot-msg bot">Thanks — I received: ${escapeHtml(text)}</div>`;
-    msgArea.scrollTop = msgArea.scrollHeight;
+});
+
+/* ============================================================
+      THEME TOGGLE
+============================================================ */
+
+document.getElementById("theme-toggle").onclick = () => {
+  document.body.classList.toggle("dark-mode");
+  document.getElementById("theme-toggle").innerText =
+    document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
+};
+
+/* ============================================================
+      CHATBOT
+============================================================ */
+
+document.getElementById("chatbot-bubble").onclick = () => {
+  const box = document.getElementById("chatbot-box");
+  box.style.display = box.style.display === "block" ? "none" : "block";
+};
+
+document.getElementById("chatbot-send").onclick = sendMessage;
+document.getElementById("chatbot-input").addEventListener("keypress", (e) => {
+  if (e.key === "Enter") sendMessage();
+});
+
+function sendMessage() {
+  const input = document.getElementById("chatbot-input");
+  const msg = input.value.trim();
+  if (!msg) return;
+
+  const area = document.getElementById("chatbot-messages");
+  area.innerHTML += `<div class="chatbot-msg user">${msg}</div>`;
+  input.value = "";
+
+  setTimeout(() => {
+    area.innerHTML += `<div class="chatbot-msg bot">Thanks — I received: ${msg}</div>`;
+    area.scrollTop = area.scrollHeight;
   }, 500);
 }
 
-/* ---------------------------
-   Simple translations - EN + HI (expandable)
-----------------------------*/
-const TRANSLATIONS = {
-  en: { "title":"Subrata Pramanik", "nav.home":"Home", "nav.about":"About", "home.title":"Home",
-    "home.p":"Namaskar — I am <strong>Subrata Pramanik</strong>. This page shows my profile, publications, projects, gallery (memory), job updates and more.",
-    "quicklinks":"Quick Links", "resume.title":"Resume", "publications.title":"Publications",
-    "projects.title":"Projects", "skills.title":"Skills", "memory.title":"Memory (Gallery)", "jobs.title":"Job Updates",
-    "map.title":"World Map", "contact.title":"Contact"
-  },
-  hi: { "title":"सुब्रत प्रामाणिक", "nav.home":"होम", "nav.about":"परिचय", "home.title":"होम",
-    "home.p":"नमस्कार — मैं <strong>सुब्रत प्रामाणिक</strong> हूँ। यह पृष्ठ मेरा प्रोफ़ाइल, प्रकाशन, परियोजनाएँ और अधिक दिखाता है।",
-    "quicklinks":"त्वरित लिंक", "resume.title":"रिज़्यूमे", "publications.title":"प्रकाशन",
-    "projects.title":"प्रोजेक्ट्स", "skills.title":"कौशल", "memory.title":"गैलरी", "jobs.title":"नौकरी अपडेट्स",
-    "map.title":"मानचित्र", "contact.title":"संपर्क"
-  }
-};
-function applyTranslations(lang){
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    const key = el.getAttribute('data-i18n');
-    const map = TRANSLATIONS[lang] || TRANSLATIONS['en'];
-    if(map[key]){
-      el.innerHTML = map[key];
-    }
-  });
-  const map = TRANSLATIONS[lang] || TRANSLATIONS['en'];
-  if(map['title']){ document.getElementById('site-title').innerText = map['title']; document.title = map['title']; }
-}
-document.getElementById('language-switcher').addEventListener('change', function(){ applyTranslations(this.value); });
+/* ============================================================
+      CV GENERATOR
+============================================================ */
 
-/* ---------------------------
-   CV generator (builds printable page from current DOM)
-----------------------------*/
-function escapeHtml(s){ if(!s) return ''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-function buildCVHtml(){
-  const name = document.getElementById('profile-name').innerText;
-  const meta = document.getElementById('profile-meta').innerText;
-  const about = document.querySelector('#about p')?.innerText || '';
-  const education = Array.from(document.querySelectorAll('#education li')).map(li=> li.innerText).join('<br>');
-  const projects = Array.from(document.querySelectorAll('#projects li')).map(li=> li.innerText).join('<br>');
-  const pubs = Array.from(document.querySelectorAll('#publications li')).map(li=> li.innerText).join('<br>');
-  const html = `
-  <html><head><title>CV - ${escapeHtml(name)}</title>
-    <style>body{ font-family: Georgia, serif; padding:28px; color:#111;} h1{ font-size:26px;} h2{ font-size:18px; margin-top:18px; color:#213e63; }</style>
-  </head><body>
-    <h1>${escapeHtml(name)}</h1>
-    <div><strong>${escapeHtml(meta)}</strong></div>
-    <h2>About</h2><div>${escapeHtml(about)}</div>
-    <h2>Education</h2><div>${education}</div>
-    <h2>Projects</h2><div>${projects}</div>
-    <h2>Publications</h2><div>${pubs}</div>
-  </body></html>`;
-  return html;
+function buildCVHtml() {
+  const name = document.getElementById("profile-name").innerText;
+  const meta = document.querySelector(".meta").innerText;
+  const about = document.querySelector("#about p").innerText;
+
+  return `
+    <html>
+    <head><title>CV - ${name}</title></head>
+    <body style="font-family:Georgia;padding:30px;">
+      <h1>${name}</h1>
+      <strong>${meta}</strong>
+      <h2>About</h2>
+      ${about}
+    </body>
+    </html>
+  `;
 }
-document.getElementById('cv-open').addEventListener('click', ()=>{
-  const w = window.open('', '_blank');
+
+document.getElementById("cv-open").onclick = () => {
+  const w = window.open("", "_blank");
   w.document.write(buildCVHtml());
   w.document.close();
-  setTimeout(()=> w.print(), 700);
-});
-document.getElementById('download-cv').addEventListener('click', ()=> document.getElementById('cv-open').click());
+  setTimeout(() => w.print(), 500);
+};
 
-/* ---------------------------
-   Init on DOM ready
-----------------------------*/
-document.addEventListener('DOMContentLoaded', ()=>{
-  buildYearOptions();
-  renderGallery();
-  seedJobs();
-  renderJobs();
-  applyTranslations('en'); // default
-  const stored = parseInt(localStorage.getItem(VIEW_KEY) || '0',10);
-  if(!isNaN(stored)) document.getElementById('view-count-footer').innerText = stored;
-});
+document.getElementById("download-cv").onclick = () =>
+  document.getElementById("cv-open").click();
