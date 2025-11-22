@@ -9,17 +9,16 @@
   --muted:#596472;
   --max-width:1200px;
   --text:#111;
-  --flower-url: url("sandbox:/mnt/data/A_watercolor_painting_on_paper_serves_as_a_floral_.png");
+  --flower-url: url("images/flower_hd.png");
 }
 
-/* full-page tricolor gradient background with flower overlay */
+/* full-page tricolor gradient background (Option 1) with flower overlay */
 html,body{ height:100%; margin:0; font-family: "Georgia", serif; color:var(--text); background: linear-gradient(180deg, var(--saffron) 0%, var(--white) 40%, var(--green) 100%); }
 body{
-  /* flower overlay: the sandbox path is used here; when deploying to GitHub move file to images/flower_hd.png and update URL */
   background-image: var(--flower-url);
   background-repeat: no-repeat;
   background-position: left top, right bottom;
-  background-size: 360px 360px;
+  background-size: 360px 360px, 360px 360px;
   background-attachment: fixed;
   transition: background-color .25s ease, color .25s ease;
 }
